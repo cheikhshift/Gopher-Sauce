@@ -1,0 +1,32 @@
+<gos>
+	<!--Stating the deployment type GoS should compile -->
+	<!-- Curent valid types are webapp,shell and precursor -->
+	<!-- Shell = cli, sort of a GoS(Ghost) in the Shell -->
+	<!-- Using import within different tags will have different results -->
+	<!-- We going to make the goPkg Mongo Db Driver available to our application -->
+	<!-- Using <import/> within the <go/> tag is similar to using the import call within a .go file -->
+	<!-- To be less dramating, GoS will skip packages that it has already imported -->
+	<import src= "gopkg.in/mgo.v2"/>
+	<import src="gopkg.in/mgo.v2/bson"/>
+	<!-- Go File output name -->
+	
+	<!-- The <init/> tag is similar to the init function within Go, -->
+
+	<!-- Contains interfaces and structs
+	 that will be used by the GoS application -->
+	<header> 
+	
+	</header>
+	<methods>
+	
+	</methods>
+	<timers>
+	
+	</timers>
+	<templates>
+ 	<!-- Please make sure any needed template is within your tmpl folder which is determined on GoS compile init!!!! -->	
+	</templates>
+	<endpoints>
+    
+	</endpoints>
+</gos>

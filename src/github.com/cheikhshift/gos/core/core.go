@@ -1,0 +1,145 @@
+package core
+
+
+import (
+	"encoding/xml"
+)
+
+/*
+	type server struct {
+    XMLName    xml.Name `xml:"server"`
+    Port string `xml:"port"`
+    Package  string `xml:"package"`
+}
+	GoS Xml Strucs
+	Links are used to import methods 
+*/
+/*
+	Struct for Go method handling
+*/
+type gosArch struct {
+	interfacedMethods []string
+	methodlimits []string
+	keeplocal []string
+	webmethods[]string
+	structs []string
+	objects []string
+}
+
+type gos struct {
+	 XMLName    xml.Name `xml:"gos"`
+	 Port string `xml:"port"`
+	 Output string `xml:"output"`
+	 Type string `xml:"deploy"`
+	 Main string `xml:"main"`
+	 WriteOut bool
+	 Session Session `xml:"session"`
+	 Template_path string `xml:"templatePath"`
+	 Web_root string `xml:"webroot"`
+	 Package_root string `xml:"package"`
+	 RootImports []Import `xml:"import"`
+	 Init_Func string `xml:"init"`
+	 Header Header `xml:"header"`
+	 Methods Methods `xml:"methods"`
+	 Timers Timers `xml:"timers"`
+	 Templates Templates `xml:"templates"`
+	 Endpoints Endpoints `xml:"endpoints"`
+}
+
+type Session struct {
+	 XMLName    xml.Name `xml:"session"`
+
+}
+
+type Error struct {
+	reason string
+	code int
+}
+
+/*
+	Root Types to GoS xml File
+*/
+type gosConfig struct {
+	template_path string
+	web_root string
+}
+type Import struct {
+   XMLName xml.Name `xml:"import"`
+   Src string `xml:"src,attr"`
+   
+}
+
+type Header struct {
+	XMLName xml.Name `xml:"header"`
+    Structs []Struct `xml:"struct"`
+    Objects []Object `xml:"object"` 
+}
+
+type Methods struct {
+	XMLName xml.Name `xml:"methods"`
+	Methods []Method `xml:"method"`
+}
+
+type Timers struct {
+	XMLName xml.Name `xml:"timers"`
+	Timers []Timer `xml:"timer"`
+}
+
+type Templates struct {
+	XMLName xml.Name `xml:"templates"`
+	Templates []Template `xml:"template"`
+}
+
+type Endpoints struct {
+	XMLName xml.Name `xml:"endpoints"`
+	Endpoints []Endpoint `xml:"endpoint"`
+}
+
+/*
+	Nested values within GoS root file
+*/
+type Struct struct {
+	XMLName xml.Name `xml:"struct"`
+	Name string `xml:"name,attr"`
+	Attributes string `xml:",innerxml"`	
+}
+
+type Object struct {
+	XMLName xml.Name `xml:"object"`
+	Name string `xml:"name,attr"`
+	Templ string `xml:"struct,attr"`
+	Methods string `xml:",innerxml"`
+}
+
+type Method struct {
+	XMLName xml.Name `xml:"method"`
+	Method string `xml:",innerxml"`
+	Name string `xml:"name,attr"`
+	Variables string `xml:"var,attr"`
+	Limit string `xml:"limit,attr"`
+	Object string `xml:"object,attr"`
+	Autoface string `xml:"autoface,attr"`
+	Keeplocal string `xml:"keep-local,attr"`
+	Returntype string `xml:"return,attr"`
+}
+
+type Timer struct {
+	XMLName xml.Name `xml:"timer"`
+	Method string `xml:"method,attr"`
+	Interval string `xml:"interval,attr"`
+	Name string `xml:"name,attr"`
+}
+
+type Template struct {
+	XMLName xml.Name `xml:"template"`
+	Name string `xml:"name,attr"`
+	TemplateFile string `xml:"tmpl,attr"`
+	Struct string `xml:"struct,attr"`
+	ForcePath bool
+}
+
+type Endpoint struct {
+	XMLName xml.Name `xml:"end"`
+	Path string `xml:"path,attr"`
+	Method string `xml:"method,attr"`
+}

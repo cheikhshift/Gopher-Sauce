@@ -1,0 +1,5 @@
+<import>
+	<struct name="importedChild">
+			SomeOtherAttr string
+	</struct>
+</import>
