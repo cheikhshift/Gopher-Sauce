@@ -65,7 +65,7 @@ import (`
 		}
 
 		fmt.Printf("APi Methods %v\n",api_methods)
-		     netMa := 	`template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt`
+		     netMa := 	`template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt`
            for _,imp := range available_methods {
            	if !contains(api_methods, imp) {
           		netMa += `,"` + imp + `" : net_` + imp
@@ -140,6 +140,14 @@ import (`
 				func net_sessionSetInt(key string, value interface{},s *sessions.Session) string {
 					 s.Values[key] = value
 					 return ""
+				}
+
+				func net_importcss(s string) string {
+					return "<link rel=\"stylesheet\" href=\"" + s + "\" /> "
+				}
+
+				func net_importjs(s string) string {
+					return "<script type=\"text/javascript\" src=\"" + s + "\" ></script> "
 				}
 
 
@@ -469,13 +477,18 @@ import (`
 			}
 					for _,imp := range template.Templates.Templates {
 				local_string += `
-				func  net_`+ imp.Name + `(jso string) string {
+				func  net_`+ imp.Name + `(args ...interface{}) string {
 					var d ` + imp.Struct + `
+					if len(args) > 0 {
+					jso := args[0].(string)
 					var jsonBlob = []byte(jso)
 					err := json.Unmarshal(jsonBlob, &d)
 					if err != nil {
 						fmt.Println("error:", err)
 						return ""
+					}
+					} else {
+						d = ` + imp.Struct +`{}
 					}
 
 					filename :=  "` + tmpl + `/` + imp.TemplateFile + `.tmpl"

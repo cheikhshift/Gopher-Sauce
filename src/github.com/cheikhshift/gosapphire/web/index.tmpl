@@ -8,9 +8,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bootstrap 101 Template</title>
 
-    <!-- Bootstrap -->
-     <link href="/dist/css/bootstrap.css" rel="stylesheet">
-
+    
+     {{css "dist/css/bootstrap.css" }}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,6 +40,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/dist/js/bootstrap.js"></script>
+    {{js "/dist/js/bootstrap.js" }}
   </body>
 </html>
