@@ -24,6 +24,18 @@
     {{ if  "from" | sendEmail "to" }}
       {{Bootstrap_alert /{`Strong`:`Success`,`Type`:`success`, `Text` : `Sample`}/ }}
     {{end}}
+    {{$mutable := cButton  /{}/ }}
+    <!-- The object can be mutated before b is called -->
+    {{$mutable | bButton }}
+    {{if .Session | sc "username"}}
+    {{.Session | sg "username" }}
+    {{.Session | sd}}
+    {{else}}
+       {{Bootstrap_alert /{`Strong`:`Error`,`Type`:`danger`, `Text` : `Please Login`}/ }}
+       {{.Session | ss "username" "somethingRandom"}}
+    {{end}}
+    {{.R | form "FOO"}}
+
 
     <img src="gopher_head.png">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

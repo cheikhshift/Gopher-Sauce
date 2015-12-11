@@ -17,6 +17,7 @@ import (
 var GOHOME = os.ExpandEnv("$GOPATH") + "/src/"
 var available_methods []string
 	var	int_methods  []string
+		var	api_methods  []string
 	var	int_mappings []string
 func Process(template *gos,r string, web string, tmpl string) (local_string string) {
 	// r = GOHOME + GoS Project
@@ -25,9 +26,59 @@ func Process(template *gos,r string, web string, tmpl string) (local_string stri
 import (`
 	if template.Type == "webapp" {
 		
-		net_imports := []string{"net/http","os","bytes","encoding/json" ,"fmt", "io/ioutil","html",   "html/template", "strings", "reflect", "unsafe"}
+		net_imports := []string{"net/http", "time","github.com/gorilla/sessions","os","bytes","encoding/json" ,"fmt", "io/ioutil","html",   "html/template", "strings", "reflect", "unsafe"}
+		/*
+			Methods before so that we can create to correct delegate method for each object
+		*/
+		for _,imp := range template.Methods.Methods {
+			if !contains(available_methods, imp.Name) {
+				available_methods = append(available_methods, imp.Name)
+			}
+		}
+		apiraw := ``
+		for _,imp := range template.Endpoints.Endpoints {
+			if !contains(api_methods, imp.Method) {
+				api_methods = append(api_methods, imp.Method)
+				meth := template.findMethod(imp.Method)
+				apiraw += ` 
+				if  r.URL.Path == "` + imp.Path +`" && r.Method == strings.ToUpper("` + imp.Type +`") { 
+					` + meth.Method + `
+					callmet = true
+				}
+				` 
+			}
+		}
+		timeline :=  ``
+		for _,imp := range template.Timers.Timers {
+			if !contains(api_methods, imp.Method) {
+				api_methods = append(api_methods,imp.Method)
+			}
+			meth := template.findMethod(imp.Method)
+			timeline += `
+			` + imp.Name +` := time.NewTicker(time.` + imp.Unit + ` * ` + imp.Interval +`)
+					    go func() {
+					        for _ = range ` + imp.Name +`.C {
+					           ` + meth.Method +`
+					        }
+					    }()
+    `
+		}
 
-		
+		fmt.Printf("APi Methods %v\n",api_methods)
+		     netMa := 	`template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt`
+           for _,imp := range available_methods {
+           	if !contains(api_methods, imp) {
+          		netMa += `,"` + imp + `" : net_` + imp
+      		}
+           }
+           for _,imp := range template.Templates.Templates {
+
+				netMa += `,"` + imp.Name + `" : net_` + imp.Name
+				netMa += `,"b` + imp.Name + `" : net_b` + imp.Name
+				netMa += `,"c` + imp.Name + `" : net_c` + imp.Name
+           }
+           netMa += `}`
+
 		for _,imp := range template.RootImports {
 				//fmt.Println(imp)
 			if !strings.Contains(imp.Src,".xml") {
@@ -45,29 +96,120 @@ import (`
 		}
 		local_string += `
 		)
-				func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
+				var store = sessions.NewCookieStore([]byte("` + template.Key +`"))
+
+				func net_sessionGet(key string,s *sessions.Session) string {
+					return s.Values[key].(string)
+				}
+
+
+				func net_sessionDelete(s *sessions.Session) string {
+						//keys := make([]string, len(s.Values))
+
+						//i := 0
+						for k := range s.Values {
+						   // keys[i] = k.(string)
+						    net_sessionRemove(k.(string), s)
+						    //i++
+						}
+
+					return ""
+				}
+
+				func net_sessionRemove(key string,s *sessions.Session) string {
+					delete(s.Values, key)
+					return ""
+				}
+				func net_sessionKey(key string,s *sessions.Session) bool {					
+				 if _, ok := s.Values[key]; ok {
+					    //do something here
+				 		return true
+					}
+
+					return false
+				}
+
+				func net_sessionGetInt(key string,s *sessions.Session) interface{} {
+					return s.Values[key]
+				}
+
+				func net_sessionSet(key string, value string,s *sessions.Session) string {
+					 s.Values[key] = value
+					 return ""
+				}
+				func net_sessionSetInt(key string, value interface{},s *sessions.Session) string {
+					 s.Values[key] = value
+					 return ""
+				}
+
+
+
+				func formval(s string, r*http.Request) string {
+					return r.FormValue(s)
+				}
+			
+				func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, p *Page) {
 				     filename :=  tmpl  + ".tmpl"
 				    body, err := ioutil.ReadFile(filename)
+				    session, er := store.Get(r, "session-")
+
+				 	if er != nil {
+				           session,er = store.New(r,"session-")
+				    }
+				    p.Session = session
+				    p.R = r
 				    if err != nil {
 				       fmt.Print(err)
 				    } else {
 				    t := template.New("PageWrapper")
-				    t = t.Funcs(netMap)
+				    t = t.Funcs(` + netMa + `)
 				    t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"` + "`" + `", ` + "`" + `\"` + "`" +` ,-1) )
 				    outp := new(bytes.Buffer)
 				    error := t.Execute(outp, p)
 				    if error != nil {
 				    fmt.Print(error)
+				    return
 				    } 
+
+				    p.Session.Save(r, w)
+
 				    fmt.Fprintf(w, html.UnescapeString(outp.String()) )
 				    }
 				}
 
 				func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
 				  return func(w http.ResponseWriter, r *http.Request) {
+				  	if !apiAttempt(w,r) {
 				      fn(w, r, "")
+				  	}
 				  }
 				} 
+				func mResponse(v interface{}) string {
+					data,_ := json.Marshal(&v)
+					return string(data)
+				}
+				func apiAttempt(w http.ResponseWriter, r *http.Request) bool {
+					session, er := store.Get(r, "session-")
+					response := ""
+					if er != nil {
+						session,_ = store.New(r, "session-")
+					}
+					callmet := false
+
+					` + apiraw + `
+
+					if callmet {
+						session.Save(r,w)
+						if response != "" {
+							//Unmarshal json
+							w.Header().Set("Access-Control-Allow-Origin", "*")
+							w.Header().Set("Content-Type",  "application/json")
+							w.Write([]byte(response))
+						}
+						return true
+					}
+					return false
+				}
 
 				func handler(w http.ResponseWriter, r *http.Request, context string) {
 				  // fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
@@ -78,7 +220,7 @@ import (`
 				  }
 
 				  if !p.isResource {
-				        renderTemplate(w,  "` + web +`" + r.URL.Path, p)
+				        renderTemplate(w, r,  "` + web +`" + r.URL.Path, p)
 				  } else {
 				       w.Write(p.Body)
 				  }
@@ -156,8 +298,13 @@ import (`
 					    request *http.Request
 					    isResource bool
 					    s *map[string]interface{}
+					    R *http.Request
+					    Session *sessions.Session
 					}`
-
+					for _,imp := range template.Variables {
+						local_string += `
+						var ` + imp.Name + ` ` + imp.Type 
+					}
 		if template.Init_Func != "" {
 			local_string += `
 			func init(){
@@ -178,14 +325,15 @@ import (`
 			}`
 			}
 		}
-		/*
-			Methods before so that we can create to correct delegate method for each object
-		*/
-		for _,imp := range template.Methods.Methods {
-			if !contains(available_methods, imp.Name) {
-				available_methods = append(available_methods, imp.Name)
-			}
+		
+
+
+		for _,imp := range template.Header.Objects {
+			local_string += `
+			type ` + imp.Name + ` ` + imp.Templ
 		}
+		
+
 		//Create an object map
 		for _,imp := range template.Header.Objects {
 			//struct return and function
@@ -235,6 +383,10 @@ import (`
 							if !contains(strings.Split(meth.Limit,","), imp.Name ){
 								procc_funcs = false 
 							}
+						}
+
+						if contains(api_methods, meth.Name){
+							procc_funcs = false
 						}
 						
 						objectName := meth.Object
@@ -288,7 +440,7 @@ import (`
 			//create Unused methods methods
 			fmt.Println(int_methods)
 			for _,imp := range available_methods {
-				if !contains(int_methods,imp)  {
+				if !contains(int_methods,imp) && !contains(api_methods, imp)  {
 					fmt.Println("Processing : " + imp)
 						meth := template.findMethod(imp)
 						addedit := false
@@ -333,33 +485,48 @@ import (`
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("` +  imp.Name + `")
-    				t = t.Funcs(netMa)
-				    t, _ = t.Parse(BytesToString(body))
-
+    				t = t.Funcs(` + netMa +`)
+				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"` + "`" + `", ` + "`" + `\"` + "`" +` ,-1) )
+			
 				    error := t.Execute(output, &d)
 				    if error != nil {
 				    fmt.Print(error)
 				    } 
-					return output.String()
+					return html.UnescapeString(output.String())
+				}`	    
+					local_string += `
+				func  net_b`+ imp.Name + `(d ` + imp.Struct +`) string {
+					filename :=  "` + tmpl + `/` + imp.TemplateFile + `.tmpl"
+    				body, er := ioutil.ReadFile(filename)
+    				if er != nil {
+    					return ""
+    				}
+    				 output := new(bytes.Buffer) 
+					t := template.New("` +  imp.Name + `")
+    				t = t.Funcs(` + netMa +`)
+				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"` + "`" + `", ` + "`" + `\"` + "`" +` ,-1) )
+			
+				    error := t.Execute(output, &d)
+				    if error != nil {
+				    fmt.Print(error)
+				    } 
+					return html.UnescapeString(output.String())
+				}`	    
+				local_string += `
+				func  net_c`+ imp.Name + `(l string) (d ` + imp.Struct +`) {
+					
+					
+					var jsonBlob = []byte(l)
+					err := json.Unmarshal(jsonBlob, &d)
+					if err != nil {
+						fmt.Println("error:", err)
+						return 
+					}
+    				return
 				}`	    
 			}
 
-           local_string += 	`
-           var netMa = template.FuncMap{"eq": equalz, "neq" : nequalz, "lte" : netlt`
-           for _,imp := range available_methods {
-           	local_string += `,"` + imp + `" : net_` + imp
-           }
-
-
-           local_string += `}
-           var netMap = template.FuncMap{"eq": equalz, "neq" : nequalz, "lte" : netlt`
-           for _,imp := range available_methods {
-           	local_string += `,"` + imp + `" : net_` + imp
-           }
-           for _,imp := range template.Templates.Templates {
-				 local_string += `,"` + imp.Name + `" : net_` + imp.Name
-           }
-           local_string += `}`
+     
 			//Methods have been added
 
 
@@ -373,7 +540,9 @@ import (`
 					 `
 					}
 				
-					 local_string += `fmt.Printf("Listenning on Port %v\n", "` + template.Port +`")
+					 local_string += `
+					 ` + timeline +`
+					 fmt.Printf("Listenning on Port %v\n", "` + template.Port +`")
 					 http.HandleFunc( "/",  makeHandler(handler))
 					 http.Handle("/dist/", http.StripPrefix("", http.FileServer(http.Dir("` + web + `"))))
 					 http.ListenAndServe(":`+ template.Port +`", nil)`
@@ -413,7 +582,9 @@ func exe_cmd(cmd string) {
 	t := false
 	for !t {
 	line, _, _ := r.ReadLine()
-    fmt.Printf("%s", line)
+	if string(line) != "" {
+    fmt.Println(string(line))
+}
     }
 }
 
@@ -519,14 +690,6 @@ func DoubleInput(p1 string,p2 string) (r1 string, r2 string) {
     return
 }
 
-func GenerateInit(s*Struct) string {
-	return ""
-}
-
-func Excape(body string) string {
-	//Parse <{}> Deritive for JSON
-	return "" 
-}
 
 func AskForConfirmation() bool {
 	var response string

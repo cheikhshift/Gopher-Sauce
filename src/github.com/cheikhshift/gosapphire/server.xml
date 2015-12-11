@@ -5,7 +5,7 @@
 	<!-- Shell = cli, sort of a GoS(Ghost) in the Shell -->
 	<deploy>webapp</deploy>
 	<port>8080</port>
-	<session struct="http.Session" enable="true"></session>
+	
 	<!-- Using import within different tags will have different results -->
 	<!-- We going to make the goPkg Mongo Db Driver available to our application -->
 	<!-- Using <import/> within the <go/> tag is similar to using the import call within a .go file -->
@@ -13,19 +13,25 @@
 	
 	<!-- Go File output name -->
 	<output>server_out.go</output>
+	<key>something-secretive-is-what-a-gorrilla-needs</key>
 	<!-- The <init/> tag is similar to the init function within Go, -->
 	<init>
-		fmt.Println("Not up yet....?")
+		fmt.Println("Not up yet....?\n")
 	</init>
 	<!-- func main() -->
 	<main>
 
 	</main>
+	<!-- Declare global variables -->
+	<var type="string">FreeServer</var>
 	<!-- Contains interfaces and structs
 	 that will be used by the GoS application -->
 	<header> 
 			<!-- remember to Jumpline when stating methods or different struct attributes, it is vital for our parser \n trick -->
 		<struct name="DemoChild">
+			SomeOtherAttr string
+		</struct>
+		<struct name="Basic_response">
 			SomeOtherAttr string
 		</struct>
 		<struct name="DemoGos">
@@ -63,7 +69,7 @@
 		</method>
 
 		<method name="sendEmail" var="to,from" return="bool">
-			   	fmt.Println("Send Email -> " + to.(string) + " ->" + from.(string))
+			   	go fmt.Println("Send Email -> " + to.(string) + " ->" + from.(string))
 				return true
 		</method>
 		<!-- Sometimes the autointerface will reuse the wrong the function, or your interface methods need a bit more distinction -->
@@ -75,8 +81,16 @@
 			fmt.Printf(gb)
 		</method>
 		<!-- API compatible methods do not need var,limit or any autoface attributes. Simply give it a name which can be used when declaring an endpoint -->
-		<method name="login" var=""> 
+		<method name="login" > 
+			//login function
+			response = mResponse(Button{Color:"#fff"})
+			fmt.Println("Login!! -> " + session.Values["username"].(string))
+		</method>
+
+			<method name="timerMethod" > 
+			//login function
 			
+			fmt.Println("Clean up resources")
 		</method>
 	</methods>
 	<timers>
@@ -85,7 +99,7 @@
 		<!-- Useful for gettings stats on timer -->
 		<!-- When declaring a method that will be used with the timer call, you must leave the var attribute empty as well as return -->
 		<!-- The only object accessible is the timer object think of the go function being called with the timer as a variable  timerMethod(timer *Timer) -->
-		<timer method="timerMethod" interval="60" name="PublicName"></timer>
+		<timer method="timerMethod" interval="60" unit="Second" name="PublicName"></timer>
 	</timers>
 	<templates>
  		<!-- Template libraries are useful for expediting page creation and reuse common website elements within this GoS application -->
@@ -102,6 +116,6 @@
       <!-- methods linked to an API call, please keep in mind that you may use w for http.ResponseWriter and r for http.Request . Additional available function variables is params and session. If a function is api listed it will not be used anywhere else.-->
       <!-- <end /> is the endpoint tag and has the variables path,method, -->
       <!-- Happy trails!!! -->
-      <end path="/index/api" method="login" ></end>
+      <end path="/index/api" method="login" type="POST" ></end>
 	</endpoints>
 </gos>

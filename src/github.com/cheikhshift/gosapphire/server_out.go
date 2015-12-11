@@ -1,6 +1,8 @@
 package main 
 import (
 			"net/http"
+			"time"
+			"github.com/gorilla/sessions"
 			"os"
 			"bytes"
 			"encoding/json"
@@ -12,29 +14,129 @@ import (
 			"reflect"
 			"unsafe"
 		)
-				func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
+				var store = sessions.NewCookieStore([]byte("something-secretive-is-what-a-gorrilla-needs"))
+
+				func net_sessionGet(key string,s *sessions.Session) string {
+					return s.Values[key].(string)
+				}
+
+
+				func net_sessionDelete(s *sessions.Session) string {
+						//keys := make([]string, len(s.Values))
+
+						//i := 0
+						for k := range s.Values {
+						   // keys[i] = k.(string)
+						    net_sessionRemove(k.(string), s)
+						    //i++
+						}
+
+					return ""
+				}
+
+				func net_sessionRemove(key string,s *sessions.Session) string {
+					delete(s.Values, key)
+					return ""
+				}
+				func net_sessionKey(key string,s *sessions.Session) bool {					
+				 if _, ok := s.Values[key]; ok {
+					    //do something here
+				 		return true
+					}
+
+					return false
+				}
+
+				func net_sessionGetInt(key string,s *sessions.Session) interface{} {
+					return s.Values[key]
+				}
+
+				func net_sessionSet(key string, value string,s *sessions.Session) string {
+					 s.Values[key] = value
+					 return ""
+				}
+				func net_sessionSetInt(key string, value interface{},s *sessions.Session) string {
+					 s.Values[key] = value
+					 return ""
+				}
+
+
+
+				func formval(s string, r*http.Request) string {
+					return r.FormValue(s)
+				}
+			
+				func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, p *Page) {
 				     filename :=  tmpl  + ".tmpl"
 				    body, err := ioutil.ReadFile(filename)
+				    session, er := store.Get(r, "session-")
+
+				 	if er != nil {
+				           session,er = store.New(r,"session-")
+				    }
+				    p.Session = session
+				    p.R = r
 				    if err != nil {
 				       fmt.Print(err)
 				    } else {
 				    t := template.New("PageWrapper")
-				    t = t.Funcs(netMap)
+				    t = t.Funcs(template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
 				    t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
 				    outp := new(bytes.Buffer)
 				    error := t.Execute(outp, p)
 				    if error != nil {
 				    fmt.Print(error)
+				    return
 				    } 
+
+				    p.Session.Save(r, w)
+
 				    fmt.Fprintf(w, html.UnescapeString(outp.String()) )
 				    }
 				}
 
 				func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
 				  return func(w http.ResponseWriter, r *http.Request) {
+				  	if !apiAttempt(w,r) {
 				      fn(w, r, "")
+				  	}
 				  }
 				} 
+				func mResponse(v interface{}) string {
+					data,_ := json.Marshal(&v)
+					return string(data)
+				}
+				func apiAttempt(w http.ResponseWriter, r *http.Request) bool {
+					session, er := store.Get(r, "session-")
+					response := ""
+					if er != nil {
+						session,_ = store.New(r, "session-")
+					}
+					callmet := false
+
+					 
+				if  r.URL.Path == "/index/api" && r.Method == strings.ToUpper("POST") { 
+					 
+			//login function
+			response = mResponse(Button{Color:"#fff"})
+			fmt.Println("Login!! -> " + session.Values["username"].(string))
+		
+					callmet = true
+				}
+				
+
+					if callmet {
+						session.Save(r,w)
+						if response != "" {
+							//Unmarshal json
+							w.Header().Set("Access-Control-Allow-Origin", "*")
+							w.Header().Set("Content-Type",  "application/json")
+							w.Write([]byte(response))
+						}
+						return true
+					}
+					return false
+				}
 
 				func handler(w http.ResponseWriter, r *http.Request, context string) {
 				  // fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
@@ -45,7 +147,7 @@ import (
 				  }
 
 				  if !p.isResource {
-				        renderTemplate(w,  "web" + r.URL.Path, p)
+				        renderTemplate(w, r,  "web" + r.URL.Path, p)
 				  } else {
 				       w.Write(p.Body)
 				  }
@@ -123,13 +225,20 @@ import (
 					    request *http.Request
 					    isResource bool
 					    s *map[string]interface{}
+					    R *http.Request
+					    Session *sessions.Session
 					}
+						var FreeServer string
 			func init(){
 				
-		fmt.Println("Not up yet....?")
+		fmt.Println("Not up yet....?\n")
 	
 			}
 			type DemoChild struct {
+			SomeOtherAttr string
+		
+			}
+			type Basic_response struct {
 			SomeOtherAttr string
 		
 			}
@@ -148,6 +257,7 @@ import (
 			Color string
 		
 			}
+			type myDemoObject DemoGos
 				func  net_myDemoObject(jso string) (d DemoGos){
 					var jsonBlob = []byte(jso)
 					err := json.Unmarshal(jsonBlob, &d)
@@ -179,7 +289,7 @@ import (
 							to := args[0]
 								from := args[1]
 								
-			   	fmt.Println("Send Email -> " + to.(string) + " ->" + from.(string))
+			   	go fmt.Println("Send Email -> " + to.(string) + " ->" + from.(string))
 				return true
 		
 						}
@@ -189,13 +299,6 @@ import (
 								 
 			gb := save.(string) + end.(string)
 			fmt.Printf(gb)
-		
-						 return ""
-						 
-						}
-						func net_login(args ...interface{}) string {
-							 
-			
 		
 						 return ""
 						 
@@ -216,14 +319,42 @@ import (
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("Button")
-    				t = t.Funcs(netMa)
-				    t, _ = t.Parse(BytesToString(body))
-
+    				t = t.Funcs(template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
+			
 				    error := t.Execute(output, &d)
 				    if error != nil {
 				    fmt.Print(error)
 				    } 
-					return output.String()
+					return html.UnescapeString(output.String())
+				}
+				func  net_bButton(d Button) string {
+					filename :=  "tmpl/button.tmpl"
+    				body, er := ioutil.ReadFile(filename)
+    				if er != nil {
+    					return ""
+    				}
+    				 output := new(bytes.Buffer) 
+					t := template.New("Button")
+    				t = t.Funcs(template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
+			
+				    error := t.Execute(output, &d)
+				    if error != nil {
+				    fmt.Print(error)
+				    } 
+					return html.UnescapeString(output.String())
+				}
+				func  net_cButton(l string) (d Button) {
+					
+					
+					var jsonBlob = []byte(l)
+					err := json.Unmarshal(jsonBlob, &d)
+					if err != nil {
+						fmt.Println("error:", err)
+						return 
+					}
+    				return
 				}
 				func  net_Bootstrap_alert(jso string) string {
 					var d Bootstrap_alert
@@ -241,22 +372,61 @@ import (
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("Bootstrap_alert")
-    				t = t.Funcs(netMa)
-				    t, _ = t.Parse(BytesToString(body))
-
+    				t = t.Funcs(template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
+			
 				    error := t.Execute(output, &d)
 				    if error != nil {
 				    fmt.Print(error)
 				    } 
-					return output.String()
+					return html.UnescapeString(output.String())
 				}
-           var netMa = template.FuncMap{"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"login" : net_login,"myDemoObject" : net_myDemoObject}
-           var netMap = template.FuncMap{"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"login" : net_login,"myDemoObject" : net_myDemoObject,"Button" : net_Button,"Bootstrap_alert" : net_Bootstrap_alert}
+				func  net_bBootstrap_alert(d Bootstrap_alert) string {
+					filename :=  "tmpl/Bootstrap/alert.tmpl"
+    				body, er := ioutil.ReadFile(filename)
+    				if er != nil {
+    					return ""
+    				}
+    				 output := new(bytes.Buffer) 
+					t := template.New("Bootstrap_alert")
+    				t = t.Funcs(template.FuncMap{"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
+			
+				    error := t.Execute(output, &d)
+				    if error != nil {
+				    fmt.Print(error)
+				    } 
+					return html.UnescapeString(output.String())
+				}
+				func  net_cBootstrap_alert(l string) (d Bootstrap_alert) {
+					
+					
+					var jsonBlob = []byte(l)
+					err := json.Unmarshal(jsonBlob, &d)
+					if err != nil {
+						fmt.Println("error:", err)
+						return 
+					}
+    				return
+				}
 			func main() {
 				
 
 	
 					 os.Chdir("/Users/Adrian/gosapphire/src/github.com/cheikhshift/gosapphire")
+					 
+					 
+			PublicName := time.NewTicker(time.Second * 60)
+					    go func() {
+					        for _ = range PublicName.C {
+					            
+			//login function
+			
+			fmt.Println("Clean up resources")
+		
+					        }
+					    }()
+    
 					 fmt.Printf("Listenning on Port %v\n", "8080")
 					 http.HandleFunc( "/",  makeHandler(handler))
 					 http.Handle("/dist/", http.StripPrefix("", http.FileServer(http.Dir("web"))))

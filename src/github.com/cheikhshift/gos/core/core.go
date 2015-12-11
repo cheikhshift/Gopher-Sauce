@@ -32,7 +32,9 @@ type gos struct {
 	 Output string `xml:"output"`
 	 Type string `xml:"deploy"`
 	 Main string `xml:"main"`
+	 Variables []GlobalVariables `xml:"var"`
 	 WriteOut bool
+	 Key string `xml:"key"`
 	 Session Session `xml:"session"`
 	 Template_path string `xml:"templatePath"`
 	 Web_root string `xml:"webroot"`
@@ -44,6 +46,12 @@ type gos struct {
 	 Timers Timers `xml:"timers"`
 	 Templates Templates `xml:"templates"`
 	 Endpoints Endpoints `xml:"endpoints"`
+}
+
+type GlobalVariables struct {
+	 XMLName    xml.Name `xml:"var"`
+	 Name string `xml:",innerxml"`
+	 Type string `xml:"type,attr"`
 }
 
 type Session struct {
@@ -92,7 +100,7 @@ type Templates struct {
 
 type Endpoints struct {
 	XMLName xml.Name `xml:"endpoints"`
-	Endpoints []Endpoint `xml:"endpoint"`
+	Endpoints []Endpoint `xml:"end"`
 }
 
 /*
@@ -128,6 +136,7 @@ type Timer struct {
 	Method string `xml:"method,attr"`
 	Interval string `xml:"interval,attr"`
 	Name string `xml:"name,attr"`
+	Unit string `xml:"unit,attr"`
 }
 
 type Template struct {
@@ -142,4 +151,5 @@ type Endpoint struct {
 	XMLName xml.Name `xml:"end"`
 	Path string `xml:"path,attr"`
 	Method string `xml:"method,attr"`
+	Type string `xml:"type,attr"`
 }
