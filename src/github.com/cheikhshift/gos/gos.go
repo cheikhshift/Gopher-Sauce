@@ -2,9 +2,11 @@ package main
 
 import (
 	"github.com/cheikhshift/gos/core"
+	
 	"fmt"
 	"os"
 	"strings"
+	"time"
 //	"io/ioutil"
 )
 
@@ -20,7 +22,16 @@ func main() {
     	//fmt.Println( os.Args)
     if len(os.Args) > 1 {
     //args := os.Args[1:]
-    	if os.Args[1] == "compile" || os.Args[1] == "run" {
+    		if os.Args[1] == "dependencies" {
+    			fmt.Println("∑ Getting GoS dependencies")
+    			 core.RunCmd("go get -u github.com/jteeuwen/go-bindata/...")
+    			core.RunCmd("go get github.com/gorilla/sessions")
+    			core.RunCmd("go get github.com/elazarl/go-bindata-assetfs")
+    			time.Sleep(time.Second *120)
+    			fmt.Println("Done")
+    			return
+    		}
+    
     		GOHOME = GOHOME   + strings.Trim(os.Args[2],"/")
     		serverconfig := os.Args[3]
     		webroot = os.Args[4]
@@ -36,10 +47,33 @@ func main() {
 			coreTemplate.WriteOut = false
 			core.Process(coreTemplate,GOHOME, webroot,template_root);
 
-			if os.Args[1] == "run" {
-				core.RunFile(GOHOME, coreTemplate.Output)
+			if os.Args[1] == "export" {
+				coreTemplate.WriteOut = true				
 			}
-    	}
+		
+			if os.Args[1] == "run" {
+				os.Chdir(GOHOME)
+				fmt.Println("Invoking go-bindata");
+				core.RunCmd(os.ExpandEnv("$GOPATH") + "/bin/go-bindata -debug " + webroot +"/... " + template_root + "/...")
+				//time.Sleep(time.Second*100 )
+				//core.RunFile(GOHOME, coreTemplate.Output)
+				core.RunCmd("go build")
+				pk := strings.Split(strings.Trim(os.Args[2],"/"), "/")
+				fmt.Println("Use Ctrl + C to quit")
+				core.Exe_Stall("./" + pk[len(pk) - 1] )
+			}
+
+			if os.Args[1] == "export" {
+				fmt.Println("Generating Export Program")
+				os.Chdir(GOHOME)		
+				//create both zips
+				fmt.Println("Invoking go-bindata");
+				core.RunCmd(  os.ExpandEnv("$GOPATH") + "/bin/go-bindata  " + webroot +"/... " + template_root + "/...")
+				core.RunCmd("go build")
+			}
+
+
+    	
 
 	} else { 
 	

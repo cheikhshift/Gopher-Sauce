@@ -13,6 +13,7 @@
 	
 	<!-- Go File output name -->
 	<output>server_out.go</output>
+
 	<key>something-secretive-is-what-a-gorrilla-needs</key>
 	<!-- The <init/> tag is similar to the init function within Go, -->
 	<init>
@@ -106,8 +107,8 @@
  		<!-- Templates are nested and customized with the template function instead of using the normal {{template "Name"}} call you can now use {{Button &{Color:"#fff"}& }}
  		{{Modal &{Color:"#fff"}& }}  -->
  		<!-- *Notice that special braces are used to initialize the parameters of the struct '&{' and '}&' -->
- 		<template name="Button" tmpl="button" struct="Button" /> 
- 		<template name="Bootstrap_alert" tmpl="Bootstrap/alert" struct="Bootstrap_alert" /> 
+ 		<template name="Button" tmpl="bootstrap/button" struct="Button" /> 
+ 		<template name="Bootstrap_alert" tmpl="bootstrap/alert" struct="Bootstrap_alert" /> 
  		
 	</templates>
 	<endpoints>

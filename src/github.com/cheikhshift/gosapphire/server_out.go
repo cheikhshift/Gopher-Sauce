@@ -1,13 +1,12 @@
 package main 
 import (
 			"net/http"
+			"github.com/elazarl/go-bindata-assetfs"
 			"time"
 			"github.com/gorilla/sessions"
-			"os"
 			"bytes"
 			"encoding/json"
 			"fmt"
-			"io/ioutil"
 			"html"
 			"html/template"
 			"strings"
@@ -76,7 +75,7 @@ import (
 			
 				func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, p *Page) {
 				     filename :=  tmpl  + ".tmpl"
-				    body, err := ioutil.ReadFile(filename)
+				    body, err := Asset(filename)
 				    session, er := store.Get(r, "session-")
 
 				 	if er != nil {
@@ -163,13 +162,13 @@ import (
 
 				func loadPage(title string, servlet string,r *http.Request) (*Page,error) {
 				    filename :=  "web" + title + ".tmpl"
-				    body, err := ioutil.ReadFile(filename)
+				    body, err := Asset(filename)
 				    if err != nil {
 				      filename = "web" + title + ".html"
-				      body, err = ioutil.ReadFile(filename)
+				      body, err = Asset(filename)
 				      if err != nil {
 				         filename = "web" + title
-				         body, err = ioutil.ReadFile(filename)
+				         body, err = Asset(filename)
 				         if err != nil {
 				            return nil, err
 				         } else {
@@ -325,8 +324,8 @@ import (
 						d = Button{}
 					}
 
-					filename :=  "tmpl/button.tmpl"
-    				body, er := ioutil.ReadFile(filename)
+					filename :=  "tmpl/bootstrap/button.tmpl"
+    				body, er := Asset(filename)
     				if er != nil {
     					return ""
     				}
@@ -342,8 +341,8 @@ import (
 					return html.UnescapeString(output.String())
 				}
 				func  net_bButton(d Button) string {
-					filename :=  "tmpl/button.tmpl"
-    				body, er := ioutil.ReadFile(filename)
+					filename :=  "tmpl/bootstrap/button.tmpl"
+    				body, er := Asset(filename)
     				if er != nil {
     					return ""
     				}
@@ -383,8 +382,8 @@ import (
 						d = Bootstrap_alert{}
 					}
 
-					filename :=  "tmpl/Bootstrap/alert.tmpl"
-    				body, er := ioutil.ReadFile(filename)
+					filename :=  "tmpl/bootstrap/alert.tmpl"
+    				body, er := Asset(filename)
     				if er != nil {
     					return ""
     				}
@@ -400,8 +399,8 @@ import (
 					return html.UnescapeString(output.String())
 				}
 				func  net_bBootstrap_alert(d Bootstrap_alert) string {
-					filename :=  "tmpl/Bootstrap/alert.tmpl"
-    				body, er := ioutil.ReadFile(filename)
+					filename :=  "tmpl/bootstrap/alert.tmpl"
+    				body, er := Asset(filename)
     				if er != nil {
     					return ""
     				}
@@ -431,8 +430,6 @@ import (
 				
 
 	
-					 os.Chdir("/Users/Adrian/gosapphire/src/github.com/cheikhshift/gosapphire")
-					 
 					 
 			PublicName := time.NewTicker(time.Second * 60)
 					    go func() {
@@ -447,6 +444,6 @@ import (
     
 					 fmt.Printf("Listenning on Port %v\n", "8080")
 					 http.HandleFunc( "/",  makeHandler(handler))
-					 http.Handle("/dist/", http.StripPrefix("", http.FileServer(http.Dir("web"))))
+					 http.Handle("/dist/",  http.FileServer(&assetfs.AssetFS{Asset: Asset, AssetDir: AssetDir, Prefix: "web"}))
 					 http.ListenAndServe(":8080", nil)
 			}

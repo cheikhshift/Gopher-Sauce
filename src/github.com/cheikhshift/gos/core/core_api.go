@@ -12,13 +12,59 @@ import (
 	"strconv"
 	"os/exec"
 	"bufio"
+	"crypto/rand"
+)
+
+
+const (
+	StdLen = 16
+	UUIDLen = 20
 )
 
 var GOHOME = os.ExpandEnv("$GOPATH") + "/src/"
 var available_methods []string
-	var	int_methods  []string
-		var	api_methods  []string
-	var	int_mappings []string
+var	int_methods  []string
+var	api_methods  []string
+var	int_mappings []string
+var StdChars = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+
+func NewLen(length int) string {
+	return NewLenChars(length, StdChars)
+}
+
+// NewLenChars returns a new random string of the provided length, consisting
+// of the provided byte slice of allowed characters (maximum 256).
+func NewLenChars(length int, chars []byte) string {
+	if length == 0 {
+		return ""
+	}
+	clen := len(chars)
+	if clen < 2 || clen > 256 {
+		panic("uniuri: wrong charset length for NewLenChars")
+	}
+	maxrb := 255 - (256 % clen)
+	b := make([]byte, length)
+	r := make([]byte, length+(length/4)) // storage for random bytes.
+	i := 0
+	for {
+		if _, err := rand.Read(r); err != nil {
+			panic("uniuri: error reading random bytes: " + err.Error())
+		}
+		for _, rb := range r {
+			c := int(rb)
+			if c > maxrb {
+				// Skip this number to avoid modulo bias.
+				continue
+			}
+			b[i] = chars[c%clen]
+			i++
+			if i == length {
+				return string(b)
+			}
+		}
+	}
+}
+
 func Process(template *gos,r string, web string, tmpl string) (local_string string) {
 	// r = GOHOME + GoS Project
 	arch := gosArch{}
@@ -26,7 +72,7 @@ func Process(template *gos,r string, web string, tmpl string) (local_string stri
 import (`
 	if template.Type == "webapp" {
 		
-		net_imports := []string{"net/http", "time","github.com/gorilla/sessions","os","bytes","encoding/json" ,"fmt", "io/ioutil","html",   "html/template", "strings", "reflect", "unsafe"}
+		net_imports := []string{"net/http","github.com/elazarl/go-bindata-assetfs", "time","github.com/gorilla/sessions","bytes","encoding/json" ,"fmt","html",   "html/template", "strings", "reflect", "unsafe"}
 		/*
 			Methods before so that we can create to correct delegate method for each object
 		*/
@@ -158,7 +204,7 @@ import (`
 			
 				func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, p *Page) {
 				     filename :=  tmpl  + ".tmpl"
-				    body, err := ioutil.ReadFile(filename)
+				    body, err := Asset(filename)
 				    session, er := store.Get(r, "session-")
 
 				 	if er != nil {
@@ -236,13 +282,13 @@ import (`
 
 				func loadPage(title string, servlet string,r *http.Request) (*Page,error) {
 				    filename :=  "` +  web + `" + title + ".tmpl"
-				    body, err := ioutil.ReadFile(filename)
+				    body, err := Asset(filename)
 				    if err != nil {
 				      filename = "` + web + `" + title + ".html"
-				      body, err = ioutil.ReadFile(filename)
+				      body, err = Asset(filename)
 				      if err != nil {
 				         filename = "` + web + `" + title
-				         body, err = ioutil.ReadFile(filename)
+				         body, err = Asset(filename)
 				         if err != nil {
 				            return nil, err
 				         } else {
@@ -492,7 +538,7 @@ import (`
 					}
 
 					filename :=  "` + tmpl + `/` + imp.TemplateFile + `.tmpl"
-    				body, er := ioutil.ReadFile(filename)
+    				body, er := Asset(filename)
     				if er != nil {
     					return ""
     				}
@@ -510,7 +556,7 @@ import (`
 					local_string += `
 				func  net_b`+ imp.Name + `(d ` + imp.Struct +`) string {
 					filename :=  "` + tmpl + `/` + imp.TemplateFile + `.tmpl"
-    				body, er := ioutil.ReadFile(filename)
+    				body, er := Asset(filename)
     				if er != nil {
     					return ""
     				}
@@ -547,17 +593,12 @@ import (`
 			func main() {
 				` + template.Main
 				if template.Type == "webapp" {
-					if !template.WriteOut {
-					local_string += `
-					 os.Chdir("` + r + `")
-					 `
-					}
-				
+					
 					 local_string += `
 					 ` + timeline +`
 					 fmt.Printf("Listenning on Port %v\n", "` + template.Port +`")
 					 http.HandleFunc( "/",  makeHandler(handler))
-					 http.Handle("/dist/", http.StripPrefix("", http.FileServer(http.Dir("` + web + `"))))
+					 http.Handle("/dist/",  http.FileServer(&assetfs.AssetFS{Asset: Asset, AssetDir: AssetDir, Prefix: "` + web +`"}))
 					 http.ListenAndServe(":`+ template.Port +`", nil)`
 				}
 
@@ -581,10 +622,59 @@ func RunFile(root string,file string){
 	exe_cmd("go run " + root + "/" +  file )
 }
 
+func RunCmd(cmd string){
+	exe_cmd(cmd)
+}
+
 func exe_cmd(cmd string) {
     fmt.Println(cmd)
-     parts := strings.Fields(cmd)
-    out := exec.Command(parts[0],parts[1],parts[2])
+    parts := strings.Fields(cmd)
+    var out *exec.Cmd
+    if len(parts) == 4 {
+    		out = exec.Command(parts[0],parts[1],parts[2],parts[3])	
+    }else if len(parts) > 2 {
+    	out = exec.Command(parts[0],parts[1],parts[2])
+	} else if len(parts) == 1 {
+		out = exec.Command(parts[0])
+	} else {
+		out = exec.Command(parts[0],parts[1])
+	}
+    stdout, err := out.StdoutPipe()
+    if err != nil {
+        fmt.Println("error occured")
+        fmt.Printf("%s", err)
+    }
+    out.Start()
+	r := bufio.NewReader(stdout)
+	t := false
+	for !t {
+	if out.ProcessState != nil {
+	if out.ProcessState.Exited() {
+		t = true
+		fmt.Println("Ω Sub Process finished")
+	}
+	} else {
+		t = true
+		fmt.Println("Ω Sub Process finished")
+	}
+	line, _, _ := r.ReadLine()
+	if string(line) != "" {
+    fmt.Println(string(line))
+	}
+    }
+}
+
+func Exe_Stall(cmd string) {
+    fmt.Println(cmd)
+    parts := strings.Fields(cmd)
+    var out *exec.Cmd
+    if len(parts) > 2 {
+    	out = exec.Command(parts[0],parts[1],parts[2])
+	} else if len(parts) == 1 {
+		out = exec.Command(parts[0])
+	} else {
+		out = exec.Command(parts[0],parts[1])
+	}
     stdout, err := out.StdoutPipe()
     if err != nil {
         fmt.Println("error occured")
@@ -597,7 +687,7 @@ func exe_cmd(cmd string) {
 	line, _, _ := r.ReadLine()
 	if string(line) != "" {
     fmt.Println(string(line))
-}
+	}
     }
 }
 
