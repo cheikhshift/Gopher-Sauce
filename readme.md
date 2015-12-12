@@ -474,3 +474,70 @@ The example below will download the package using the `go get` command during th
 
 	<import src= "gopkg.in/mgo.v2" fetch="true"/>
 
+# GoS builtin template functions
+This section covers the list of functions available within all your templates compiled using GoS.
+Please keep in mind that the .Session and .R variable are only available to templates within your server web root.
+
+ - js - will take its only input and add it as the src attribute of the html `<script/>` tag `<script src="var"></script>`
+	 - Usage : `{{js  "dist/js/bootstrap.js"}}`
+ - css - Will take its only input and add it as the href attribute of the html  `<link/>` tag.
+	 - Usage : `{{css "dist/css/bootstrap.css" }} `
+ - sd - Will delete the current page session
+	 - Usage : `{{.Session | sd }}` 
+ - sr - Will remove a specified session key
+	 - Usage : `{{.Session | sr "KeyName" }}` 
+ - sc - Will check to see if a session key exists
+	 - Usage : `{{.Session | sc "KeyName" }}`
+ - ss - Will set a string value as a session variable.
+	 - Usage : `{{.Session | ss "KeyName" "Variable" }}` 
+ - sso - Will set a struct as a session variable. 
+	 - Usage : This requires three steps to work.
+		 -   Import `encoding/gob` with the import tag. Do not set the fetch attribute.
+		 - Register the struct types within your `<init/>` tag of your GoS project root. 
+					 
+					 init(){ 
+					 ...
+					 gob.Register(&Object{})
+					 
+		
+		- Once the steps above are completed you can now set the linked object as session variables : `{{.Session | sso "KeyName" $object_with_Object_struct }}`
+ - sgo - Will retrieve a a session stored object
+	 - Usage : `{{$desiredObject =  .Session | sgo "keyName" }}` 
+ - sg - Will retrieve a string stored as a session variable.
+	 - Usage : `{{$string := .Session | sg "KeyName" }}` 
+ - form - Will retrieve a request variable no matter how it is submitted.
+	- Usage : `{{ $input = .R | }}` .  `.R` is a page variable with type `http.Request` from the Go lang package `net/http`
+ - eq - Will compare two variables and return a `bool` of value true if they are equal
+	 - Usage : `{{if eq "Obj1" "Obj1" }} {{end}}` 
+ - neq - Will compare two variables and return a `bool` of value true if they are not equal.
+	 - Usage :  `{{if neq "Obj1" "Obj2" }} {{end}}` 
+ - lte - Will see if the first number declared is less than or equal to than the second number declared, if this statement proves to be true it will return a `bool` with the value true.
+	 - Usage : `{{if lte 5 10 }} {{end}}` 
+ - lt - Will see if the first number declared is less than the second number declared, if this statement proves to be true it wil return a `bool` with value true.
+	 - Usage  : `{{if lt 5  7 }} {{end}}`
+ - gte - Will see if the first number declared is greater than or equal to the second number declared, if this statement proves to be true it will return a `bool` with value true
+	 - Usage : `{{if gte 5 2}} {{end}}` 
+ - gt -  Will see if the first number declared is greater than or equal to the second number declared, if this statement proves to be true it will return a `bool` with value true
+	 - Usage : `{{if gt 5 2}} {{end}}` 
+
+# Gos page
+This section covers the variables accessible to a template page in your GoS project's web root.
+
+More information on [sessions.Session](http://www.gorillatoolkit.org/pkg/sessions)
+
+The Go lang struct for a page in your web root : 
+
+		 type Page struct {
+					    Title string
+					    Body  []byte
+					    request *http.Request
+					    isResource bool
+					    R *http.Request
+					    Session *sessions.Session
+			}
+
+These variables are accessible to tmpl based web pages within your project's web root. For templates in your template class folder, GoS will use the explicitly defined struct for that template.
+
+# Bug tracking
+
+Github Issue tracker!!!!
