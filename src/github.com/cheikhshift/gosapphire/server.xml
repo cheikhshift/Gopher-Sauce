@@ -94,14 +94,7 @@
 			fmt.Println("Clean up resources")
 		</method>
 	</methods>
-	<timers>
-		<!-- This is where timer calls are placed, The Timer tag has two attributes, method,interval, and name  -->
-		<!-- method is the function called, interval is the time period in between calls in seconds. And name refers to the timer public name -->
-		<!-- Useful for gettings stats on timer -->
-		<!-- When declaring a method that will be used with the timer call, you must leave the var attribute empty as well as return -->
-		<!-- The only object accessible is the timer object think of the go function being called with the timer as a variable  timerMethod(timer *Timer) -->
-		<timer method="timerMethod" interval="60" unit="Second" name="PublicName"></timer>
-	</timers>
+
 	<templates>
  		<!-- Template libraries are useful for expediting page creation and reuse common website elements within this GoS application -->
  		<!-- Templates are nested and customized with the template function instead of using the normal {{template "Name"}} call you can now use {{Button &{Color:"#fff"}& }}

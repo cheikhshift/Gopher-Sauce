@@ -85,6 +85,7 @@ import (`
 		for _,imp := range template.Endpoints.Endpoints {
 			if !contains(api_methods, imp.Method) {
 				api_methods = append(api_methods, imp.Method)
+			}
 				meth := template.findMethod(imp.Method)
 				apiraw += ` 
 				if  r.URL.Path == "` + imp.Path +`" && r.Method == strings.ToUpper("` + imp.Type +`") { 
@@ -92,7 +93,7 @@ import (`
 					callmet = true
 				}
 				` 
-			}
+			
 		}
 		timeline :=  ``
 		for _,imp := range template.Timers.Timers {
@@ -110,6 +111,7 @@ import (`
     `
 		}
 
+		
 		fmt.Printf("APi Methods %v\n",api_methods)
 		     netMa := 	`template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt`
            for _,imp := range available_methods {
@@ -117,6 +119,18 @@ import (`
           		netMa += `,"` + imp + `" : net_` + imp
       		}
            }
+           int_lok := []string{}
+
+           for _,imp := range template.Header.Objects {
+			//struct return and function
+				
+			if !contains(int_lok, imp.Name) {
+				int_lok = append(int_lok,imp.Name)
+			 	netMa += `,"` + imp.Name + `" : net_` + imp.Name
+			}
+			}
+
+
            for _,imp := range template.Templates.Templates {
 
 				netMa += `,"` + imp.Name + `" : net_` + imp.Name
@@ -128,6 +142,10 @@ import (`
 		for _,imp := range template.RootImports {
 				//fmt.Println(imp)
 			if !strings.Contains(imp.Src,".xml") {
+					if imp.Download == "true" {
+						fmt.Println("∑ Downloading Package " + imp.Src)
+						RunCmd("go get " + imp.Src)
+					}
 					if  !contains(net_imports, imp.Src) {
 						net_imports = append(net_imports, imp.Src)
 					}
@@ -282,9 +300,15 @@ import (`
 
 				func loadPage(title string, servlet string,r *http.Request) (*Page,error) {
 				    filename :=  "` +  web + `" + title + ".tmpl"
+				    if title == "/" {
+				    	filename = "` + web + `/index.tmpl"
+				    }
 				    body, err := Asset(filename)
 				    if err != nil {
 				      filename = "` + web + `" + title + ".html"
+				      if title == "/" {
+				    	filename = "` + web + `/index.html"
+				    	}
 				      body, err = Asset(filename)
 				      if err != nil {
 				         filename = "` + web + `" + title
@@ -292,7 +316,7 @@ import (`
 				         if err != nil {
 				            return nil, err
 				         } else {
-				          if strings.Contains(title, ".tmpl") {
+				          if strings.Contains(title, ".tmpl") || title == "/" {
 				              return nil,nil
 				          }
 				          return &Page{Title: title, Body: body,isResource: true,request: nil}, nil
@@ -351,7 +375,6 @@ import (`
 					    Body  []byte
 					    request *http.Request
 					    isResource bool
-					    s *map[string]interface{}
 					    R *http.Request
 					    Session *sessions.Session
 					}`
@@ -397,7 +420,9 @@ import (`
 				available_methods = append(available_methods,imp.Name)
 				int_methods = append(int_methods,imp.Name)
 				local_string += `
-				func  net_`+ imp.Name + `(jso string) (d ` + imp.Templ +`){
+				func  net_`+ imp.Name + `(args ...interface{}) (d ` + imp.Templ +`){
+					if len(args) > 0 {
+					jso := args[0].(string)
 					var jsonBlob = []byte(jso)
 					err := json.Unmarshal(jsonBlob, &d)
 					if err != nil {
@@ -405,6 +430,10 @@ import (`
 						return
 					}
 					return
+					} else {
+						d = ` + imp.Templ +`{} 
+						return
+					}
 				}`	    
 
 			}
@@ -572,14 +601,16 @@ import (`
 					return html.UnescapeString(output.String())
 				}`	    
 				local_string += `
-				func  net_c`+ imp.Name + `(l string) (d ` + imp.Struct +`) {
-					
-					
-					var jsonBlob = []byte(l)
+				func  net_c`+ imp.Name + `(args ...interface{}) (d ` + imp.Struct +`) {
+					if len(args) > 0 {
+					var jsonBlob = []byte(args[0].(string))
 					err := json.Unmarshal(jsonBlob, &d)
 					if err != nil {
 						fmt.Println("error:", err)
 						return 
+					}
+					} else {
+						d = `+ imp.Struct +`{}
 					}
     				return
 				}`	    
@@ -590,6 +621,11 @@ import (`
 
 
 			local_string += `
+			func dummy_timer(){
+				dg := time.Second *5
+				fmt.Println(dg)
+			}
+
 			func main() {
 				` + template.Main
 				if template.Type == "webapp" {

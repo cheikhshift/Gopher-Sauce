@@ -87,7 +87,7 @@ import (
 				       fmt.Print(err)
 				    } else {
 				    t := template.New("PageWrapper")
-				    t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+				    t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"timerMethod" : net_timerMethod,"myDemoObject" : net_myDemoObject,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
 				    t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
 				    outp := new(bytes.Buffer)
 				    error := t.Execute(outp, p)
@@ -162,9 +162,15 @@ import (
 
 				func loadPage(title string, servlet string,r *http.Request) (*Page,error) {
 				    filename :=  "web" + title + ".tmpl"
+				    if title == "/" {
+				    	filename = "web/index.tmpl"
+				    }
 				    body, err := Asset(filename)
 				    if err != nil {
 				      filename = "web" + title + ".html"
+				      if title == "/" {
+				    	filename = "web/index.html"
+				    	}
 				      body, err = Asset(filename)
 				      if err != nil {
 				         filename = "web" + title
@@ -172,7 +178,7 @@ import (
 				         if err != nil {
 				            return nil, err
 				         } else {
-				          if strings.Contains(title, ".tmpl") {
+				          if strings.Contains(title, ".tmpl") || title == "/" {
 				              return nil,nil
 				          }
 				          return &Page{Title: title, Body: body,isResource: true,request: nil}, nil
@@ -231,7 +237,6 @@ import (
 					    Body  []byte
 					    request *http.Request
 					    isResource bool
-					    s *map[string]interface{}
 					    R *http.Request
 					    Session *sessions.Session
 					}
@@ -265,7 +270,9 @@ import (
 		
 			}
 			type myDemoObject DemoGos
-				func  net_myDemoObject(jso string) (d DemoGos){
+				func  net_myDemoObject(args ...interface{}) (d DemoGos){
+					if len(args) > 0 {
+					jso := args[0].(string)
 					var jsonBlob = []byte(jso)
 					err := json.Unmarshal(jsonBlob, &d)
 					if err != nil {
@@ -273,6 +280,10 @@ import (
 						return
 					}
 					return
+					} else {
+						d = DemoGos{} 
+						return
+					}
 				}
 					  	func  net_Hackfmt(save string, object DemoGos)  string {
 									 
@@ -310,6 +321,15 @@ import (
 						 return ""
 						 
 						}
+						func net_timerMethod(args ...interface{}) string {
+							 
+			//login function
+			
+			fmt.Println("Clean up resources")
+		
+						 return ""
+						 
+						}
 				func  net_Button(args ...interface{}) string {
 					var d Button
 					if len(args) > 0 {
@@ -331,7 +351,7 @@ import (
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("Button")
-    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"timerMethod" : net_timerMethod,"myDemoObject" : net_myDemoObject,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
 				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
 			
 				    error := t.Execute(output, &d)
@@ -348,7 +368,7 @@ import (
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("Button")
-    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"timerMethod" : net_timerMethod,"myDemoObject" : net_myDemoObject,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
 				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
 			
 				    error := t.Execute(output, &d)
@@ -357,14 +377,16 @@ import (
 				    } 
 					return html.UnescapeString(output.String())
 				}
-				func  net_cButton(l string) (d Button) {
-					
-					
-					var jsonBlob = []byte(l)
+				func  net_cButton(args ...interface{}) (d Button) {
+					if len(args) > 0 {
+					var jsonBlob = []byte(args[0].(string))
 					err := json.Unmarshal(jsonBlob, &d)
 					if err != nil {
 						fmt.Println("error:", err)
 						return 
+					}
+					} else {
+						d = Button{}
 					}
     				return
 				}
@@ -389,7 +411,7 @@ import (
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("Bootstrap_alert")
-    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"timerMethod" : net_timerMethod,"myDemoObject" : net_myDemoObject,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
 				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
 			
 				    error := t.Execute(output, &d)
@@ -406,7 +428,7 @@ import (
     				}
     				 output := new(bytes.Buffer) 
 					t := template.New("Bootstrap_alert")
-    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
+    				t = t.Funcs(template.FuncMap{"js" : net_importjs,"css" : net_importcss,"sd" : net_sessionDelete,"sr" : net_sessionRemove,"sc": net_sessionKey,"ss" : net_sessionSet,"sso": net_sessionSetInt,"sgo" : net_sessionGetInt,"sg" : net_sessionGet,"form" : formval,"eq": equalz, "neq" : nequalz, "lte" : netlt,"WhatsMyAttrLength" : net_WhatsMyAttrLength,"sendEmail" : net_sendEmail,"WhatsMyAttr" : net_WhatsMyAttr,"timerMethod" : net_timerMethod,"myDemoObject" : net_myDemoObject,"Button" : net_Button,"bButton" : net_bButton,"cButton" : net_cButton,"Bootstrap_alert" : net_Bootstrap_alert,"bBootstrap_alert" : net_bBootstrap_alert,"cBootstrap_alert" : net_cBootstrap_alert})
 				  	t, _ = t.Parse(strings.Replace(strings.Replace(strings.Replace(BytesToString(body), "/{", "\"{",-1),"}/", "}\"",-1 ) ,"`", `\"` ,-1) )
 			
 				    error := t.Execute(output, &d)
@@ -415,33 +437,29 @@ import (
 				    } 
 					return html.UnescapeString(output.String())
 				}
-				func  net_cBootstrap_alert(l string) (d Bootstrap_alert) {
-					
-					
-					var jsonBlob = []byte(l)
+				func  net_cBootstrap_alert(args ...interface{}) (d Bootstrap_alert) {
+					if len(args) > 0 {
+					var jsonBlob = []byte(args[0].(string))
 					err := json.Unmarshal(jsonBlob, &d)
 					if err != nil {
 						fmt.Println("error:", err)
 						return 
 					}
+					} else {
+						d = Bootstrap_alert{}
+					}
     				return
 				}
+			func dummy_timer(){
+				dg := time.Second *5
+				fmt.Println(dg)
+			}
+
 			func main() {
 				
 
 	
 					 
-			PublicName := time.NewTicker(time.Second * 60)
-					    go func() {
-					        for _ = range PublicName.C {
-					            
-			//login function
-			
-			fmt.Println("Clean up resources")
-		
-					        }
-					    }()
-    
 					 fmt.Printf("Listenning on Port %v\n", "8080")
 					 http.HandleFunc( "/",  makeHandler(handler))
 					 http.Handle("/dist/",  http.FileServer(&assetfs.AssetFS{Asset: Asset, AssetDir: AssetDir, Prefix: "web"}))

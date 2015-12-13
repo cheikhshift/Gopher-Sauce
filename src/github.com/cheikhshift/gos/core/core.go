@@ -74,6 +74,7 @@ type gosConfig struct {
 type Import struct {
    XMLName xml.Name `xml:"import"`
    Src string `xml:"src,attr"`
+   Download string `xml:"fetch,attr"`
    
 }
 

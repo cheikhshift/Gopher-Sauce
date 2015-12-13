@@ -84,7 +84,7 @@ func main() {
    	serverconfig := ""
 
    	fmt.Scanln(&gosProject)
-   	GOHOME = GOHOME  + "/" + strings.Trim(gosProject,"/")
+   	GOHOME = GOHOME  + strings.Trim(gosProject,"/")
    	fmt.Printf("We need your Gos Project config source (%v)\n", GOHOME)
    	fmt.Scanln(&serverconfig)
     //fmt.Println(GOHOME)
@@ -98,7 +98,39 @@ func main() {
 				return 
 			}
 
-			fmt.Println(coreTemplate)
+			coreTemplate.WriteOut = false
+			core.Process(coreTemplate,GOHOME, webroot,template_root);
+			fmt.Println("One moment...")
+			core.RunCmd("go get -u github.com/jteeuwen/go-bindata/...")
+    	    core.RunCmd("go get github.com/gorilla/sessions")
+    		core.RunCmd("go get github.com/elazarl/go-bindata-assetfs")
+			fmt.Println("Would you like to just run this application [y,n]")
+
+			if core.AskForConfirmation() {
+				os.Chdir(GOHOME)
+				fmt.Println("Invoking go-bindata");
+				core.RunCmd(os.ExpandEnv("$GOPATH") + "/bin/go-bindata -debug " + webroot +"/... " + template_root + "/...")
+				//time.Sleep(time.Second*100 )
+				//core.RunFile(GOHOME, coreTemplate.Output)
+				core.RunCmd("go build")
+				pk := strings.Split(strings.Trim(gosProject,"/"), "/")
+				fmt.Println("Use Ctrl + C to quit")
+				core.Exe_Stall("./" + pk[len(pk) - 1] )
+
+			} else {
+				fmt.Println("Would you like to create an export release [y,n]")
+
+				if core.AskForConfirmation() {
+					fmt.Println("Generating Export Program")
+					os.Chdir(GOHOME)		
+					//create both zips
+					fmt.Println("Invoking go-bindata");
+					core.RunCmd(  os.ExpandEnv("$GOPATH") + "/bin/go-bindata  " + webroot +"/... " + template_root + "/...")
+					core.RunCmd("go build")
+				
+				}
+			}
+			
 
 		} else {
 			fmt.Println("Operation Cancelled!!")
