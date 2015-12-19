@@ -35,10 +35,10 @@ type gos struct {
 	 Variables []GlobalVariables `xml:"var"`
 	 WriteOut bool
 	 Key string `xml:"key"`
-	 Session Session `xml:"session"`
+	 Session string `xml:"session"`
 	 Template_path string `xml:"templatePath"`
 	 Web_root string `xml:"webroot"`
-	 Package_root string `xml:"package"`
+	 Package string `xml:"package"`
 	 RootImports []Import `xml:"import"`
 	 Init_Func string `xml:"init"`
 	 Header Header `xml:"header"`
@@ -54,10 +54,7 @@ type GlobalVariables struct {
 	 Type string `xml:"type,attr"`
 }
 
-type Session struct {
-	 XMLName    xml.Name `xml:"session"`
 
-}
 
 type Error struct {
 	reason string
