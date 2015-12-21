@@ -607,7 +607,7 @@ Notice the `s` prefix in each function.  Sessions can be handy to customize your
  - sSet - Will set the first variable followed by a pipe `|` or the last variable without the pipe as an object within the session's map with the given key.
 	 - Usage : `{{$object | sSet "keyname" }} || {{sSet "keyname" $object }}` 
  - sSetField - Will set a property for a Given exported field within the `session` struct. This function is crucial because these variables cannot be set with templates.
-	 -Usage : `{{sSetField "FieldName" $obj }} || {{$obj | sSetField  }}` 
+	 -Usage : `{{sSetField "FieldName" $obj }} || {{$obj | sSetField   "FieldName" }}` 
  - sGet - Will retrieve an interface. Recommend using sGetString to retrieve strings and sGetN to retrieve numbers, this will return an interface stored within your local session's map, which can be casted to a struct or defined object within GoS. 
 	 - Usage : `{{$var := sGet "keyname" }}` 
  - sGetString - Will retrieve a stored string within your local session's map.
@@ -621,6 +621,36 @@ To cast a session object to struct use the template method `is<Struct_name>`. Fo
 		
 	{{$sGetVar := sGet "StoredButton" }}
 	{{$struct := isButton  $sGetVar}}
+
+# Basic Math functions
+
+To get around manipulating number values within templates refer to the functions listed below.
+
+ - Adding x + y : `{{$total := x | a y }}`
+ - Subtracting x - y : `{{$total := x | s y }}`
+ - Multiplying x * y : `{{ $total := x | m y }}`
+ - Diving x/y : `{{$total := x | d y }}`
+
+
+# Mobile page parameters
+
+Each page within the web root uses the Mobile page struct : 
+
+
+		type page struct {
+			Title string
+			Body  []byte
+			Parameters map[string]interface{}
+			Session session
+			isResource bool
+		}
+
+To access a variable passed within the Get string and post body are accessed in the same manner. Keep in mind that if a Post and Get variable share the same key name, the Post variable will be used instead.
+
+Use the Get function to access parameters within templates. Example :
+		
+		{{.Parameters | Get "KEYNAME" }} | {{ Get "KEYNAME" .Parameters }}
+
 	
 # Bug tracking
 
