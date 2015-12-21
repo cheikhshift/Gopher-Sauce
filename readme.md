@@ -2,7 +2,7 @@
 -12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions. [Tutorial](tutorial.md) 
 
 
-# Gopher Sauce Server Generation
+# Gopher Sauce Markup language
 ![Implies that Gopher sauce uses Go to write go programs.](https://lh3.googleusercontent.com/-vnw4NhuJKQY/VmuZgzodIPI/AAAAAAAAAAM/mbm7EfWjfsY/s0/xlarge.png "xlarge.png")
 
 Gopher Sauce is is a command line tool used for compiling GoS projects. A GoS project uses XML sources and Go lang packages to create a web server. It uses xml to build onto Go lang's [template](https://golang.org/pkg/html/template/)  processing functionality, making it easier to define custom objects,methods and structs that are accessible to your templates as well as any Go lang declarations within your GoS project.
