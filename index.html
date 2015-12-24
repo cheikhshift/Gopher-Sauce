@@ -8,50 +8,21 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css" media="screen">
   </head>
   <body>
-    <style type="text/css">
-    .page-header {
-    color: #fff;
-    text-align: center;
-    background-color: #1A56FF;
-    background-image: linear-gradient(120deg, #155799, #1d3e81);
-}
-    </style>
-<nav class="navbar navbar-default" style="border-color: rgba(0,0,0,0);
-    background-color: rgba(0, 0, 0, 0.56);
-    border-radius: 0px;
-    position: absolute;
-    width: 100%;">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b>GoS</b></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-     
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
     <section class="page-header">
       <h1 class="project-name">GoS</h1>
       <h2 class="project-tagline">Go Lang template SDK</h2>
-      <a href="https://github.com/cseck/gos" class="btn">View on GitHub</a>
-      <a href="https://github.com/cseck/gos/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/cseck/gos/tarball/master" class="btn">Download .tar.gz</a>
+      <a href="https://github.com/cseck/Gopher-Sauce" class="btn">View on GitHub</a>
+      <a href="https://github.com/cseck/Gopher-Sauce/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/cseck/Gopher-Sauce/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
-      <h3>
-<a id="how-to-install-gos" class="anchor" href="#how-to-install-gos" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to install GoS</h3>
+      <h2>
+<a id="updates-" class="anchor" href="#updates-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates :</h2>
 
-<pre><code>go get -u github.com/cheikhshift/gos/...
-</code></pre>
+<p>-12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions. <a href="tutorial.md">Tutorial</a> </p>
 
 <h1>
 <a id="table-of-content" class="anchor" href="#table-of-content" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Content</h1>
@@ -66,6 +37,7 @@
 <li><a href="#using-gos-command-without-parameters">Using GoS command without parameters</a></li>
 <li><a href="#gos-running-application">GoS running application</a></li>
 <li><a href="#gos-export-application">GoS export application</a></li>
+<li><a href="#gos-ios-application">GoS Bind to Xcode Project</a></li>
 </ol>
 </li>
 <li>
@@ -78,12 +50,12 @@
 <li><a href="#key">Key</a></li>
 <li><a href="#init">Init</a></li>
 <li><a href="#main">Main</a></li>
-<li><a href="#variables">Var</a></li>
+<li><a href="#var">Var</a></li>
 <li>
 <a href="#header">Header</a>
 
 <ol>
-<li><a href="#structs">Structs</a></li>
+<li><a href="#struct">Structs</a></li>
 <li><a href="#objects">Objects</a></li>
 </ol>
 </li>
@@ -95,27 +67,13 @@
 </li>
 </ol>
 </li>
-<li> <a href="#builtin-template-functions">GoS builtin template functions</a>
+<li> <a href="#gos-builtin-template-functions">GoS builtin template functions</a>
 </li>
 <li><a href="#gos-page">GoS page</a></li>
+<li>
+<a href="#mobile-session">Mobile Sessions</a> </li>
 <li><a href="#bug-tracking">Bug tracking</a></li>
 </ol>
-
-<h1>
-<a id="gopher-sauce-server-generation" class="anchor" href="#gopher-sauce-server-generation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gopher Sauce Server Generation</h1>
-
-<p><img src="https://lh3.googleusercontent.com/-vnw4NhuJKQY/VmuZgzodIPI/AAAAAAAAAAM/mbm7EfWjfsY/s0/xlarge.png" alt="Implies that Gopher sauce uses Go to write go programs." title="xlarge.png"></p>
-
-<p>Gopher Sauce is is a command line tool used for compiling GoS projects. A GoS project uses XML sources and Go lang packages to create a web server. It uses xml to build onto Go lang's <a href="https://golang.org/pkg/html/template/">template</a>  processing functionality, making it easier to define custom objects,methods and structs that are accessible to your templates as well as any Go lang declarations within your GoS project.
-Gopher Sauce makes web server application distribution easy by compiling your entire Gopher Sauce application's sources and misc. file resources into one binary. </p>
-
-<h3>
-<a id="handle-gos-dependencies" class="anchor" href="#handle-gos-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Handle GoS Dependencies</h3>
-
-<p>The application generated by Gopher Sauce has certain dependencies. Please run the command below to download them before attempting to run or export your application. (Assuming $GOPATH is set)</p>
-
-<pre><code>$GOPATH/bin/gos dependencies
-</code></pre>
 
 <h1>
 <a id="gos-xml-template" class="anchor" href="#gos-xml-template" aria-hidden="true"><span class="octicon octicon-link"></span></a>GoS XML template</h1>
@@ -198,26 +156,63 @@ The example below will compile a package called <code>sample/test</code> with co
 <p>Exporting your application will wrap up all of your GoS project resources as one binary ready for distribution (Zips require too much work). To compile and export your GoS application invoke <code>gos</code> with the export parameter.
 For example to export a package called <code>sample/test</code> with configuration file    <code>server.xml</code>, a web root folder called <code>web</code> as well as a templates directory called  <code>tmpl</code>, the command below will be ran : </p>
 
-<pre><code>*Command of process described
+<pre><code>$GOPATH/bin/gos export &lt;package_name&gt; &lt;gos_template_file&gt; &lt;name_of_web_root_folder&gt; &lt;name_of_template_folder&gt;
+*Command of process described
 $GOPATH/bin/gos export sample/test server.xml web tmpl
 </code></pre>
 
 <p>Unlike running the GoS application, this build will have static copies of its resources at the time of compilation. The executable will be placed in your GoS project root (package root). This copy can be ran anywhere without the need of resources within your package.</p>
 
+<h2>
+<a id="gos-ios-application" class="anchor" href="#gos-ios-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gos IOS application</h2>
+
+<p>Bind your IOS project with your GoS project. Please make sure that this packages GoS configuration file has its deploy set to <code>bind</code>. </p>
+
+<pre><code>$GOPATH/bin/gos export &lt;package_name&gt; &lt;gos_template_file&gt; &lt;name_of_web_root&gt; &lt;name_of_template_root&gt; &lt;ios_project_path&gt;
+//ios_project_path = the folder with your Xcode project's .xcodeproj file as a child element
+</code></pre>
+
 <h1>
 <a id="configuring-gos-xml-file" class="anchor" href="#configuring-gos-xml-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuring GoS XML file</h1>
 
-<p>This section covers documentation of GoS XML template tags</p>
+<p>This section covers documentation of GoS XML template tags. Here is how to export your application, and to simplify the command line entry process, we recommend creating your new Xcode project in the same folder as your package. Read this <a href="tutorial.md">Tutorial</a> to make your first GoS Mobile application</p>
 
 <h2>
 <a id="deploy" class="anchor" href="#deploy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploy</h2>
 
-<p>Application deploy specifies the manner that GoS should compile your application. Use <code>webapp</code> to have GoS generate a webserver for you. This tag should always be within the root of the <code>&lt;gos/&gt;</code> tag.
+<p>Application deploy specifies the manner that GoS should compile your application. Use <code>webapp</code> to have GoS generate a webserver for you. To link this package to an app use <code>bind</code> instead of <code>webapp</code>. This tag should always be within the root of the <code>&lt;gos/&gt;</code> tag.
 *This tag is required</p>
 
 <pre><code>&lt;gos&gt;
     ...
     &lt;deploy&gt;webapp&lt;/deploy&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2>
+<a id="session" class="anchor" href="#session" aria-hidden="true"><span class="octicon octicon-link"></span></a>Session</h2>
+
+<p>Custom variables append to the <code>session</code> Struct. Useful for setting custom Exported fields for the session struct. More information on mobile sessions <a href="#mobile-session">here</a> with templates</p>
+
+<pre><code>&lt;gos&gt;
+    ...
+    &lt;session&gt;
+        Theme Color // assuming the struct Color exists
+        Other,userid string
+    &lt;/session&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2>
+<a id="package" class="anchor" href="#package" aria-hidden="true"><span class="octicon octicon-link"></span></a>Package</h2>
+
+<p>This is only applicable to applications of type <code>bind</code> (mobile). It specifies the package name to use in generation of your IOS FrameWork.</p>
+
+<pre><code>&lt;gos&gt;
+    ...
+    &lt;package&gt;packageName&lt;/package&gt;
     ...
 &lt;/gos&gt;
 </code></pre>
@@ -503,7 +498,7 @@ Another way to invoke your function is  :</p>
 <h2>
 <a id="timers" class="anchor" href="#timers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Timers</h2>
 
-<p>This section covers how to create methods that are called after every certain unit of time intervals. GoS uses the <code>&lt;timer/&gt;</code> tag to generate timer execution block with the target method specified.</p>
+<p>This section covers how to create methods that are called after every certain unit of time intervals. GoS uses the <code>&lt;timer/&gt;</code> tag to generate timer execution block with the target method specified. Please keep in mind that timers do not work within GoS mobile exports.</p>
 
 <h3>
 <a id="attributes-3" class="anchor" href="#attributes-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes</h3>
@@ -818,6 +813,110 @@ Please keep in mind that the .Session and .R variable are only available to temp
 <p>These variables are accessible to template web pages within your project's web root. For templates in your template class folder, GoS will use the explicitly defined struct for that template.</p>
 
 <h1>
+<a id="mobile-session" class="anchor" href="#mobile-session" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mobile Session</h1>
+
+<p>A session within a GoS mobile application is encrypted by the 32 byte key set within your GoS xml file, and stored locally within your app. You can access session variables on every template file, even defined templates with your template folder. It expires when the session destroyed method is called. Here are the methods to get and set session objects within a GoS mobile application.
+Notice the <code>s</code> prefix in each function.  Sessions can be handy to customize your customer's app experience. </p>
+
+<pre><code>type session struct {
+                // \|/ Session's map
+                Values map[string]interface{}
+                //custom props
+
+}
+</code></pre>
+
+<ul>
+<li>sDelete - Will delete a session entirely
+
+<ul>
+<li>Usage : <code>{{sDelete}}</code> </li>
+</ul>
+</li>
+<li>sRemove -  Will remove a key from the session's map.
+
+<ul>
+<li>Usage : <code>{{sRemove "keyname"}}</code> </li>
+</ul>
+</li>
+<li>sExists  - Will check if a key exists from the session's map. Returns a <code>bool</code>
+
+<ul>
+<li>Usage : <code>{{sExists "keyname"}}</code> </li>
+</ul>
+</li>
+<li>sSet - Will set the first variable followed by a pipe <code>|</code> or the last variable without the pipe as an object within the session's map with the given key.
+
+<ul>
+<li>Usage : <code>{{$object | sSet "keyname" }} || {{sSet "keyname" $object }}</code> </li>
+</ul>
+</li>
+<li>sSetField - Will set a property for a Given exported field within the <code>session</code> struct. This function is crucial because these variables cannot be set with templates.
+ -Usage : <code>{{sSetField "FieldName" $obj }} || {{$obj | sSetField   "FieldName" }}</code> </li>
+<li>sGet - Will retrieve an interface. Recommend using sGetString to retrieve strings and sGetN to retrieve numbers, this will return an interface stored within your local session's map, which can be casted to a struct or defined object within GoS. 
+
+<ul>
+<li>Usage : <code>{{$var := sGet "keyname" }}</code> </li>
+</ul>
+</li>
+<li>sGetString - Will retrieve a stored string within your local session's map.
+
+<ul>
+<li>Usage : <code>{{$string := sGetString "keyname" }}</code>
+</li>
+</ul>
+</li>
+<li>sGetN - Will retrieve a stored float64 within your local session's map.
+     - Usage : <code>{{$number := sGetN "keyname" }}</code>
+</li>
+</ul>
+
+<p>Remember that Exported fields can be accessed directly within templates <code>&lt;Struct&gt;.&lt;exported_field_name&gt;</code> so no function is necessary to access the variable.</p>
+
+<p>To cast a session object to struct use the template method <code>is&lt;Struct_name&gt;</code>. For example to cast a session map variable object to the struct <code>Button</code>, which is declared within the GoS xml file.</p>
+
+<pre><code>{{$sGetVar := sGet "StoredButton" }}
+{{$struct := isButton  $sGetVar}}
+</code></pre>
+
+<h1>
+<a id="basic-math-functions" class="anchor" href="#basic-math-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Math functions</h1>
+
+<p>To get around manipulating number values within templates refer to the functions listed below.</p>
+
+<ul>
+<li>Adding x + y : <code>{{$total := x | a y }}</code>
+</li>
+<li>Subtracting x - y : <code>{{$total := x | s y }}</code>
+</li>
+<li>Multiplying x * y : <code>{{ $total := x | m y }}</code>
+</li>
+<li>Diving x/y : <code>{{$total := x | d y }}</code>
+</li>
+</ul>
+
+<h1>
+<a id="mobile-page-parameters" class="anchor" href="#mobile-page-parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mobile page parameters</h1>
+
+<p>Each page within the web root uses the Mobile page struct : </p>
+
+<pre><code>    type page struct {
+        Title string
+        Body  []byte
+        Parameters map[string]interface{}
+        Session session
+        isResource bool
+    }
+</code></pre>
+
+<p>To access a variable passed within the Get string and post body are accessed in the same manner. Keep in mind that if a Post and Get variable share the same key name, the Post variable will be used instead.</p>
+
+<p>Use the Get function to access parameters within templates. Example :</p>
+
+<pre><code>    {{.Parameters | Get "KEYNAME" }} | {{ Get "KEYNAME" .Parameters }}
+</code></pre>
+
+<h1>
 <a id="bug-tracking" class="anchor" href="#bug-tracking" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bug tracking</h1>
 
 <p>Github Issue tracker!!!!</p>
@@ -829,12 +928,7 @@ Please keep in mind that the .Session and .R variable are only available to temp
       </footer>
 
     </section>
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="dist/js/tether.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
-  
+
             <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
