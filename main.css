@@ -1,0 +1,48 @@
+.brand-image {
+	width: 25px;
+    display: inline-block !important;
+}
+
+.header-space {
+	 background: url(bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 700px;
+   display: table;
+   width: 100%;
+}
+
+.header-space > .cont {
+	 display: table-cell;
+    vertical-align: middle;
+}
+
+.navbar .nav-item a {
+	color:#fff !important;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+.text-justify {
+	text-align: justify !important;
+}
+
+.page-header {
+	padding: 20px;
+    border-bottom: 1px solid rgba(185, 185, 185, 0.82);
+}
+
+footer {
+	height: 180px;
+	margin-top: 3em;
+
+}
+
+footer .container {
+	border-top:1px solid #999;
+	padding-top: 20px;
+}
