@@ -148,6 +148,24 @@ Application deploy specifies the manner that GoS should compile your application
 		...
 	</gos>
 
+## Web tag
+Specifies the name of the folder that contains your web resources within your GoS exportable package.
+
+	<gos>
+		...
+		<web>foldername</web>
+		...
+	</gos>
+
+## Tmpl tag
+Specifies the name of the folder containing your template files within your Gos exportable package.
+
+	<gos>
+		...
+		<tmpl>foldername</tmpl>
+		...
+	</gos>
+
 ## Session
 Custom variables append to the `session` Struct. Useful for setting custom Exported fields for the session struct. More information on mobile sessions [here](#mobile-session) with templates
 
