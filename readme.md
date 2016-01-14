@@ -1,4 +1,5 @@
 ## Updates :
+- 1.14.2016 : Leverage your hardware now with [Hardware kit](hardwarekit.md)
 -12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions. [Tutorial](tutorial.md) 
 
 
