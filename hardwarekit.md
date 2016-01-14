@@ -127,6 +127,8 @@ Within methods that become API endpoints :
 		
 Cure the curiosity :)
 
+![enter image description here](https://lh3.googleusercontent.com/-V7M5QZqcaXE/Vpf2t2yE_dI/AAAAAAAAAFU/f_WaAbJueH0/s0/image1.PNG "image1.PNG")
+
 # Launch screen
 To set a splash image for your application, simply put your image within your GoS project root and name it LaunchImage.png.
 
