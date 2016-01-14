@@ -31,6 +31,9 @@
     <li class="nav-item">
       <a class="nav-link" href="mobile.html"><i class="fa fa-mobile-phone"></i> Mobile SDK</a>
     </li>
+       <li class="nav-item">
+      <a class="nav-link" href="hardware.html"><i class="fa fa-space-shuttle"></i> Hardware Kit</a>
+    </li>
     
 
   </ul>
@@ -96,9 +99,22 @@
 </ol>
       </div>
       <div class="col-md-9">
-                <h2><a id="updates-" class="anchor" href="#updates-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates :</h2>
+                <div class="alert alert-info">
+                  <h3><i class="fa fa-send"></i> Just in!</h3>
+                  <p><strong>Leverage</strong> your device's physical capabilities.</p>
+                   <p><a class="btn btn-primary-outline" href="hardware.html"><i class="fa fa-space-shuttle"></i> Hardware kit</a></p>
+                </div>
 
-          <p>-12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions.</p>
+                <h2><a id="updates-" class="anchor" href="#updates-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates :</h2>
+                <p>-1.14.2016</p>
+                <div style="padding-left:20px;">
+                <p> : Hardware kit added. Access to device features </p>
+                <p> : Background task support added to mobile sdk</p>
+                <p> : Fetch attribute added to import tag. Move one pkg to another dev and have the dependencies downloaded on arrival.</p>
+                <p> : Mobile session encryption.</p>
+                <p> : Hardware kit implemented within Go templates.</p>
+                </div>
+                <p>-12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions.</p>
 
           <h1><a id="gopher-sauce-markup-language" class="anchor" href="#gopher-sauce-markup-language" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gopher Sauce Markup language</h1>
 
@@ -694,6 +710,8 @@ if  r.URL.Path == "/index/api" &amp;&amp; r.Method == strings.ToUpper("POST") {
 
 <pre><code>response - String response of api.
 session - Current Gorilla session of the request (if applicable). Use the session.Values dictionary to access and save data.
+## Mobile only
+layer - current instance of Hardware kit
 Handy functions :
 mResponse - will convert any object into a JSON string for output. The example below converts Button into a JSON string for output.
 </code></pre>

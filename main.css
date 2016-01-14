@@ -12,6 +12,9 @@
   height: 700px;
    display: table;
    width: 100%;
+   -webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
 }
 
 .header-space > .cont {

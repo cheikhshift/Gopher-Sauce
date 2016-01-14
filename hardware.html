@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hardware Kit</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  <a class="navbar-brand" href="index.html"> Gopher Sauce</a>
+    <ul class="nav navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="documentation.html"><i class="fa fa-book"></i> Documentation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="server.html"><i class="fa fa-server"></i> Server SDK</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="mobile.html"><i class="fa fa-mobile-phone"></i> Mobile SDK</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" href="hardware.html"><i class="fa fa-space-shuttle"></i> Hardware Kit</a>
+    </li>
+
+  
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect"><i class="fa fa-space-shuttle"></i> Hardware Kit</h1>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+<div class="col-sm-3">
+    <ol>
+<li><a href="#hardware-kit">Hardware Kit</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#using-your-speakers">Using your speakers</a></li>
+<li><a href="#taking-a-picture">Taking a picture</a></li>
+<li><a href="#applinks">Applinks</a></li>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#load-screen">Load Screen</a></li>
+<li><a href="#launch-screen">Launch Screen</a></li>
+<li><a href="#active-js">Active JS</a></li>
+<li><a href="#file-management">File management</a></li>
+</ol>
+</div>
+<div class="col-sm-9">
+  <h1><a id="user-content-hardware-kit" class="anchor" href="#hardware-kit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware Kit</h1>
+
+<p>Hardware kit is an attempt to allow easy access to what we believe you need to make an incredible app. Hardware kit essentially is the bridge between your Go lang code and your device's capabilities.</p>
+
+<p>Please keep in mind that in a Gopher Sauce application there is one instance of Hardware kit running; and that unique instance is available to methods that become API endpoints and templates.</p>
+
+<h1><a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+<ul>
+<li>Gopher Sauce project with <code>bind</code> as its deploy target.</li>
+<li>Latest version of Python. </li>
+</ul>
+
+<h3><a id="user-content-fyi" class="anchor" href="#fyi" aria-hidden="true"><span class="octicon octicon-link"></span></a>FYI</h3>
+
+<p>.Layer  - Hardware kit instance within templates.
+layer - Hardware kit instance within methods that become API endpoints. </p>
+
+<p>Here is the interface of the fabled Hardware kit : </p>
+
+<pre><code>   type Flow interface {
+                PushView(url string)
+                DismissView()
+                DismissViewatInt(index int)
+                Width() float64
+                Height() float64
+                Device() int
+                ShowLoad()
+                HideLoad()
+                RunJS(line string)
+                Play(path string)
+                Stop()
+                SetVolume(power int)
+                GetVolume() int
+                IsPlaying() bool
+                PlayFromWebRoot(path string)
+                CreatePictureNamed(name string)
+                OpenAppLink(url string)
+
+                Notify(title string,message string)
+                AbsolutePath(file string) string
+                Download(url string, target string) bool
+                DownloadLarge(url string, target string)
+                Base64String(target string) string
+                GetBytes(target string) []byte
+                GetBytesFromUrl(target string) []byte
+                DeleteDirectory(path string) bool
+                DeleteFile(path string) bool
+
+            }
+</code></pre>
+
+<h1><a id="user-content-using-your-speakers" class="anchor" href="#using-your-speakers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using your speakers</h1>
+
+<p>The example below will play a sound from a template file. Templates will play song files within your web root. </p>
+
+<pre><code>{{ .Layer | PlaySound "/filename" }}
+</code></pre>
+
+<p>To stop the sound now :</p>
+
+<pre><code>{{ .Layer | StopSound }}
+</code></pre>
+
+<p>To get or set the volume :</p>
+
+<pre><code>{{ .Layer | SetVolume 40 }} // 40%
+{{ .Layer | GetVolume }}
+</code></pre>
+
+<p>Methods that become API endpoints have two ways to access your device's speaker.</p>
+
+<pre><code>//Play from device's documents
+layer.Play("/filename")
+//load from compressed web root
+layer.PlayFromWebRoot("/filename")
+
+//layer set volume
+layer.SetVolume(40)
+power = layer.GetVolume()
+</code></pre>
+
+<h1><a id="user-content-taking-a-picture" class="anchor" href="#taking-a-picture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Taking a picture</h1>
+
+<p>To invoke your device's camera within your templates use the function below. One liner to take a picture and save it. </p>
+
+<pre><code>{{ .Layer | TakePicture "localNameOfImage" }}
+</code></pre>
+
+<p>Yup... it is that easy.</p>
+
+<p>Within methods that become endpoints the call is as follows :</p>
+
+<pre><code>layer.CreatePictureNamed("name")
+</code></pre>
+
+<h1><a id="user-content-applinks" class="anchor" href="#applinks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Applinks</h1>
+
+<p>App interconnectivity is the key to saving 5 days on reinventing a feature that an 'app-link' compatible app provides. The call is as follows within methods that become API endpoints... can't stress it anymore.</p>
+
+<pre><code>layer.OpenAppLink("link...")
+</code></pre>
+
+<h1><a id="user-content-notifications" class="anchor" href="#notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notifications</h1>
+
+<p>Deliver local notifications with one call, ideal for apps which utilizer background refresh to find new content. The call is as follows within templates :</p>
+
+<pre><code>{{ .Layer | Notify "title" "Message" }}
+</code></pre>
+
+<p>Within methods that become endpoints please use this call : </p>
+
+<pre><code>layer.Notify("title", "Message")
+</code></pre>
+
+<h1><a id="user-content-load-screen" class="anchor" href="#load-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load Screen</h1>
+
+<p>Don't ever leave your user thinking your app froze while you are attempting to handle a time consuming process. Load screen allows for adding a loading overlay spinner easy, while your application handles Big data. Here are the template methods :</p>
+
+<pre><code>{{ .Layer | ShowLoad }}
+{{ .Layer | HideLoad }}
+</code></pre>
+
+<p>Within methods that become API endpoints :</p>
+
+<pre><code>    layer.ShowLoad()
+    layer.HideLoad()
+</code></pre>
+
+<div class="text-center">
+<p>Cure the curiosity :)</p>
+
+
+<img src="https://camo.githubusercontent.com/8893289dd9a176e924cfd17933227460e557889b/68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f2d56374d35515a71636158452f56706632743279455f64492f41414141414141414146552f665f576141624a756548302f73302f696d616765312e504e47" alt="enter image description here" title="image1.PNG" data-canonical-src="https://lh3.googleusercontent.com/-V7M5QZqcaXE/Vpf2t2yE_dI/AAAAAAAAAFU/f_WaAbJueH0/s0/image1.PNG" style="width:200px;">
+</div>
+<h1><a id="user-content-launch-screen" class="anchor" href="#launch-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch screen</h1>
+
+<p>To set a splash image for your application, simply put your image within your GoS project root and name it LaunchImage.png.</p>
+
+<p>Yup... its that easy.</p>
+
+<h1><a id="user-content-active-js" class="anchor" href="#active-js" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active JS</h1>
+
+<p>While your request is being processed it is possible to call the current active view's javascript with the Run method within templates. To run a javascript function within your templates please refer to the example below :</p>
+
+<pre><code>{{ .Layer | Run "alert(\"nostalgia\")" }}
+</code></pre>
+
+<p>To run it within a method that is being used as an API endpoint :</p>
+
+<pre><code>layer.RunJS("alert(\"\")")
+</code></pre>
+
+<h1><a id="user-content-file-management" class="anchor" href="#file-management" aria-hidden="true"><span class="octicon octicon-link"></span></a>File management</h1>
+
+<p>This section covers accessing your app's own personal space within your future deployment target. Leverage your local filesystem to add more functionality to your app. </p>
+
+<h3><a id="user-content-file-management-template-methods" class="anchor" href="#file-management-template-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>File management template methods</h3>
+
+<ul>
+<li>Absolute Path : Find the full qualified path of a resource. Returns a string. ie: <code>{{ .Layer | AbsolutePath "FILENAME" }}</code></li>
+<li>Download : Downloads a file from the internet and saves it in the specified path. ie: <code>{{ .Layer | Download "URL" "FILENAME" }}</code></li>
+<li>Download Large : Made for files that are incredibly large, even opens a new thread. ie : <code>{{.Layer | Download_lg "URL" "FILENAME" }}</code></li>
+<li>Base64 : Will retrieve the base64 string of the specified file. ie : <code>{{ .Layer | Base64 "FILENAME" }}</code></li>
+<li>DeleteRes : Will delete the specified path, directory or file... ie : <code>{{ .Layer | DeleteRes "FILENAME" }}</code></li>
+</ul>
+
+</div>
+ 
+</div>
+
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2016 Gopher Sauce LLC</h5>
+      <p class="text-muted">Maintained by <a target="_blank" href="https://twitter.com/CDseck">@cdseck</a></p>
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/okshadow.js"></script>
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+    </script>
+       <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71342160-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  </body>
+</html>
