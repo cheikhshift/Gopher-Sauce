@@ -68,20 +68,20 @@
 </ol>
 </div>
 <div class="col-sm-9">
-  <h1><a id="user-content-hardware-kit" class="anchor" href="#hardware-kit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware Kit</h1>
+  <h1><a id="hardware-kit" class="anchor" href="#hardware-kit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware Kit</h1>
 
 <p>Hardware kit is an attempt to allow easy access to what we believe you need to make an incredible app. Hardware kit essentially is the bridge between your Go lang code and your device's capabilities.</p>
 
 <p>Please keep in mind that in a Gopher Sauce application there is one instance of Hardware kit running; and that unique instance is available to methods that become API endpoints and templates.</p>
 
-<h1><a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+<h1><a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
 
 <ul>
 <li>Gopher Sauce project with <code>bind</code> as its deploy target.</li>
 <li>Latest version of Python. </li>
 </ul>
 
-<h3><a id="user-content-fyi" class="anchor" href="#fyi" aria-hidden="true"><span class="octicon octicon-link"></span></a>FYI</h3>
+<h3><a id="fyi" class="anchor" href="#fyi" aria-hidden="true"><span class="octicon octicon-link"></span></a>FYI</h3>
 
 <p>.Layer  - Hardware kit instance within templates.
 layer - Hardware kit instance within methods that become API endpoints. </p>
@@ -120,7 +120,7 @@ layer - Hardware kit instance within methods that become API endpoints. </p>
             }
 </code></pre>
 
-<h1><a id="user-content-using-your-speakers" class="anchor" href="#using-your-speakers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using your speakers</h1>
+<h1><a id="using-your-speakers" class="anchor" href="#using-your-speakers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using your speakers</h1>
 
 <p>The example below will play a sound from a template file. Templates will play song files within your web root. </p>
 
@@ -150,7 +150,7 @@ layer.SetVolume(40)
 power = layer.GetVolume()
 </code></pre>
 
-<h1><a id="user-content-taking-a-picture" class="anchor" href="#taking-a-picture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Taking a picture</h1>
+<h1><a id="taking-a-picture" class="anchor" href="#taking-a-picture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Taking a picture</h1>
 
 <p>To invoke your device's camera within your templates use the function below. One liner to take a picture and save it. </p>
 
@@ -164,14 +164,14 @@ power = layer.GetVolume()
 <pre><code>layer.CreatePictureNamed("name")
 </code></pre>
 
-<h1><a id="user-content-applinks" class="anchor" href="#applinks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Applinks</h1>
+<h1><a id="applinks" class="anchor" href="#applinks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Applinks</h1>
 
 <p>App interconnectivity is the key to saving 5 days on reinventing a feature that an 'app-link' compatible app provides. The call is as follows within methods that become API endpoints... can't stress it anymore.</p>
 
 <pre><code>layer.OpenAppLink("link...")
 </code></pre>
 
-<h1><a id="user-content-notifications" class="anchor" href="#notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notifications</h1>
+<h1><a id="notifications" class="anchor" href="#notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notifications</h1>
 
 <p>Deliver local notifications with one call, ideal for apps which utilizer background refresh to find new content. The call is as follows within templates :</p>
 
@@ -183,7 +183,7 @@ power = layer.GetVolume()
 <pre><code>layer.Notify("title", "Message")
 </code></pre>
 
-<h1><a id="user-content-load-screen" class="anchor" href="#load-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load Screen</h1>
+<h1><a id="load-screen" class="anchor" href="#load-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load Screen</h1>
 
 <p>Don't ever leave your user thinking your app froze while you are attempting to handle a time consuming process. Load screen allows for adding a loading overlay spinner easy, while your application handles Big data. Here are the template methods :</p>
 
@@ -203,13 +203,13 @@ power = layer.GetVolume()
 
 <img src="https://camo.githubusercontent.com/8893289dd9a176e924cfd17933227460e557889b/68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f2d56374d35515a71636158452f56706632743279455f64492f41414141414141414146552f665f576141624a756548302f73302f696d616765312e504e47" alt="enter image description here" title="image1.PNG" data-canonical-src="https://lh3.googleusercontent.com/-V7M5QZqcaXE/Vpf2t2yE_dI/AAAAAAAAAFU/f_WaAbJueH0/s0/image1.PNG" style="width:200px;">
 </div>
-<h1><a id="user-content-launch-screen" class="anchor" href="#launch-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch screen</h1>
+<h1><a id="launch-screen" class="anchor" href="#launch-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch screen</h1>
 
 <p>To set a splash image for your application, simply put your image within your GoS project root and name it LaunchImage.png.</p>
 
 <p>Yup... its that easy.</p>
 
-<h1><a id="user-content-active-js" class="anchor" href="#active-js" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active JS</h1>
+<h1><a id="active-js" class="anchor" href="#active-js" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active JS</h1>
 
 <p>While your request is being processed it is possible to call the current active view's javascript with the Run method within templates. To run a javascript function within your templates please refer to the example below :</p>
 
@@ -221,11 +221,11 @@ power = layer.GetVolume()
 <pre><code>layer.RunJS("alert(\"\")")
 </code></pre>
 
-<h1><a id="user-content-file-management" class="anchor" href="#file-management" aria-hidden="true"><span class="octicon octicon-link"></span></a>File management</h1>
+<h1><a id="file-management" class="anchor" href="#file-management" aria-hidden="true"><span class="octicon octicon-link"></span></a>File management</h1>
 
 <p>This section covers accessing your app's own personal space within your future deployment target. Leverage your local filesystem to add more functionality to your app. </p>
 
-<h3><a id="user-content-file-management-template-methods" class="anchor" href="#file-management-template-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>File management template methods</h3>
+<h3><a id="file-management-template-methods" class="anchor" href="#file-management-template-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>File management template methods</h3>
 
 <ul>
 <li>Absolute Path : Find the full qualified path of a resource. Returns a string. ie: <code>{{ .Layer | AbsolutePath "FILENAME" }}</code></li>
