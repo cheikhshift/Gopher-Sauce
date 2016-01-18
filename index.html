@@ -15,6 +15,22 @@
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
+    <script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
 
     <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
   <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
@@ -52,6 +68,10 @@
                <h1 style="color:#fff" class="tect">Gopher Sauce App SDK</h1>
                <p style="color:#fff" class="tect"> The easiest App SDK in the world. </p>
                <p><a type="button" href="documentation.html" class="head btn btn-primary-outline">Open documentation </a></p>
+               <p> <a class="twitter-follow-button"
+  href="https://twitter.com/gophersauce"
+  data-size="large">
+Follow @GopherSauce</a></p>
             </div>
            <div class="col-md-6">
                 <div class="head" style="    border: 1px solid;
