@@ -1,7 +1,7 @@
 ## Updates :
 - 1.14.2016 : Leverage your hardware now with [Hardware kit](hardwarekit.md)
 -12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions. [Tutorial](tutorial.md) 
-
+- 6.10.2017: Update to .gxml file extension. Automatic support with Sublime syntax correction.
 
 # Gopher Sauce Markup language
 ![Implies that Gopher sauce uses Go to write go programs.](https://lh3.googleusercontent.com/-vnw4NhuJKQY/VmuZgzodIPI/AAAAAAAAAAM/mbm7EfWjfsY/s0/xlarge.png "xlarge.png")
@@ -89,7 +89,7 @@ Your GoS project should look like this
 		
 		$GOPATH/src/
 			|-	your/package/name
-							|-		gos_xml_template.xml
+							|-		gos_xml_template.gxml
 							|-		web_root/
 										|-	index.html
 									template_root/
@@ -106,19 +106,19 @@ It is possible to invoke gos directly without commands. Simply answer the questi
 
 ## GoS running application
 To compile and run your GoS application invoke `gos` with the run parameter.
-The example below will compile a package called `sample/test` with configuration file 	`server.xml`, a web root folder called `web` as well as a templates directory called  `tmpl` ,
+The example below will compile a package called `sample/test` with configuration file 	`server.gxml`, a web root folder called `web` as well as a templates directory called  `tmpl` ,
 		
 *Command of process described
-	 $GOPATH/bin/gos run sample/test server.xml web tmpl
+	 $GOPATH/bin/gos run sample/test server.gxml web tmpl
 	 
 The command above should compile and execute your program. Invoking the `gos` with the run parameter will put go-bindata in -debug mode so that you can edit your server resources and templates while your application is in running.
 ## GoS export application
 Exporting your application will wrap up all of your GoS project resources as one binary ready for distribution (Zips require too much work). To compile and export your GoS application invoke `gos` with the export parameter.
-For example to export a package called `sample/test` with configuration file 	`server.xml`, a web root folder called `web` as well as a templates directory called  `tmpl`, the command below will be ran : 
+For example to export a package called `sample/test` with configuration file 	`server.gxml`, a web root folder called `web` as well as a templates directory called  `tmpl`, the command below will be ran : 
 		
 	$GOPATH/bin/gos export <package_name> <gos_template_file> <name_of_web_root_folder> <name_of_template_folder>
 	*Command of process described
-	$GOPATH/bin/gos export sample/test server.xml web tmpl
+	$GOPATH/bin/gos export sample/test server.gxml web tmpl
 
 Unlike running the GoS application, this build will have static copies of its resources at the time of compilation. The executable will be placed in your GoS project root (package root). This copy can be ran anywhere without the need of resources within your package.
 
@@ -460,7 +460,7 @@ The examples below will declare a struct and use that struct's parameters within
 The example is using a template file with path 	`bootstrap/alert`.
 *Due to the canonical nature of our asset to binary tools, file paths must be in lower case.
 
-Server.xml
+Server.gxml
 	
 	<gos>
 		...
@@ -548,7 +548,7 @@ Imports allow you to import other Go lang packages for use within your GoS XML t
 This tag belongs only in the root of the `<gos/>` tag
 Example import :
 		
-		<import src="mongo.xml"/>
+		<import src="mongo.gxml"/>
 		<!-- Importing Golang Packages -->
 		<import src= "gopkg.in/mgo.v2"/>
 		<import src="gopkg.in/mgo.v2/bson"/>
