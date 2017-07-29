@@ -10,7 +10,8 @@ Gopher Sauce is is a command line tool used for compiling GoS projects. A GoS pr
 Gopher Sauce makes web server application distribution easy by compiling your entire Gopher Sauce application's sources and misc. file resources into one binary. 
 
 ### How to install GoS
-	go get -u github.com/cheikhshift/gos/...
+	go get github.com/cheikhshift/gos
+	go install github.com/cheikhshift/gos
 	
 ### Generate project
 GoS can be used to generated package folders with the option `make`
