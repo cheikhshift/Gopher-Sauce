@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Gopher Sauce App SDK</title>
-    <meta name="description" content="Easiest SDK to use to make an app.">
-<meta name="keywords" content="dev,kit,sdk,mobile,server">
+    <meta name="description" content="Go lang web application markup language. Compatible with the cloud.">
+<meta name="keywords" content="dev,kit,sdk,mobile,server,cdn">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
@@ -56,18 +56,101 @@
 
   </ul>
   <div class="form-inline pull-xs-right">
-    <a href="documentation.html#get-started" class="btn btn-warning-outline btn-block" type="submit"><i class="fa fa-beer"></i> Get started</a>
+    <a href="#scrl" class="btn btn-warning-outline btn-block" type="submit"><i class="fa fa-beer"></i> Get started</a>
   </div> 
 </div>
 </nav>
 
-  <div class="header-space">
+  <div style="height:380px;" class="header-space">
+    <!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Getting started</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-cog fa-spin"></i> Compile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Template 101</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">APIs 101</a>
+  </li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home" role="tabpanel">
+    <h3>Install Gopher Sauce</h3>
+    <pre><code class="bash">go get github.com/cheikhshift/gos
+    go install github.com/cheikhshift/gos
+    $ gos dependencies</code></pre>
+    <p>Once Gos is in your Path :</p>
+    <img width="500" src="https://www.orkiv.com/sapphire/gs-intro.gif" />
+  </div>
+  <div class="tab-pane" id="profile" role="tabpanel">
+    <p>Create a new file in your template directory named <code>test</code></p>
+    <pre><code>$ touch tmpl/test.tmpl</code></pre>
+    <p>Contents of file <code>tmpl/test.tmpl</code></p>
+    <pre><code class="html">&lt;div class="header"&gt;
+ &lt;img src="logo.png" style="float:left" width="60" /&gt;
+&lt;a href="/Link to home" &gt;Home&lt;/a&gt; 
+&lt;a href="/Link to Page" &gt;Link&lt;/a&gt;
+&lt;/div&gt;</code> </pre>
+    <h3>Link template in <code>gos.gxml</code></h3>
+    <pre><code class="html">&lt;gos&gt;  
+ ...
+    &lt;templates&gt;
+        ...
+         &lt;template name="Header" tmpl="test" struct="" /&gt; 
+    &lt;/templates&gt;
+&lt;/gos&gt;
+</code></pre>
+    <h3>Using template in Gos project</h3>
+    <p>Create a new file within the <code>web</code> folder.</p>
+    <pre><code>$ touch web/page.tmpl</code></pre>
+    <p>Contents of <code>page.tmpl</code> : <p>
+    <pre><code class="html">&lt;html&gt;
+{{ Header }}
+&lt;/html&gt;</code></pre>
+    <p>Test page at url <a target="_blank" href="http://localhost:8080/page">localhost:8080/page</a></p>
+    <a href="documentation.html#templates">Add models to your templates to create MVC's with Go.</a>
+  </div>
+  <div class="tab-pane" id="messages" role="tabpanel">
+    <h3>Create new method in <code>gos.gxml</code>.</h3>
+    <pre><code class="html go"> &lt;gos&gt;
+        &lt;methods&gt;
+            &lt;method name="Hackfmt"&gt;
+            fmt.Println(save + " -&gt; " + object.SomeAttr) 
+            &lt;/method&gt;
+        &lt;/methods&gt;
+        ...
+    &lt;/gos&gt;</code></pre>
+    <h3>Link method to endpoint</h3>
+    <pre> <code class="html golang">&lt;gos&gt;
+    ...
+    &lt;endpoints&gt;
+           &lt;end path="/index/api" method="Hackfmt" type="POST" &gt;&lt;/end&gt;
+    &lt;/endpoints&gt;
+    ...
+&lt;/gos&gt;</code></pre>
+     <p>Test endpoint at url <a target="_blank" href="http://localhost:8080/index/api">localhost:8080/index/api</a></p>
+     <a href="documentation.html#api-generation">Learn more about APIs.</a>
+  </div>
+  <div class="tab-pane" id="settings" role="tabpanel">
+    <h3>Compile with Gopher Sauce. </h3>
+    <p class="text-muted">Please make sure <code>gos</code> is in your binary path.</p>
+    <pre><code>$ cd project/dir</code></pre>
+    <pre><code>gos run-sub . gos.gxml web tmpl </code></pre>
+  </div>
+</div>
       <div class="cont">
           <div class="row">
             <div class="col-md-6 " style="text-align:right;padding-right:20px;">
                <h1 style="color:#fff" class="tect">Gopher Sauce App SDK</h1>
-               <p style="color:#fff" class="tect"> The easiest App SDK in the world. </p>
-               <p><a type="button" href="documentation.html" class="head btn btn-primary-outline">Open documentation </a></p>
+               <p style="color:#fff" class="tect">Go lang web application markup language. Compatible with the cloud. </p>
+               <p><a type="button" href="#scrl" class="head btn btn-primary-outline">Get Started </a></p>
                <p> <a class="twitter-follow-button"
   href="https://twitter.com/gophersauce"
   data-size="large">
@@ -84,7 +167,8 @@ Follow @GopherSauce</a></p>
           </div>
       </div>
   </div>
-  <div class="container">
+  <div class="container" id="scrl">
+      
     <div style="text-align:center"><h1  class="page-header" style="
 ">{{ <i class="fa fa-gears"></i> }} Complete Kit</h1>
   <p class="text-muted" style="text-align:center;"><b>A smooth approach to developing HTML based applications. Gopher Sauce's xml markup language creates powerful applications with just a few lines of code.</b></p>
