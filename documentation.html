@@ -151,7 +151,8 @@
 
 <h1><a id="gos-xml-template" class="anchor" href="#gos-xml-template" aria-hidden="true"><span class="octicon octicon-link"></span></a>GoS XML template</h1>
 
-<p>The GoS XML template is where your application's imports, structs,objects,methods,timers,templates and end point hooks. Here is a fully documented project template <a href="https://github.com/cheikhshift/Gopher-Sauce/blob/master/src/github.com/cheikhshift/gosapphire/server.xml">file</a></p>
+<p>The GoS XML template is where your application's imports, structs,objects,methods,timers,templates and end point hooks. Here is a fully documented project template <a href="https://github.com/cheikhshift/Gopher-Sauce/blob/master/src/github.com/cheikhshift/gosapphire/server
+  ">file</a></p>
 
 <p>Below is an example of a very minimal GoS XML source : 
 This Example will save a file named server_out.go to the package package in the gos cmd tool. It will create one struct called DemoChild in the native go manner.</p>
@@ -190,7 +191,7 @@ This Example will save a file named server_out.go to the package package in the 
 
 <pre><code>    $GOPATH/src/
         |-  your/package/name
-                        |-      gos_xml_template.xml
+                        |-      gos_xml_template.gxml
                         |-      web_root/
                                     |-  index.html
                                 template_root/
@@ -211,21 +212,21 @@ This Example will save a file named server_out.go to the package package in the 
 <h2><a id="gos-running-application" class="anchor" href="#gos-running-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>GoS running application</h2>
 
 <p>To compile and run your GoS application invoke <code>gos</code> with the run parameter.
-The example below will compile a package called <code>sample/test</code> with configuration file   <code>server.xml</code>, a web root folder called <code>web</code> as well as a templates directory called  <code>tmpl</code> ,</p>
+The example below will compile a package called <code>sample/test</code> with configuration file   <code>server.gxml</code>, a web root folder called <code>web</code> as well as a templates directory called  <code>tmpl</code> ,</p>
 
 <p>*Command of process described
-     $GOPATH/bin/gos run sample/test server.xml web tmpl</p>
+     $GOPATH/bin/gos run sample/test server.gxml web tmpl</p>
 
 <p>The command above should compile and execute your program. Invoking the <code>gos</code> with the run parameter will put go-bindata in -debug mode so that you can edit your server resources and templates while your application is in running.</p>
 
 <h2><a id="gos-export-application" class="anchor" href="#gos-export-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>GoS export application</h2>
 
 <p>Exporting your application will wrap up all of your GoS project resources as one binary ready for distribution (Zips require too much work). To compile and export your GoS application invoke <code>gos</code> with the export parameter.
-For example to export a package called <code>sample/test</code> with configuration file    <code>server.xml</code>, a web root folder called <code>web</code> as well as a templates directory called  <code>tmpl</code>, the command below will be ran : </p>
+For example to export a package called <code>sample/test</code> with configuration file    <code>server.gxml</code>, a web root folder called <code>web</code> as well as a templates directory called  <code>tmpl</code>, the command below will be ran : </p>
 
 <pre><code>$GOPATH/bin/gos export &lt;package_name&gt; &lt;gos_template_file&gt; &lt;name_of_web_root_folder&gt; &lt;name_of_template_folder&gt;
 *Command of process described
-$GOPATH/bin/gos export sample/test server.xml web tmpl
+$GOPATH/bin/gos export sample/test server.gxml web tmpl
 </code></pre>
 
 <p>Unlike running the GoS application, this build will have static copies of its resources at the time of compilation. The executable will be placed in your GoS project root (package root). This copy can be ran anywhere without the need of resources within your package.</p>
@@ -631,7 +632,7 @@ struct - This specifies a declared `struct` to be used as the template's paramet
 <p>The example is using a template file with path  <code>bootstrap/alert</code>.
 *Due to the canonical nature of our asset to binary tools, file paths must be in lower case.</p>
 
-<p>Server.xml</p>
+<p>Server.gxml</p>
 
 <pre><code>&lt;gos&gt;
     ...
@@ -724,7 +725,7 @@ mResponse - will convert any object into a JSON string for output. The example b
 <p>This tag belongs only in the root of the <code>&lt;gos/&gt;</code> tag
 Example import :</p>
 
-<pre><code>    &lt;import src="mongo.xml"/&gt;
+<pre><code>    &lt;import src="mongo.gxml"/&gt;
     &lt;!-- Importing Golang Packages --&gt;
     &lt;import src= "gopkg.in/mgo.v2"/&gt;
     &lt;import src="gopkg.in/mgo.v2/bson"/&gt;
