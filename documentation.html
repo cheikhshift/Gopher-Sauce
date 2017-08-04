@@ -665,10 +665,10 @@ struct - This specifies a declared `struct` to be used as the template's paramet
     {{Bootstrap_alert}}
     &lt;!-- Static JSON --&gt;
     {{Boostrap_alert /{`Type`:`danger`,`Strong`: `Strong`,`Text` :`Test`  }/ }}
-    &lt;!--Struct object Init, Static Json parameters can be supplied as well!! Add  `c` to your template name to initialize its struct; And add `b` to your template name to output the html --&gt;
-    {{ $mutable := cBootstrap_alert }}
-    {{ $mutable | dbOperation "queryvalue"  }}
-    {{bBootstrap_alert}}
+    &lt;!--Struct object Init, Static Json parameters can be supplied as well!! Add  `c` to your template name to initialize its struct (You may use any method as long as the template struct matches that of the template); And add `b` (b<template name> $var) to your template name to output the html --&gt;
+    {{ $object := cBootstrap_alert }}
+    {{ $object | dbOperation "queryvalue"  }}
+    {{bBootstrap_alert $object}}
 </code></pre>
 
 <h2><a id="api-generation" class="anchor" href="#api-generation" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Generation</h2>
