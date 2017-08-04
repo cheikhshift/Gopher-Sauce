@@ -497,10 +497,10 @@ Now to use the template within other templates there are three ways of doing thi
 		{{Bootstrap_alert}}
 		<!-- Static JSON -->
 		{{Boostrap_alert /{`Type`:`danger`,`Strong`: `Strong`,`Text` :`Test`  }/ }}
-		<!--Struct object Init, Static Json parameters can be supplied as well!! Add  `c` to your template name to initialize its struct; And add `b` to your template name to output the html -->
-		{{ $mutable := cBootstrap_alert }}
-		{{ $mutable | dbOperation "queryvalue"  }}
-		{{bBootstrap_alert}}
+		<!--Struct object Init, Static Json parameters can be supplied as well!! Add  `c` to your template name to initialize its struct; And add `b`(b<template name> $var) to your template name to output the html -->
+		{{ $struct := cBootstrap_alert }}
+		{{ $struct | dbOperation "queryvalue"  }}
+		{{bBootstrap_alert $struct}}
 		
 
 ## API Generation
