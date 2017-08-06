@@ -165,10 +165,7 @@ Follow @GopherSauce</a></p>
     <h3>Create new method in <code>gos.gxml</code>.</h3>
     <pre><code class="html go"> &lt;gos&gt;
         &lt;methods&gt;
-            &lt;method name="Hackfmt"&gt;
-            /*response - API response var */
-            response = mResponse(Model{key:data,field:0})
-            &lt;/method&gt;
+       ...
         &lt;/methods&gt;
         ...
     &lt;/gos&gt;</code></pre>
@@ -176,7 +173,10 @@ Follow @GopherSauce</a></p>
     <pre> <code class="html golang">&lt;gos&gt;
     ...
     &lt;endpoints&gt;
-           &lt;end path="/index/api" method="Hackfmt" type="POST" &gt;&lt;/end&gt;
+           &lt;end path="/index/api" type="POST" &gt;
+                  /*response - API response var */
+                  response = mResponse(Model{key:data,field:0})
+           &lt;/end&gt;
     &lt;/endpoints&gt;
     ...
 &lt;/gos&gt;</code></pre>
