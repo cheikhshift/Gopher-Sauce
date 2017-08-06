@@ -686,17 +686,16 @@ type - This specifies the request method ie: POST,GET,PUT,DELETE
 
 <pre><code>&lt;gos&gt;
     ...
-        &lt;methods&gt;
-            &lt;method name="login" &gt; 
-                //login function
-                response = mResponse(Button{Color:"#fff"})
-                fmt.Println("Login!! -&gt; " + session.Values["username"].(string))
-        &lt;/method&gt;
+        &lt;methods&gt;     
         ...
     &lt;/methods&gt;
     ...
     &lt;endpoints&gt;
-           &lt;end path="/index/api" method="login" type="POST" &gt;&lt;/end&gt;
+           &lt;end path="/index/api" method="login" type="POST" &gt;
+                //login function
+                response = mResponse(Button{Color:"#fff"})
+                fmt.Println("Login!! -&gt; " + session.Values["username"].(string))
+           &lt;/end&gt;
     &lt;/endpoints&gt;
     ...
 &lt;/gos&gt;
