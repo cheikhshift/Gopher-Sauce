@@ -691,7 +691,7 @@ type - This specifies the request method ie: POST,GET,PUT,DELETE
     &lt;/methods&gt;
     ...
     &lt;endpoints&gt;
-           &lt;end path="/index/api" method="login" type="POST" &gt;
+           &lt;end path="/index/api" type="POST" &gt;
                 //login function
                 response = mResponse(Button{Color:"#fff"})
                 fmt.Println("Login!! -&gt; " + session.Values["username"].(string))
