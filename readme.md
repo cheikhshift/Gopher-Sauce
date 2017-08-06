@@ -516,17 +516,16 @@ The example below will declare a method and api end point within the GoS configu
 
 	<gos>
 		...
-			<methods>
-				<method name="login" > 
-					//login function
-					response = mResponse(Button{Color:"#fff"})
-					fmt.Println("Login!! -> " + session.Values["username"].(string))
-			</method>
+			<methods>	
 			...
 		</methods>
 		...
 		<endpoints>
-			   <end path="/index/api" method="login" type="POST" ></end>
+			   <end path="/index/api" type="POST" >
+			   		//login function
+					response = mResponse(Button{Color:"#fff"})
+					fmt.Println("Login!! -> " + session.Values["username"].(string))
+			   </end>
 		</endpoints>
 		...
 	</gos>
