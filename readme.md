@@ -2,6 +2,7 @@
 - 1.14.2016 : Leverage your hardware now with [Hardware kit](hardwarekit.md)
 -12.18.2015 :  Mobile Support added. Create IOS applications from Go lang templates and functions. [Tutorial](tutorial.md) 
 - 6.10.2017: Update to .gxml file extension. Automatic support with Sublime syntax correction.
+- 8.04.2017 : Debug with GoS compiler directly.
 
 # Gopher Sauce Markup language
 ![Implies that Gopher sauce uses Go to write go programs.](https://lh3.googleusercontent.com/-vnw4NhuJKQY/VmuZgzodIPI/AAAAAAAAAAM/mbm7EfWjfsY/s0/xlarge.png "xlarge.png")
