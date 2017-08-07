@@ -14,6 +14,7 @@ Gopher Sauce makes web server application distribution easy by compiling your en
 ### How to install GoS
 	go get github.com/cheikhshift/gos
 	go install github.com/cheikhshift/gos
+	gos deps
 	
 ### Generate project
 GoS can be used to generated package folders with the option `make`
