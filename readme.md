@@ -596,7 +596,7 @@ Please keep in mind that the .Session and .R variable are only available to temp
  - sg - Will retrieve a string stored as a session variable.
 	 - Usage : `{{$string := .Session | sg "KeyName" }}` 
  - form - Will retrieve a request variable no matter how it is submitted.
-	- Usage : `{{ $input = .R | }}` .  `.R` is a page variable with type `http.Request` from the Go lang package `net/http`
+	- Usage : `{{ $input = .R | form "Key" }}` .  `.R` is a page variable with type `http.Request` from the Go lang package `net/http`
  - eq - Will compare two variables and return a `bool` of value true if they are equal
 	 - Usage : `{{if eq "Obj1" "Obj1" }} {{end}}` 
  - neq - Will compare two variables and return a `bool` of value true if they are not equal.
