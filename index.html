@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="overflow-x:hidden;" lang="en">
+<html style="overflow-x:hidden;background:#333" lang="en">
   <head>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
@@ -32,51 +32,108 @@
   return t;
 }(document, "script", "twitter-wjs"));</script>
 
-    <nav style="border-radius:0px;" class="navbar navbar-light bg-primary" >
+    <nav style="border-radius:0px;position:absolute;z-index:200" class="navbar navbar-light " >
   <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
     &#9776;
   </button>
 
    <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
  
-  <ul class="nav navbar-nav">
-    <li class="nav-item">
+  <ul  class="nav navbar-nav">
+    <li style="margin-left: 12px;" class="nav-item">
       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"><i class="fa fa-book"></i> Wiki</a>
+    </li>
+
+    <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
     </li>
 
      
 
   </ul>
-  <div class="form-inline pull-xs-right">
-    <a href="#scrl" class="btn btn-warning-outline btn-block" type="submit">Get started</a>
-  </div> 
+ 
 </div>
 </nav>
+  <style type="text/css">
+    
+    #feat .col-sm-6 {
+            padding: 25px;
+    } 
+    #feat p {
+      text-align: center;
+      padding: 25px;
+    }
+
+  </style>
 
   <div style="height:380px;" class="header-space">
     <!-- Nav tabs -->
 
       <div class="cont">
           <div class="row">
-            <div class="col-md-6 " style="text-align:right;padding-right:20px;">
-               <p style="color:#fff" class="tect">Go lang web application markup language.</p>
-               <p><a type="button" href="#scrl" class="head btn btn-primary-outline">Get Started </a></p>
-               <p> <a class="twitter-follow-button"
-  href="https://twitter.com/gophersauce"
-  data-size="large">
-Follow @GopherSauce</a></p>
-            </div>
-           <div class="col-md-6">
-                <div class="head" style="    border: 1px solid;
+            <div class="col-md-12 text-center " style="padding-right:20px;">
+            <div style="width: 240px;
+    margin: 0 auto;">
+              <div class="head" style="    border: 1px solid;
     border-radius: 50%; width: 240px;position:relative;">
                   <img src="shield.png" style="width: 100%;">
                  <div class="head" style="position: absolute; width: 100px; text-align: center; top: 71px; left: 68px; border-radius: 46px; border: 1px solid;">  <img src="gopher-top.png" style="width:140px;position: relative;left: -20px;">
   </div>
                 </div>
+                </div>
+              <h1 style="color:#fff" class="tect">Go Server</h1>
+               <p style="color:#fff" class="tect">Go lang web application markup language.</p>
+               <p><a type="button" href="#scrl" class="head btn btn-primary-outline">Get Started </a> <a type="button" href="#feat" class="head btn btn-primary-outline">Features</a></p>
+               <p> <a class="twitter-follow-button"
+  href="https://twitter.com/gophersauce"
+  data-size="large">
+Follow @GopherSauce</a></p>
+            </div>
+           <div class="col-md-6 hidden-xs-down">
+              
             </div>
           </div>
       </div>
   </div>
+    <div style="" id="feat" class="header-space">
+    <!-- Nav tabs -->
+
+      <div class="cont">
+          <h1 class="text-center" style="color:#fff">Features</h1>
+          <div class="row text-center">
+
+          <div class="col-sm-6">
+          <h2 style="color:#fff"><i class="fa fa-magic"></i> ACTIVE WEB-PAGES</h2>
+          <p style="color:#fff">Deliver a dynamic user experience. Build web pages with Go lang funcs. </p>
+          </div>
+
+          <div class="col-sm-6">
+          <h2 style="color:#fff"><i class="fa fa-flash"></i> SERVICES MADE EASY</h2>
+          <p style="color:#fff">Connect any Go lang package to the internet.</p>
+          </div>
+
+          </div>
+
+            <div class="row text-center">
+
+          <div class="col-sm-6">
+          <h2 style="color:#fff"><i class="fa fa-hourglass-start"></i> EXTEND ANYTHING</h2>
+          <p style="color:#fff">Outsourcing simplified. Extend web content and service URL paths with new packages.</p>
+          </div>
+
+          <div class="col-sm-6">
+          <h2 style="color:#fff"><i class="fa fa-flask"></i> AUTOMATED TESTS</h2>
+          <p style="color:#fff">Measure the speed and footprint of your program, with the builtin test console.</p>
+          </div>
+
+          </div>
+            <p class="text-center">
+            <a type="button" class="head btn btn-primary-outline"  href="https://github.com/cheikhshift/Gopher-Sauce/wiki"><i class="fa fa-book"></i> Wiki</a>
+            </p>
+          </div>
+
+
+          </div>
     <style type="text/css">
       h3 {
        font-size:20px; 
@@ -194,7 +251,9 @@ Follow @GopherSauce</a></p>
 </div>
     </div>
     
+    </div>
 
+ 
 
 
 
