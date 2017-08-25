@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Gopher Sauce App SDK</title>
+    <title>Go Server : web application markup language</title>
     <meta name="description" content="Go lang web application markup language. Compatible with the cloud.">
 <meta name="keywords" content="dev,kit,sdk,mobile,server,cdn,test">
     <!-- Bootstrap CSS -->
@@ -69,7 +69,7 @@
   <div style="height:380px;" class="header-space">
     <!-- Nav tabs -->
 
-      <div class="cont" style="    padding-top: 135px;">
+      <div class="cont">
           <div class="row">
             <div class="col-md-12 text-center " style="padding-right:20px;">
             <div style="width: 240px;
@@ -118,17 +118,97 @@ Follow @GopherSauce</a></p>
 
           <div class="col-sm-6">
           <h2 style="color:#fff"><i class="fa fa-hourglass-start"></i> EXTEND ANYTHING</h2>
-          <p style="color:#fff">Outsourcing simplified. Extend web content and service URL paths with new packages.</p>
+          <p style="color:#fff">Outsourcing simplified. Extend web content, template pipelines and service URL paths with new packages.</p>
           </div>
 
           <div class="col-sm-6">
           <h2 style="color:#fff"><i class="fa fa-flask"></i> AUTOMATED TESTS</h2>
-          <p style="color:#fff">Measure the speed and footprint of your program, with the builtin test console.</p>
+          <p style="color:#fff">Measure the speed and memory footprint of your program, with the builtin test console.</p>
           </div>
 
           </div>
-            <p class="text-center">
-            <a type="button" class="head btn btn-primary-outline"  href="https://github.com/cheikhshift/Gopher-Sauce/wiki"><i class="fa fa-book"></i> Wiki</a>
+        
+          </div>
+
+
+          </div>
+           <div style="" id="feattwo" class="header-space">
+    <!-- Nav tabs -->
+
+      <div class="cont">
+          <h1 class="text-center" style="color:#fff">How it works?</h1>
+          <div class="container">
+
+          <div class="col-sm-5">
+          <h2 style="color:#fff"><i class="fa fa-magic"></i> Template pipeline creation.</h2>
+          <p style="color:#fff">Go Server simplifies the task of extending your Go lang {{ templates' }} pipelines. <br /> The example on the right will create a pipeline <code>{{Pipeline}}</code> available to all your Go server templates. </p>
+          </div>
+
+          <div class="col-sm-7">
+       <pre> <code class="html golang"> 
+          &lt;gos&gt;
+            ...
+              &lt;methods&gt;
+                &lt;method name="Pipeline" return="string"&gt;
+                    return "string"
+                &lt;/method&gt;
+              &lt;/methods&gt;
+            ...
+          &lt;/gos&gt;
+       </code></pre>
+          </div>
+
+          </div>
+
+           <div class="container">
+
+    
+
+          <div class="col-sm-7">
+       <pre> <code class="html golang"> 
+          &lt;gos&gt;
+            ...
+                &lt;endpoints&gt;      
+                  &lt;end path="/login" type="GET" &gt;
+                      fmt.Println("Login attempt --&gt;")
+                  &lt;/end&gt;
+                &lt;/endpoints&gt;
+            ...
+          &lt;/gos&gt;
+       </code></pre>
+          </div>
+
+                <div class="col-sm-5">
+          <h2 style="color:#fff"><i class="fa fa-flash"></i> Building web services</h2>
+          <p style="color:#fff">Go Server simplifies the task of assigning a function to a server path. The snippet on the left will create a web service at path <code>/login</code>. The endpoint will log to your console via Go lang package <code>fmt</code></p>
+          </div>
+
+          </div>
+
+            <div class="container">
+
+                <div class="col-sm-5">
+           <h2 style="color:#fff"><i class="fa fa-hourglass-start"></i> Outsourcing anything</h2>
+          <p style="color:#fff">Go Simplifies the task of outsourcing. Request <code>&lt;method&gt;</code> and <code>&lt;end&gt;</code> tags from your favorite developers. The snippet on the right demonstrates importing a Go-Server package. </p>
+          </div>
+
+          <div class="col-sm-7">
+       <pre> <code class="html golang"> 
+          &lt;gos&gt;
+            ...
+                &lt;import src="outsourced/pkg/gos.gxml" /&gt;
+            ...
+          &lt;/gos&gt;
+       </code></pre>
+          </div>
+
+      
+
+          </div>
+
+          
+            <p class="text-center"  style="color:#fff;">
+           <b>And more...</b> <a type="button" class="head btn btn-primary-outline"  href="https://github.com/cheikhshift/Gopher-Sauce/wiki"><i class="fa fa-book"></i> Wiki</a>
             </p>
           </div>
 
@@ -180,7 +260,7 @@ Follow @GopherSauce</a></p>
     gos --make
     </code></pre> </div>
     <h3>Install Gopher Sauce</h3>
-    <pre><code class="bash">
+    <pre><code class="bash">
     go get github.com/cheikhshift/gos
     go install github.com/cheikhshift/gos
     gos dependencies</code></pre>
