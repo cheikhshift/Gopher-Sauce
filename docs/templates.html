@@ -173,6 +173,10 @@ struct - This specifies a declared `struct` to be used as the template's interfa
         });
         $(document).ready(function() {
           $('#simple-menu').sidr();
+            $('#simple-menu-two').sidr();
+          setTimeout(function(){
+          $('#simple-menu').click();
+        } , 500 );
         });
          hljs.initHighlightingOnLoad();
     </script>
