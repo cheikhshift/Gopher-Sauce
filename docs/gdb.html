@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Go Server - Data manipulation with templates.</title>
+    <!-- Bootstrap CSS -->
+<script src="https://use.fontawesome.com/d102afacbe.js"></script>
+        <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
+<meta name="keywords" content="dev,kit,server,ops,web,framework,test">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+  </head>
+  <body>
+
+   
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  
+  <ul class="nav navbar-nav">
+  
+   <li class="nav-item">
+      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Menu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
+    </li>
+        <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
+    </li>
+       <li style="margin-left: 12px;" class="nav-item">
+      <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"> Wiki</a>
+    </li>
+
+     <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+    </li>
+
+      <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://www.orkiv.com/project-submission/"><i class="fa fa-building"></i> Enterprise</a>
+    </li>
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect">Data manipulation with templates.</h1>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+        <div class="list-group list-group-item">
+            
+          
+          <h1 id="dbgophersauceextension">Go Server {{db}} project</h1>
+
+<p>Install database pipelines to your templates. Perform Mongo database actions with Golang <a href="https://golang.org/pkg/text/template/">templates</a>.</p>
+
+<ol>
+<li><a href="#howitworks">Guide</a></li>
+
+<li><a href="#pipelines">pipelines 🐧</a></li>
+</ol>
+
+<p>Add this <code>import</code> tag within your <code>.gxml</code>.</p>
+
+<pre><code>&lt;import src="github.com/cheikhshift/db/gos.gxml"/&gt;
+</code></pre>
+
+<h1 id="testit">Test it</h1>
+
+<p>Make sure MongoDb is running!</p>
+
+<pre><code>go get github.com/cheikhshift/gopher-sauce-database
+$GOPATH/bin/gopher-sauce-database
+</code></pre>
+
+<h1 id="howitworks">How it works</h1>
+
+<h2 id="saveobject">Save object</h2>
+
+<ol>
+<li><p>Connect to database. Add this within your <code>main</code> tag in the root of your <code>.gxml</code> file.</p>
+
+<pre><code>defer dbs.Close()
+dbs,_ = db.Connect("localhost", "dbtest")
+</code></pre></li>
+
+<li><p>Declare a struct within your <code>header</code> tag in your <code>GoS</code> file. This struct will be named <code>Sample</code>. It is a must to have the <code>Id</code> field.</p>
+
+<pre><code>&lt;struct name="Sample"&gt;
+    Id bson.ObjectId `bson:"_id,omitempty"`
+    TestField string `valid:"unique"`
+    FieldTwo string `valid:"email,unique,required"`
+    Created time.Time //timestamp local format
+    Updated time.Time           
+&lt;/struct&gt;
+</code></pre></li>
+
+<li><p>Create a new file named <code>index.tmpl</code> in your <code>tmpl</code> directory. Contents of file :</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;DB Example&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- pipelines will go here --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+
+<li><p>Add these following lines in <code>&lt;!-- pipelines will go here --&gt;</code> : </p></li>
+
+<li><p>to create a new <code>Sample</code> within your <code>index.tmpl</code>. This will auto-populate <code>Id</code> and <code>Created</code>.</p>
+
+<pre><code>    {{ $obj := New Sample }}
+</code></pre></li>
+
+<li><p>Update values of <code>$obj</code> to prevent validation errors</p>
+
+<pre><code>{{with $obj }}
+       {{ .|u "FieldTwo" "email@gmail.com" }}
+{{end}}
+</code></pre></li>
+
+<li><p>Save <code>$obj</code> to database :</p>
+
+<pre><code>{{ $err := $obj | Update }} 
+</code></pre></li>
+
+<li><p>Check if error occurred and display :</p>
+
+<pre><code>    {{ if $err | neq "" }}
+         &lt;h1&gt;Error {{$err}}&lt;/h1&gt;
+    {{end}}
+</code></pre></li>
+</ol>
+
+<h2 id="getobject">Get object</h2>
+
+<ol>
+<li><p>Add these following lines in <code>&lt;!-- pipelines will go here --&gt;</code> : </p></li>
+
+<li><p>Load a new query map :</p>
+
+<pre><code>  {{ $query := search }}
+</code></pre></li>
+
+<li><p>Set query keys :</p>
+
+<pre><code>    {{with $query }}
+        {{ . | k "fieldtwo" "email@gmail.com" }}
+    {{end}}
+</code></pre></li>
+
+<li><p>Perform query and display one item :</p>
+
+<pre><code>    {{ with $query | Q Sample}}
+        {{ . | One }}
+    {{ end }}
+</code></pre></li>
+
+<li><p>Perform a query and attempt update. The pipeline <code>isSample</code> will convert the JSON database object to a <code>Sample</code> struct reader.</p>
+
+<pre><code>{{ with $query | Q Sample}}
+    {{ range . | All }}<pre><code>        {{ . | k "fieldtwo" "newmail" }}
+        &amp;lt;!-- Cast similar to with $obj --&amp;gt;
+        {{ with . | isSample }}
+           FieldTwo : {{ .FieldTwo }}
+           &amp;lt;!-- will display invalid email --&amp;gt;
+           {{ . | Update }}
+        {{end }}
+{{ end }}
+</code></pre>{{ end }}
+</code></pre></li>
+</ol>
+
+<h1 id="pipelines">Pipelines</h1>
+
+<h3 id="newparam"><code>{{  New param }}</code></h3>
+
+<p>Returns Struct with <code>Id</code> and <code>Created</code> initialized. </p>
+
+<ul>
+<li>param : <code>Struct</code> name without strings or any braces. For example a struct declared in your <code>.gxml</code> file named <code>Sample</code> will be initialized with pipeline <code>{{ $obj := New Sample }}</code></li>
+</ul>
+
+<h3 id="dparamupdate"><code>{{  $param | Update   }}</code></h3>
+
+<p>If an error occurs while updating your object this pipeline will return a string error as to why.</p>
+
+<ul>
+<li>$param :  Struct  to save to database.</li>
+</ul>
+
+<h3 id="dparamdelete"><code>{{ $param | Delete }}</code></h3>
+
+<p>If an error occurs while updating your object this pipeline will return a string error as to why.</p>
+
+<ul>
+<li>$param : Struct to remove from database. Requires a valid ObjectId in field <code>Id</code> to work.</li>
+</ul>
+
+<h3 id="dparamudparam1dparam2"><code>{{ $param | u "$param1" $param2  }}</code></h3>
+
+<p>Update a field value within your struct.</p>
+
+<ul>
+<li>$param : Struct to update.</li>
+
+<li>$param1 : Struct field name to update.</li>
+
+<li>$param2 : New value to set to specified struct field.</li>
+</ul>
+
+<h3 id="search"><code>{{ search }}</code></h3>
+
+<p>Returns a new query map (= json ).</p>
+
+<h3 id="dsearchkdparam1dparam2"><code>{{ $search | k "$param1" $param2 }}</code></h3>
+
+<p>Set a key within your query map. This is the equivalent of updating a map value within <code>Go</code>. </p>
+
+<ul>
+<li>$search : Query map.</li>
+
+<li>$param1 : String of key to set.</li>
+
+<li>$param2 : Value to set.</li>
+</ul>
+
+<h3 id="dsearchrmkdparam1"><code>{{ $search | rmk "$param1" }}</code></h3>
+
+<p>Remove key from query map.</p>
+
+<ul>
+<li>$search : Query map.</li>
+
+<li>$param1 : String of key to remove.</li>
+</ul>
+
+<h3 id="dsearchvdparam1"><code>{{ $search | v "$param1" }}</code></h3>
+
+<p>Return value of specified query map key.</p>
+
+<ul>
+<li>$search : Query map.</li>
+
+<li>$param1 : String of key to retrieve.</li>
+</ul>
+
+<h3 id="dsearchqdparam1"><code>{{ $search | Q $param1 }}</code></h3>
+
+<p>Return new <code>*mgo.Query</code>.</p>
+
+<ul>
+<li>$search : Query map.</li>
+
+<li>$param1 : <code>Struct</code> name without strings or any braces. For example a struct declared in your <code>.gxml</code> file named <code>Sample</code> will be initialized with pipeline <code>{{ $search | Q Sample }}</code></li>
+</ul>
+
+<h3 id="limitdparamdparam1"><code>{{ Limit $param $param1   }}</code></h3>
+
+<p>Limit query to specified number.</p>
+
+<ul>
+<li>$param : *mgo.Query to limit.</li>
+
+<li>$param1 : int value to limit query by.</li>
+</ul>
+
+<h3 id="skipdparamdparam1"><code>{{ Skip $param $param1 }}</code></h3>
+
+<p>Skip query by specified number.</p>
+
+<ul>
+<li>$param : *mgo.Query to limit.</li>
+
+<li>$param1 : int value to skip query by.</li>
+</ul>
+
+<h3 id="sortdparamdparam1"><code>{{ Sort $param $param1 }}</code></h3>
+
+<p>Sort query by specified field. Any struct field must be in lower case.</p>
+
+<ul>
+<li>$param : *mgo.Query to limit.</li>
+
+<li>$param1 :  string of field and sort syntax. For example <code>{{ Sort $query "-firstname" }}</code></li>
+</ul>
+
+<h3 id="dparamcount"><code>{{  $param | Count  }}</code></h3>
+
+<p>Return int length of query.</p>
+
+<ul>
+<li>$param : *mgo.Query to count.</li>
+</ul>
+
+<h3 id="dparamall"><code>{{ $param | All }}</code></h3>
+
+<p>Return <code>slice</code> of  maps of your query. </p>
+
+<ul>
+<li>$param : *mgo.Query to count.</li>
+</ul>
+
+<h3 id="dparamone"><code>{{ $param | One }}</code></h3>
+
+<p>Return one result of your query as a map.</p>
+
+<ul>
+<li>$param : *mgo.Query to find one of.</li>
+</ul>
+
+<h2 id="casttrick">Cast trick</h2>
+
+<p>Use the following syntax to convert a map to a struct for item update or removal. Only structs declared within your project's <code>gxml</code> files are available to your templates</p>
+
+<pre><code> {{  $map | is&lt;GoS Struct name&gt; }}
+</code></pre>
+         
+        </div>
+  </div>
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+     
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/okshadow.js"></script>
+     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+        
+         hljs.initHighlightingOnLoad();
+    </script>
+     <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71342160-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  </body>
+</html>

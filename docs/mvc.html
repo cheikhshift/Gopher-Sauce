@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Go Server - Tick project</title>
+    <title>Go Server - Header and footer template components.</title>
     <!-- Bootstrap CSS -->
 <script src="https://use.fontawesome.com/d102afacbe.js"></script>
         <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
@@ -59,123 +59,155 @@
   <div class="header-space" style="height:190px;margin-bottom:2em;">
       <div class="cont container">
           <div class="page-header">
-              <h1 style="color:#fff" class="tect">Tick : Realtime data from MongoDB</h1>
+              <h1 style="color:#fff" class="tect">Header and footer template components.</h1>
           </div>
       </div>
   </div>
   <div class="container">
         <div class="list-group list-group-item">
-            
-          
-
-<p><img src="https://cdn.xl.thumbs.canstockphoto.com/canstock22242451.jpg" alt="" />
-<img src="https://camo.githubusercontent.com/ed1230a48b6946283ee0d76185a726b49ba58254/68747470733a2f2f7472617669732d63692e6f72672f746f6f6c732f676f6465702e737667" alt="enter image description here" /></p>
+              
+              <h3 id="tutorialonwritingtemplates">Tutorial on building web pages with templates</h3>
 
 
-<p>Tick project tracks realtime data from your Mongo database to your client's browser. This is possible with the help of web sockets <code>ws://</code></p>
 
-<h1 id="howtouseit">How to use it</h1>
-
-<p>Ticker supports templates by default. To use a Template function  within your <code>gos</code> app functions add the prefix <code>net_&lt;function name&gt;</code> to your function name.</p>
-
-<p>Tick <a href="https://github.com/cheikhshift/tick-tutorial">Sample</a> project.</p>
-
-<h3 id="importtickerframework">Import Ticker package</h3>
-
-<pre><code>&lt;import src="github.com/cheikhshift/tick/gos.gxml"/&gt;
-</code></pre>
-
-<h3 id="initandsetmongodb">Init and set MongoDB</h3>
-
-<p>Add this snippet within your <code>&lt;main&gt;</code> tag. Copy the whole snippet if you're Go Server project has no main tag.</p>
-
-<pre><code>    &lt;main&gt;  
-    //Tick encryption key   
-    tick.Key = "example key 1234"
-    //HostName string syntax [host]:[port]
-    // var HostName string included on tick/gos.gxml import
-    HostName = "localhost:8080"
-    // dbs included on tick/gos.gxml import
-    dbs,_ = db.Connect("localhost", "database")
-    tick.SetDb(dbs)
-    &lt;/main&gt;
-</code></pre>
-
-<h3 id="declaredbobjectpipeline">Create DB Object pipeline</h3>
-
-<p>Struct of <code>dbObject</code>. This Struct will be made available on <code>tick</code> import (no redeclaration required) :</p>
-
-<pre><code class="html golang">    &lt;struct name="dbObject"&gt;
-        Id bson.ObjectId `bson:"_id,omitempty"`
-        Created time.Time
-        Track int
-        Signature string `valid:"unique"`
-    &lt;/struct&gt;
-</code></pre>
-
-<p>Add a new <code>method</code> within your <code>&lt;methods&gt;</code> tag (in Go Server). Replace dbObject with your own model. 
-This snippet will find any database object :</p>
-
-<pre><code class="html golang">    &lt;method name="GetdbObject" return="dbObject"&gt;
-        dbo := dbObject{}
-        dbs.Q(&amp;dbo).Find(nil).One(&amp;dbo)
-        return dbo
-    &lt;/method&gt;
-</code></pre>
-
-<h3 id="template">Template</h3>
-
-<p>With the prior section in mind, this is how you track your database object's values. Within your templates on Go Server use the following code.</p>
-
-<p>Get object via pipeline : </p>
-
-<pre><code>{{ $item := GetdbObject }}
-</code></pre>
-
-<p>Open socket to item :</p>
-
-<pre><code>{{ Tick $item }}
-</code></pre>
-
-<p>(optional) Display live value of object key. (Any struct field must be in lower case) : </p>
-
-<pre><code>{{ Watch $item "track" }}
-</code></pre>
-
-<p>Syntax :</p>
-
-<pre><code>{{ Watch mongo_database_object_interface field_string }}     
-</code></pre>
-
-<h1 id="javascriptapi">Javascript API</h1>
-
-<p>Prior to calling each of the JS functions, remember to invoke {{Tick database_object }} to load the API.
-Follow this syntax to create event handlers for your object : </p>
-
-<pre><code class="html">    &lt;script&gt;
-     //Tick Js function
-     Tick({{ IdOf $item }} , function(data){
-             console.log("Update")
-     })
-     &lt;/script&gt;
-</code></pre>
-
-<p>JS function : Tick(id string , callback function(data) )</p>
+<h3 id="benefits">Benefits</h3>
 
 <ul>
-<li>id : ID of database item.</li>
+<li>Save time
 
-<li>callback : function called on each update.</li>
+
+<ul>
+<li>Update once, reused templates.</li></ul>
+</li>
 </ul>
 
-<h3 id="detectwebsocketcloseonclient">Detect websocket close on client :</h3>
 
-<pre><code class="html">&lt;script&gt;
-    $tick.close = function(event ) {
-        console.log(event)
-    }
-&lt;/script&gt;
+<h2 id="gettingstarted">Getting started</h2>
+
+<p>(unix commands)</p>
+
+<pre><code>mkdir new-project
+cd new-project      
+gos --make
 </code></pre>
+
+<p>Please make sure your current working directory is <code>new-project</code> (or any other name).</p>
+
+<h2 id="createindexpage">Create /index page</h2>
+
+<p>Create new template file :</p>
+
+<pre><code>touch web/index.tmpl
+</code></pre>
+
+<p>Contents of file (bootstrap 4 starter) : </p>
+
+<pre><code>     &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+          &lt;head&gt;
+            &lt;!-- Required meta tags --&gt;
+            &lt;meta charset="utf-8"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+
+            &lt;!-- Bootstrap CSS --&gt;
+            &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+
+
+            &lt;!-- jQuery first, then Tether, then Bootstrap JS. --&gt;
+            &lt;script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"&gt;&lt;/script&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;
+</code></pre>
+
+<h2 id="createtemplates">Create templates</h2>
+
+<h3 id="header">Header</h3>
+
+<p>Create new template file :</p>
+
+<pre><code>touch tmpl/header.tmpl
+</code></pre>
+
+<p>Contents of file : </p>
+
+<pre><code>    &lt;nav class="navbar navbar-toggleable-md navbar-light bg-faded"&gt;
+  &lt;button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"&gt;
+    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;a class="navbar-brand" href="#"&gt;NewWebsite&lt;/a&gt;
+
+  &lt;div class="collapse navbar-collapse" id="navbarSupportedContent"&gt;
+    &lt;ul class="navbar-nav mr-auto"&gt;
+      &lt;li class="nav-item active"&gt;
+        &lt;a class="nav-link" href="#"&gt;Home &lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="nav-item"&gt;
+        &lt;a class="nav-link" href="#"&gt;Link&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li class="nav-item"&gt;
+        &lt;a class="nav-link disabled" href="#"&gt;Disabled&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/nav&gt;
+</code></pre>
+
+<h3 id="footer">Footer</h3>
+
+<p>Create new template file :</p>
+
+<pre><code>touch tmpl/footer.tmpl
+</code></pre>
+
+<p>Contents of file :</p>
+
+<pre><code>&lt;div style="height:120px" class="page-header"&gt;&lt;p&gt;Footer&lt;/p&gt;&lt;/div&gt;
+</code></pre>
+
+<h3 id="addtemplatestogos">Add templates to GoS</h3>
+
+<p>Edit <code>gos.gxml</code></p>
+
+<pre><code>nano gos.gxml
+</code></pre>
+
+<p>Add these tags within your <code>&lt;templates&gt;</code> tag :</p>
+
+<pre><code>&lt;template name="Header" tmpl="header" struct="" /&gt; 
+&lt;template name="Footer" tmpl="footer" struct="" /&gt; 
+</code></pre>
+
+<h3 id="addtemplatestowebindextmpl">Add templates to web/index.tmpl</h3>
+
+<p>Edit <code>web/index.tmpl</code></p>
+
+<pre><code>nano web/index.tmpl
+</code></pre>
+
+<p>Add your templates to <code>web/index.tmpl</code> :</p>
+
+<pre><code>&lt;body&gt;
+ ...
+{{ Header }}
+{{ Footer }}
+...
+&lt;/body&gt;
+</code></pre>
+
+<h3 id="testing">Testing</h3>
+
+<p>Run project :</p>
+
+<pre><code>gos --run
+</code></pre>
+
+<p>Visit page : <a href="http://localhost:8080/">localhost:8080</a></p>
+
          
         </div>
   </div>

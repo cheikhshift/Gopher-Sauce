@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Go Server - Session management and HTML generation</title>
+    <!-- Bootstrap CSS -->
+<script src="https://use.fontawesome.com/d102afacbe.js"></script>
+        <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
+<meta name="keywords" content="dev,kit,server,ops,web,framework,test">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+  </head>
+  <body>
+
+   
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  
+  <ul class="nav navbar-nav">
+  
+   <li class="nav-item">
+      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Menu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
+    </li>
+        <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
+    </li>
+       <li style="margin-left: 12px;" class="nav-item">
+      <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"> Wiki</a>
+    </li>
+
+     <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+    </li>
+
+      <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://www.orkiv.com/project-submission/"><i class="fa fa-building"></i> Enterprise</a>
+    </li>
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect">Session management and HTML generation</h1>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+        <div class="list-group list-group-item">
+            
+          
+        
+
+<p>Build website pages with Go lang code. Then store user session data.</p>
+
+<h2 id="gettingstarted">Getting started</h2>
+
+<p>(unix commands)</p>
+
+<pre><code>mkdir new-project
+cd new-project      
+gos --make
+</code></pre>
+
+<p>Please make sure your current working directory is <code>new-project</code> (or any other name).</p>
+
+<h2 id="createtemplates">Create templates</h2>
+
+<p>This tutorial will use 4 templates :</p>
+
+<ul>
+<li>Page</li>
+
+<li>Login block</li>
+
+<li>Demo panel one</li>
+
+<li>Demo panel two</li>
+</ul>
+
+<h3 id="page">Page</h3>
+
+<p>This is the wrapper which will be used with each page. <code>Page</code> MVC will have one property <code>Body</code> which is a string.</p>
+
+<h4 id="addmodeltoproject">Add model to project</h4>
+
+<p>Add the following tag to your <code>&lt;header&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code class="html golang">&lt;struct name="PanelPage"&gt;
+    Body string
+&lt;/struct&gt;
+</code></pre>
+
+<h4 id="createtemplate">Create template</h4>
+
+<p>Create a new file named <code>page.tmpl</code> within your <code>tmpl</code> directory.</p>
+
+<p>Contents of file : 
+(Lookout for {{ .Body }} this is how model properties are passed.For example : {{ .&lt; Property > }})</p>
+
+<pre><code class="html golang"> &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+          &lt;head&gt;
+            &lt;!-- Required meta tags --&gt;
+            &lt;meta charset="utf-8"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+
+            &lt;!-- Bootstrap CSS --&gt;
+            &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+
+        {{ .Body }}
+            &lt;!-- jQuery first, then Tether, then Bootstrap JS. --&gt;
+            &lt;script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"&gt;&lt;/script&gt;
+            &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"&gt;&lt;/script&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;
+</code></pre>
+
+<h4 id="linktemplate">Link template</h4>
+
+<p>Add the following tag to your <code>&lt;templates&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code>&lt;template name="Page" tmpl="page" struct="PanelPage"/&gt;
+</code></pre>
+
+<h3 id="loginblock">Login block</h3>
+
+<p>This is a code snippet of a login form. At this point the endpoint the form is sending data to does not exist yet. </p>
+
+<h4 id="createtemplate-1">Create template</h4>
+
+<p>Create a new file named <code>login.tmpl</code> within your <code>tmpl</code> directory.</p>
+
+<p>Contents of file : </p>
+
+<pre><code class="html golang">&lt;div class="list-group list-group-item" style="margin:0 auto;margin-top:3.2em; max-width:400px"&gt;
+
+    &lt;form action="/login" method="post"&gt;
+        &lt;p class="text-muted"&gt;Server side page assembly&lt;/p&gt;
+        &lt;p&gt;&lt;input type="text" name="name" class="form-control" placeholder="Enter your first name" /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;input type="submit" class="btn btn-lg btn-block btn-success"  value="login"/&gt;&lt;/p&gt;
+
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4 id="linktemplate-1">Link template</h4>
+
+<p>Add the following tag to your <code>&lt;templates&gt;</code> tag within your <code>gos.gxml</code> file. Since the struct is empty <code>gos</code> will revert to struct : <code>NoStruct</code>.</p>
+
+<pre><code class="html golang">&lt;template name="Login" tmpl="login" struct=""/&gt;
+</code></pre>
+
+<h3 id="demopanelone">Demo panel one</h3>
+
+<p>This is a code snippet of a simple navigation panel. The panel will display the name entered on authentication.</p>
+
+<h4 id="addmodeltoproject-1">Add model to project</h4>
+
+<p>Add the following tag to your <code>&lt;header&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code class="html golang">&lt;struct name="UserPanel"&gt;
+        Name string
+&lt;/struct&gt;
+</code></pre>
+
+<h4 id="createtemplate-2">Create template</h4>
+
+<p>Create a new file named <code>panel.tmpl</code> within your <code>tmpl</code> directory.</p>
+
+<p>Contents of file : </p>
+
+<pre><code class="html golang">&lt;div class="list-group list-group-item" style="margin:0 auto;margin-top:3.2em; max-width:400px"&gt;
+    &lt;p&gt;&lt;a class="btn btn-danger" href="/logout"&gt;Logout&lt;/a&gt;&lt;/p&gt;
+    &lt;h3&gt;Welcome {{ .Name }} &lt;/h3&gt;
+    &lt;p&gt;&lt;a href="two"&gt;Visit Page Two&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4 id="linktemplate-2">Link template</h4>
+
+<p>Add the following tag to your <code>&lt;templates&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code class="html golang">&lt;template name="Panel" tmpl="panel" struct="UserPanel"/&gt;
+</code></pre>
+
+<h3 id="demopaneltwo">Demo panel two</h3>
+
+<p>This is a code snippet of a simple navigation panel. The panel will display the name entered on authentication.</p>
+
+<h4 id="createtemplate-3">Create template</h4>
+
+<p>Create a new file named <code>panel_two.tmpl</code> within your <code>tmpl</code> directory.</p>
+
+<p>Contents of file : </p>
+
+<pre><code class="html golang">&lt;div class="list-group list-group-item" style="margin:0 auto;margin-top:3.2em; max-width:400px"&gt;
+    &lt;p&gt;&lt;a class="btn btn-danger" href="/logout"&gt;Logout&lt;/a&gt;&lt;/p&gt;
+    &lt;h3&gt;Welcome {{ .Name }} &lt;/h3&gt;
+    &lt;p&gt;&lt;a href="one"&gt;Visit Page One&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4 id="linktemplate-3">Link template</h4>
+
+<p>Add the following tag to your <code>&lt;templates&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code class="html golang">&lt;template name="PanelTwo" tmpl="panel_two" struct="UserPanel"/&gt;
+</code></pre>
+
+<h2 id="authentication">Authentication</h2>
+
+<h4 id="addloginendpoint">Add /login endpoint</h4>
+
+<p>Add the following tag to your <code>&lt;endpoints&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code class="html golang">&lt;end path="/login" type="POST"&gt;
+&lt;/end&gt;
+</code></pre>
+
+<h5 id="addgocode">Add Go code</h5>
+
+<p>Within the same <code>&lt;end&gt;</code> tag add the following snippets (in order):</p>
+
+<p>Save name as session variable :</p>
+
+<pre><code class="html golang">session.Values["name"] = r.FormValue("name")
+</code></pre>
+
+<p>Save session before redirection (crucial) :</p>
+
+<pre><code class="html golang">session.Save(r,w)
+</code></pre>
+
+<p>Redirect user to panel :</p>
+
+<pre><code class="html golang">http.Redirect(w,r,"/panel/one",307)
+</code></pre>
+
+<p><code class="html golang">&lt;end&gt;</code> tag should look like this : </p>
+
+<pre><code class="html golang"> &lt;end path="/login" type="POST"&gt;
+        session.Values["name"] = r.FormValue("name")
+        session.Save(r,w)
+        http.Redirect(w,r,"/panel/one",307)
+  &lt;/end&gt;
+</code></pre>
+
+<h4 id="addlogoutendpoint">Add /logout endpoint</h4>
+
+<p>Add the following tag to your <code class="html golang">&lt;endpoints&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+
+<pre><code class="html golang">&lt;end path="/logout" type="GET"&gt;
+&lt;/end&gt;
+</code></pre>
+
+<h5 id="addgocode-1">Add Go code</h5>
+
+<p>Within the same <code class="html golang">&lt;end&gt;</code> tag add the following snippets (in order):
+Delete <code>name</code> session variable :</p>
+
+<pre><code class="html golang">delete(session.Values, "name")
+</code></pre>
+
+<p>Save session before redirection (crucial) :</p>
+
+<pre><code class="html golang">session.Save(r,w)
+</code></pre>
+
+<p>Redirect user to non-existant page. :</p>
+
+<pre><code class="html golang">http.Redirect(w,r,"/panel/login",307)
+</code></pre>
+
+<p><code>&lt;end&gt;</code> tag should look like this : </p>
+
+<pre><code class="html golang"> &lt;end path="/logout" type="GET"&gt;
+        delete(session.Values, "name")
+        session.Save(r,w)
+        http.Redirect(w,r,"/panel/login",307)
+  &lt;/end&gt;
+</code></pre>
+
+<h2 id="assemblewebpage">Assemble web page</h2>
+
+<h4 id="addpanelendpoint">Add /panel endpoint</h4>
+
+<p>Add the following tag to your <code>&lt;endpoints&gt;</code> tag within your <code>gos.gxml</code> file. The endpoint will be set to type <code>star</code>, this will make any sub set paths use this endpoint code. For example <code>/panel/path/test</code> and <code>/panel/virtual/page</code> will invoke the same code functionality. </p>
+
+<pre><code class="html golang">&lt;end path="/panel" type="star"&gt;
+&lt;/end&gt;
+</code></pre>
+
+<h5 id="addgocode-2">Add Go code</h5>
+
+<p>Within the same <code>&lt;end&gt;</code> tag add the following snippets  (in order):</p>
+
+<p>Initialize page wrapper model :</p>
+
+<pre><code class="html golang">page := PanelPage{}
+</code></pre>
+
+<p>Add some security. The following statement will evaluate if the session variable <code>name</code> exists, if not the login form will be set as the <code>Page.Body</code>. The  function <code>bLogin</code> is used to generate HTML of your template. Since no <code>struct</code> was specified Gos will revert to struct <code>NoStruct</code> as the template's model. To build any template the syntax is <code>b&lt;template name&gt;</code>. If the user is logged in, the Body of the <code>Page</code> template is changed as needed. :</p>
+
+<pre><code class="html golang">if _, ok := session.Values["name"]; ok  {
+    /* User is logged in */
+        route := strings.Split(r.URL.Path, "/")
+        if len(route) &gt; 2 {
+            name := session.Values["name"].(string)
+            panel := UserPanel{Name: name }
+            if route[2] == "one" {
+                page.Body = bPanel(panel)
+            } else {
+                page.Body = bPanelTwo(panel)
+            }
+        } else {
+             http.Redirect(w,r,"/panel/one",307)
+        }
+} else {
+    page.Body = bLogin(NoStruct{})
+}
+</code></pre>
+
+<p>Set content type :</p>
+
+<pre><code class="html golang">w.Header().Set("Content-Type",  "text/html")
+</code></pre>
+
+<p>Compile template :</p>
+
+<pre><code class="html golang">html := bPage(page)
+w.Write([]byte(html))   
+</code></pre>
+
+<p><code>&lt;end&gt;</code> tag should look like this :</p>
+
+<pre><code class="html golang">   &lt;end path="/panel"  type="star" &gt;
+
+      // writing directly to control headers
+
+    page := PanelPage{}
+
+    if _, ok := session.Values["name"]; ok  {
+        route := strings.Split(r.URL.Path, "/")
+        if len(route) &gt; 2 {
+            name := session.Values["name"].(string)
+            panel := UserPanel{Name: name }
+            if route[2] == "one" {
+                page.Body = bPanel(panel)
+            } else {
+                page.Body = bPanelTwo(panel)
+            }
+        } else {
+             http.Redirect(w,r,"/panel/one",307)
+        }
+
+    } else {
+
+        page.Body = bLogin(NoStruct{})
+
+    }
+
+
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Content-Type",  "text/html")
+    w.Write([]byte(bPage(page)))
+
+  &lt;/end&gt; 
+</code></pre>
+
+<h3 id="testing">Testing</h3>
+
+<p>Run project :</p>
+
+<pre><code>gos --run
+</code></pre>
+
+<p>Visit page : <a href="http://localhost:8080/panel">localhost:8080/panel</a></p>
+         
+        </div>
+  </div>
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+     
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/okshadow.js"></script>
+     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+        
+         hljs.initHighlightingOnLoad();
+    </script>
+     <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71342160-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  </body>
+</html>
