@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Go Server - Documentation</title>
+    <!-- Bootstrap CSS -->
+<script src="https://use.fontawesome.com/d102afacbe.js"></script>
+        <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
+<meta name="keywords" content="dev,kit,server,ops,web,framework,test">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+  </head>
+  <body>
+
+  <div id="sidr">
+        <ul>
+          <li><a class="active" href="index.html">Home</a></li>
+          <li><a href="api.html">Build web service</a></li>
+          <li><a href="authentication.html">Authentication</a></li>
+          <li><a href="awp.html">Dynamic web pages</a></li>
+          <li><a href="benchmark-tests.html">Go Benchmark tests</a></li>
+          <li><a href="how-run-project.html">How to run</a></li>
+          <li><a href="how-to-install.html">How to install</a></li>
+          <li><a href="https.html">HTTPS</a></li>
+          <li><a href="markup.html">Go Server markup</a></li>
+          <li><a href="middleware.html">Middleware</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="tests.html">Go tests</a></li>
+        </ul>
+  </div>
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  
+  <ul class="nav navbar-nav">
+  
+   <li class="nav-item">
+      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Menu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
+    </li>
+        <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
+    </li>
+       <li style="margin-left: 12px;" class="nav-item">
+      <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"> Wiki</a>
+    </li>
+
+     <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+    </li>
+
+      <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://www.orkiv.com/project-submission/"><i class="fa fa-building"></i> Enterprise</a>
+    </li>
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect"><i class="fa fa-book"></i> Documentation</h1>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+        <div class="list-group list-group-item">
+   
+<h3><a id="About_Gopher_Sauce_2"></a>About Go Server</h3>
+<p>Go <code>Server</code> is a markup language and CLI tool. It supports :</p>
+<ul>
+<li>API endpoint generation.</li>
+<li>simplifying adding pipelines to Go lang templates.</li>
+<li>Active web pages with templates.</li>
+<li>Template components.</li>
+<li>Automatic package management.</li>
+</ul>
+<h3><a id="Syntax_9"></a>Syntax</h3>
+<p>This CLI converts the xml tags within your Go Server file into Go lang code.  Find more information about the behavior of tags in the <code>XML tags</code> section. Get the autocomplete on sublime, Search for Go Server on package control.</p>
+<h3><a id="Compiler_12"></a>Compiler</h3>
+<p>Gopher sauce xml files are converted to  Go lang source prior to compilation.</p>
+<h3><a id="Extensions_15"></a>Extensions</h3>
+<p>Any of your declared tags within a Go Server xml file can be exported to another project. Checkout <a href="tick.html">the active MVC via websocket project</a>. To have a Go Server extension listed create a new issue with a link to your repository or update the extensions’ page wiki.</p>
+<h3><a id="How_to_install_GoS_18"></a>How to install GoS</h3>
+<pre><code class="bash">go get github.com/cheikhshift/gos
+go install github.com/cheikhshift/gos
+gos deps
+</code></pre>
+<h4><a id="OR__29"></a>OR -</h4>
+<p><img src="https://orkiv.com/sapphire/gs-intro.gif" alt=""></p>
+
+<h3><a id="Dependencies_33"></a>Dependencies</h3>
+<p>The application generated by Go Server has certain dependencies. Please run the command below to download them before attempting to run or export your application. (Assuming $GOPATH is set)</p>
+<pre><code class="bash">$GOPATH/bin/gos deps
+</code></pre>
+
+    <div class="list-group list-group-item" ><h4>Quick Start your project</h4><pre><code class="bash">mkdir new-project
+    cd new-project
+    gos --make
+    </code></pre> </div>
+        </div>
+  </div>
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+     
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/okshadow.js"></script>
+     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+        $(document).ready(function() {
+          $('#simple-menu').sidr();
+        });
+         hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
