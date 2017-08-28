@@ -103,7 +103,7 @@
 
 <h3 id="declaredbobjectpipeline">Create DB Object pipeline</h3>
 
-<p>Struct of <code>dbObject</code>. This Struct will be made available on <code>tick</code> import (no) :</p>
+<p>Struct of <code>dbObject</code>. This Struct will be made available on <code>tick</code> import (no redeclaration required) :</p>
 
 <pre><code class="html golang">    &lt;struct name="dbObject"&gt;
         Id bson.ObjectId `bson:"_id,omitempty"`
@@ -113,7 +113,7 @@
     &lt;/struct&gt;
 </code></pre>
 
-<p>Add a new <code>method</code> within your <code>&lt;methods&gt;</code> tag (in Gopher Sauce). Replace dbObject with your own model. 
+<p>Add a new <code>method</code> within your <code>&lt;methods&gt;</code> tag (in Go Server). Replace dbObject with your own model. 
 This snippet will find any database object :</p>
 
 <pre><code class="html golang">    &lt;method name="GetdbObject" return="dbObject"&gt;
@@ -125,7 +125,7 @@ This snippet will find any database object :</p>
 
 <h3 id="template">Template</h3>
 
-<p>With the prior section in mind, this is how you track your database object's values. Within your templates on Gopher sauce use the following code.</p>
+<p>With the prior section in mind, this is how you track your database object's values. Within your templates on Go Server use the following code.</p>
 
 <p>Get object via pipeline : </p>
 
