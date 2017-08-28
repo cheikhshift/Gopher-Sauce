@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Go Server - Active/Dynamic web pages</title>
+    <!-- Bootstrap CSS -->
+<script src="https://use.fontawesome.com/d102afacbe.js"></script>
+        <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
+<meta name="keywords" content="dev,kit,server,ops,web,framework,test">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+  </head>
+  <body>
+
+   <div id="sidr">
+        <ul>
+          <li><a id="simple-menu-two" class="nav-link"  href="#sidr"><i class="fa fa-chevron-left"></i> Collapse</a></li>
+          <li><a  href="index.html">Home</a></li>
+          <li><a  href="api.html">Build web service</a></li>
+          <li><a href="authentication.html">Authentication</a></li>
+          <li><a class="active" href="awp.html">Dynamic web pages</a></li>
+          <li><a href="benchmark-tests.html">Go Benchmark tests</a></li>
+          <li><a href="how-run-project.html">How to run</a></li>
+          <li><a href="how-to-install.html">How to install</a></li>
+          <li><a href="https.html">HTTPS</a></li>
+          <li><a href="markup.html">Go Server markup</a></li>
+          <li><a href="middleware.html">Middleware</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="tests.html">Go tests</a></li>
+        </ul>
+  </div>
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  
+  <ul class="nav navbar-nav">
+  
+   <li class="nav-item">
+      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Menu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
+    </li>
+        <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
+    </li>
+       <li style="margin-left: 12px;" class="nav-item">
+      <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"> Wiki</a>
+    </li>
+
+     <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+    </li>
+
+      <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://www.orkiv.com/project-submission/"><i class="fa fa-building"></i> Enterprise</a>
+    </li>
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect">Active/Dynamic web pages</h1>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+        <div class="list-group list-group-item">
+   
+            <h1 id="activepages">Active pages</h1>
+
+<p>This page covers the creation of dynamic web pages.</p>
+
+<h2 id="createapage">Create a page</h2>
+
+<p>To add a new page, create a new <code>page_name.tmpl</code> file within your GoS project web root. If you used the CLI argument <code>--make</code>, your web root folder would be <code>web</code>.  To access your page visit <code>hostname/page_name</code>.</p>
+
+<p>Here is a tutorial on sending emails with active pages <a href="https://github.com/cheikhshift/gopher-sauce-methods">Link</a>.</p>
+
+<h2 id="templateinterface">Template interface</h2>
+
+<p>This section covers the variables accessible to a template page in your GoS project's web root.</p>
+
+<p>More information on <a href="http://www.gorillatoolkit.org/pkg/sessions">sessions.Session</a></p>
+
+<p>The Go lang interface for a page in your web root : </p>
+
+<pre><code class="html golang">     type Page struct {
+                    R *http.Request
+                    Session *sessions.Session // aka map[string]interface{}
+        }
+</code></pre>
+
+<p>These variables are accessible to template web pages within your project's web root. Field <code>R</code> would be accessed with syntax <code>{{ .R }}</code>. For templates in your template (<code>tmpl</code>) folder, GoS will use the explicitly defined (<code>&lt;struct&gt;</code>)interface for that template. If no interface is set, <code>NoStruct{}</code> will be used, hence no fields available.</p>
+
+<h3 id="moreinformation">More information</h3>
+
+<p>Here is a guide to managing data with templates and updating interface fields <a href="gdb.html">Link</a>. </p>
+
+<h3 id="gosexclusivetemplatemethods">GoS exclusive template methods</h3>
+
+<p>This section covers the list of functions available within all your templates compiled using Go Server.
+Please keep in mind that the .Session and .R variable are only available to template files within your server web root ( default is <code>web</code>).</p>
+
+<ul>
+<li><p>js - will take its only input and add it as the src attribute of the html <code>&lt;script/&gt;</code> tag <code>&lt;script src="var"&gt;&lt;/script&gt;</code></p>
+
+<p><ul>
+<li>Usage : <code>{{js  "dist/js/bootstrap.js"}}</code></li></ul>
+
+<p></p></li></p>
+
+<p><li><p>css - Will take its only input and add it as the href attribute of the html  <code>&lt;link/&gt;</code> tag.</p></p>
+
+<p><ul>
+<li>Usage : <code>{{css "dist/css/bootstrap.css" }}</code></li></ul></p>
+
+<p></li></p>
+
+<p><li><p>sd - Will delete the current page session</p></p>
+
+<p><ul>
+<li>Usage : <code>{{.Session | sd }}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>sr - Will remove a specified session key</p></p>
+
+<p><ul>
+<li>Usage : <code>{{.Session | sr "KeyName" }}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>sc - Will check to see if a session key exists</p></p>
+
+<p><ul>
+<li>Usage : <code>{{.Session | sc "KeyName" }}</code></li></ul></p>
+
+<p></li></p>
+
+<p><li><p>ss - Will set a string value as a session variable.</p></p>
+
+<p><ul>
+<li>Usage : <code>{{.Session | ss "KeyName" "Variable" }}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>sso - Will set a struct as a session variable. </p></p>
+
+<ul>
+<li><p>Usage : This requires three steps to work.</p>
+
+<ul>
+<li><p>Import <code>encoding/gob</code> with the import tag. Do not set the fetch attribute.</p></li>
+
+<li><p>Register the struct types within your <code>&lt;init/&gt;</code> tag of your GoS project root. </p>
+
+<pre><code>     init(){ 
+     ...
+     gob.Register(&amp;Object{})
+</code></pre>
+
+<ul>
+<li>Once the steps above are completed you can now set the linked object as session variables : <code>{{.Session | sso "KeyName" $object_with_Object_struct }}</code></li></ul></li></ul></li></ul>
+
+<p></li></p>
+
+<p><li><p>sgo - Will retrieve a a session stored object</p></p>
+
+<p><ul>
+<li>Usage : <code>{{$desiredObject =  .Session | sgo "keyName" }}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>sg - Will retrieve a string stored as a session variable.</p></p>
+
+<p><ul>
+<li>Usage : <code>{{$string := .Session | sg "KeyName" }}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>form - Will retrieve a request variable no matter how it is submitted.</p></p>
+
+<p><ul>
+<li>Usage : <code>{{ $input = .R | form "Key" }}</code> .  <code>.R</code> is a page variable with type <code>http.Request</code> from the Go lang package <code>net/http</code></li></ul></p>
+
+<p></li></p>
+
+<p><li><p>eq - Will compare two variables and return a <code>bool</code> of value true if they are equal</p></p>
+
+<p><ul>
+<li>Usage : <code>{{if eq "Obj1" "Obj1" }} {{end}}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>neq - Will compare two variables and return a <code>bool</code> of value true if they are not equal.</p></p>
+
+<p><ul>
+<li>Usage :  <code>{{if neq "Obj1" "Obj2" }} {{end}}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>lte - Will see if the first number declared is less than or equal to than the second number declared, if this statement proves to be true it will return a <code>bool</code> with the value true.</p></p>
+
+<p><ul>
+<li>Usage : <code>{{if lte 5 10 }} {{end}}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>lt - Will see if the first number declared is less than the second number declared, if this statement proves to be true it wil return a <code>bool</code> with value true.</p></p>
+
+<p><ul>
+<li>Usage  : <code>{{if lt 5  7 }} {{end}}</code></li></ul></p>
+
+<p></li></p>
+
+<p><li><p>gte - Will see if the first number declared is greater than or equal to the second number declared, if this statement proves to be true it will return a <code>bool</code> with value true</p></p>
+
+<p><ul>
+<li>Usage : <code>{{if gte 5 2}} {{end}}</code> </li></ul></p>
+
+<p></li></p>
+
+<p><li><p>gt -  Will see if the first number declared is greater than or equal to the second number declared, if this statement proves to be true it will return a <code>bool</code> with value true</p></p>
+
+<p><ul>
+<li>Usage : <code>{{if gt 5 2}} {{end}}</code> </li></ul></p>
+
+<p></li>
+</ul></p>
+        </div>
+  </div>
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+     
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/okshadow.js"></script>
+     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+        $(document).ready(function() {
+          $('#simple-menu').sidr();
+           $('#simple-menu-two').sidr();
+          setTimeout(function(){
+          $('#simple-menu').click();
+        } , 500 );
+        });
+         hljs.initHighlightingOnLoad();
+    </script>
+     <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71342160-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  </body>
+</html>

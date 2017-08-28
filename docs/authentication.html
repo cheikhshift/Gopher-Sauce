@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Go Server - Authentication</title>
+    <!-- Bootstrap CSS -->
+<script src="https://use.fontawesome.com/d102afacbe.js"></script>
+        <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
+<meta name="keywords" content="dev,kit,server,ops,web,framework,test">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+  </head>
+  <body>
+
+    <div id="sidr">
+        <ul>
+          <li><a id="simple-menu-two" class="nav-link"  href="#sidr"><i class="fa fa-chevron-left"></i> Collapse</a></li>
+          <li><a  href="index.html">Home</a></li>
+          <li><a  href="api.html">Build web service</a></li>
+          <li><a class="active" href="authentication.html">Authentication</a></li>
+          <li><a href="awp.html">Dynamic web pages</a></li>
+          <li><a href="benchmark-tests.html">Go Benchmark tests</a></li>
+          <li><a href="how-run-project.html">How to run</a></li>
+          <li><a href="how-to-install.html">How to install</a></li>
+          <li><a href="https.html">HTTPS</a></li>
+          <li><a href="markup.html">Go Server markup</a></li>
+          <li><a href="middleware.html">Middleware</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="tests.html">Go tests</a></li>
+        </ul>
+  </div>
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  
+  <ul class="nav navbar-nav">
+  
+   <li class="nav-item">
+      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Menu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
+    </li>
+        <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
+    </li>
+       <li style="margin-left: 12px;" class="nav-item">
+      <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"> Wiki</a>
+    </li>
+
+     <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+    </li>
+
+      <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://www.orkiv.com/project-submission/"><i class="fa fa-building"></i> Enterprise</a>
+    </li>
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect"><i class="fa fa-lock"></i> Authentication</h1>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+        <div class="list-group list-group-item">
+   
+          <p>Go-Server authentication API. This package supports simple service security.</p>
+<h2><a id="Index_2"></a>Index</h2>
+<ol>
+<li><a href="#authenticating-with-mongodb">Mongo Authentication</a></li>
+<li><a href="#authenticating-with-ldap">LDAP Authentication</a></li>
+<li><a href="#securing-a-service">Secure a service</a></li>
+</ol>
+<h2><a id="Import_8"></a>Import</h2>
+<p>Add this tag within the root of your <code>&lt;gos&gt;</code> tag in your <code>.gxml</code> file.</p>
+<pre><code class="html golang">&lt;import src=&quot;github.com/cheikhshift/gop/gos.gxml&quot; /&gt;
+</code></pre>
+<h2><a id="Setup_14"></a>Setup</h2>
+<p>Add the following <code>golang</code> statements within your <code class="html golang">&lt;main&gt;</code> tag in your <code>.gxml</code> file.</p>
+<h3><a id="authenticating-with-mongodb"></a>Authenticating with MongoDB</h3>
+<h4><a id="Connect_to_database_20"></a>Connect to database</h4>
+<pre><code class="golang">gop.Connect(&quot;host_mongo_uri&quot;, &quot;database_name&quot;)
+defer gop.DB.Close()
+</code></pre>
+<h4><a id="Perform_a_login_within_end_tag_25"></a>Perform a login within <code class="html golang">&lt;end&gt;</code> tag</h4>
+<p>The following <code class="html golang">&lt;end&gt;</code> tag will attempt to login a user :  If Authentication fails a text string as to why is returned.</p>
+<pre><code class="html golang">&lt;end path=&quot;/login&quot; type=&quot;POST&quot; &gt;
+    
+    succ, err := gop.Login(r.FormValue(&quot;username&quot;) ,
+        r.FormValue(&quot;password&quot;) ,
+        session )
+
+    if err != nil {
+        response = err.Error()
+    } else {
+            //redirect or return user
+            user,err := gop.GetUser(session)
+            //save in case you're redirecting
+            session.Save(r,w)
+
+    }
+
+&lt;/end&gt;
+</code></pre>
+<h4><a id="Create_a_new_user_within_end_tag_46"></a>Create a new user within <code class="html golang">&lt;end&gt;</code> tag</h4>
+<p>The following <code class="html golang">&lt;end&gt;</code> tag will attempt to login a user :  If registration fails a text string as to why is returned.</p>
+<pre><code class="html golang">   &lt;end path=&quot;/join&quot; type=&quot;POST&quot; &gt;
+        
+      succ, err := gop.Join(r.FormValue(&quot;username&quot;) ,
+            r.FormValue(&quot;password&quot;) , 
+            r.FormValue(&quot;email&quot;) ,
+            session )
+
+        if err != nil {
+            response = err.Error()
+        } else {
+                //redirect or return user
+                user,err := gop.GetUser(session)
+                //save in case you're redirecting
+                session.Save(r,w)
+
+        }
+
+   &lt;/end&gt;
+</code></pre>
+<h4><a id="Interface_of_Passport_user__70"></a>Interface of Passport user :</h4>
+<pre><code class="html golang">type User struct {
+    Id bson.ObjectId `bson:&quot;_id,omitempty&quot;`
+    Username string `valid:&quot;unique,required&quot;`
+    Pw [32]byte
+    Email string `valid:&quot;email,unique,required&quot;`
+    Created time.Time //timestamp local format
+    Scopes []string
+    Attr map[string] string
+}
+</code></pre>
+<h3><a id="authenticating-with-ldap"></a>Authenticating with LDAP</h3>
+<h4><a id="Connect_to_server_84"></a>Connect to server</h4>
+<p>Create a connection to your LDAP server. Update the fields as needed.</p>
+<pre><code class="html golang">    gop.UseLDAP(&amp;ldap.LDAPClient{
+    Base:         &quot;dc=example,dc=com&quot;,
+    Host:         &quot;ldap.example.com&quot;,
+    Port:         389,
+    UseSSL:       false,
+    BindDN:       &quot;uid=readonlysuer,ou=People,dc=example,dc=com&quot;,
+    BindPassword: &quot;readonlypassword&quot;,
+    UserFilter:   &quot;(uid=%s)&quot;,
+    GroupFilter: &quot;(memberUid=%s)&quot;,
+    Attributes:   []string{&quot;givenName&quot;, &quot;sn&quot;, &quot;mail&quot;, &quot;uid&quot;},
+    })
+    defer LDAPClient.Close()
+</code></pre>
+<h4><a id="Authentication_with_LDAP_100"></a>Authentication with LDAP</h4>
+<p>The following <code class="html golang">&lt;end&gt;</code> tag will attempt to login a user :  If Authentication fails a text string as to why is returned. Once logged in, use the <code>pkg</code> function <code class="html golang">gop.GetUser(session *sessions.Session) (User, error)</code> to get the current session’s user interface.</p>
+<pre><code class="html golang">&lt;end path=&quot;/login&quot; type=&quot;POST&quot; &gt;
+    
+    succ, err := gop.LoginLDAP(r.FormValue(&quot;username&quot;) ,
+        r.FormValue(&quot;password&quot;) ,
+        session )
+
+    if err != nil {
+        response = err.Error()
+    } else {
+            //redirect or return user
+            user,err := gop.GetUser(session)
+            //save in case you're redirecting
+            session.Save(r,w)
+
+    }
+
+&lt;/end&gt;
+</code></pre>
+<h4><a id="Interface_of_LDAP_passport_user__123"></a>Interface of LDAP passport user :</h4>
+<pre><code class="html golang">type User struct {
+    Id bson.ObjectId `bson:&quot;_id,omitempty&quot;`
+    Username string `valid:&quot;unique,required&quot;`
+    Pw [32]byte
+    Email string `valid:&quot;email,unique,required&quot;`
+    Created time.Time //timestamp local format
+    Scopes []string
+    Groups []string
+    Props db.O
+    Attr map[string] string
+}
+</code></pre>
+<h3><a id="securing-a-service"></a>Securing a service</h3>
+<p>Use the package function <code class="html golang">gop.AddAuthZone(path string)</code> to protect a request path and its subset paths. The following example will intercept any path with string <code class="html golang">protect-resource</code> in it.</p>
+<pre><code class="html golang">gop.AddAuthZone(&quot;protect-resource&quot;)
+</code></pre>
+<h3><a id="Give_user_path_permission__143"></a>Give user path permission :</h3>
+<p>Use the function <code class="html golang">(u *User)AddZone(path string)</code> to give user new access to a specified path.</p>
+<p>Use the function <code class="html golang">(u *User)RemoveZone(path string)</code> to revoke user access from a specified path.</p>
+<h3><a id="Update_user_149"></a>Update user</h3>
+<p>Use the <code >Push</code> function to update your user’s session and database value.<br>
+<code class="html golang">(u *User) Push (ses *sessions.Session) error</code></p>
+<h3><a id="Log_user_out_154"></a>Log user out.</h3>
+<p>Use the <code>gop</code> pkg func : <code class="golang">func Logout(ses *sessions.Session) (bool, error)</code> to log a user out. Example of the call within <code>&lt;end&gt;</code> tag :</p>
+<pre><code>&lt;end path=&quot;/sample/path&quot; type=&quot;GET&quot;&gt;
+    gop.Logout(session)
+&lt;/end&gt;
+</code></pre>
+<h3><a id="Set_Unauthorized_page_redirect_161"></a>Set Unauthorized page redirect</h3>
+<p>Use the <code class="golang">gop.SetUnAuthPage(path string)</code> to set the redirect path on permission error.<br>
+<code>gos.SetUnAuthPage(path string)</code></p>
+        </div>
+  </div>
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+     
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/okshadow.js"></script>
+     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+        $(document).ready(function() {
+          $('#simple-menu').sidr();
+           $('#simple-menu-two').sidr();
+          setTimeout(function(){
+          $('#simple-menu').click();
+        } , 500 );
+        });
+         hljs.initHighlightingOnLoad();
+    </script>
+     <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71342160-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  </body>
+</html>

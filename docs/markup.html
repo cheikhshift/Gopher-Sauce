@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Go Server - Markup</title>
+    <!-- Bootstrap CSS -->
+<script src="https://use.fontawesome.com/d102afacbe.js"></script>
+        <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
+<meta name="keywords" content="dev,kit,server,ops,web,framework,test">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+  </head>
+  <body>
+
+  <div id="sidr">
+        <ul>
+          <li><a id="simple-menu-two" class="nav-link"  href="#sidr"><i class="fa fa-chevron-left"></i> Collapse</a></li>
+          <li><a  href="index.html">Home</a></li>
+          <li><a href="api.html">Build web service</a></li>
+          <li><a href="authentication.html">Authentication</a></li>
+          <li><a href="awp.html">Dynamic web pages</a></li>
+          <li><a href="benchmark-tests.html">Go Benchmark tests</a></li>
+          <li><a href="how-run-project.html">How to run</a></li>
+          <li><a href="how-to-install.html">How to install</a></li>
+          <li><a href="https.html">HTTPS</a></li>
+          <li><a class="active" href="markup.html">Go Server markup</a></li>
+          <li><a href="middleware.html">Middleware</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="tests.html">Go tests</a></li>
+        </ul>
+  </div>
+    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+    &#9776;
+  </button>
+
+   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+  
+  <ul class="nav navbar-nav">
+  
+   <li class="nav-item">
+      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Menu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
+    </li>
+        <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
+    </li>
+       <li style="margin-left: 12px;" class="nav-item">
+      <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce/wiki"> Wiki</a>
+    </li>
+
+     <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+    </li>
+
+      <li style="margin-right: 12px;" class="nav-item">
+       <a class="nav-link" href="https://www.orkiv.com/project-submission/"><i class="fa fa-building"></i> Enterprise</a>
+    </li>
+
+  </ul>
+  <div class="form-inline pull-xs-right">
+    <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
+  </div> 
+</div>
+</nav>
+
+  <div class="header-space" style="height:190px;margin-bottom:2em;">
+      <div class="cont container">
+          <div class="page-header">
+              <h1 style="color:#fff" class="tect"><i class="fa fa-book"></i> Markup. Go Server syntax</h1>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+        <div class="list-group list-group-item">
+   
+          <h1 id="xmltags">XML Tags</h1>
+
+<h2 id="index">Index</h2>
+
+<ul>
+<li><a href="#tags">Tags</a>
+
+
+<ol>
+<li><a href="#deploy">Deploy</a></li>
+
+<li><a href="#webtag">Web</a></li>
+
+<li><a href="#tmpltag">Tmpl</a></li>
+
+<li><a href="#port">Port</a></li>
+
+<li><a href="#output">Output</a></li>
+
+<li><a href="#key">Key</a></li>
+
+<li><a href="#init">Init</a></li>
+
+<li><a href="#main">Main</a></li>
+
+<li><a href="#var">Var</a></li>
+
+<li><a href="#header">Header</a>
+
+
+<ol>
+<li><a href="#struct">Structs</a></li>
+
+<li><a href="#objects">Objects</a></li></ol>
+</li>
+
+<li><a href="#methods">Methods</a></li></ol>
+</li>
+</ul>
+
+<ol>
+<li><a href="#timers">Timers</a></li>
+
+<li><a href="#templates">Templates</a></li>
+
+<li><a href="#apigeneration">API Generation</a></li>
+
+<li><a href="#imports">Imports</a></li>
+</ol>
+
+<ul>
+<li><a href="#xmlschema">XML Schema</a></li>
+</ul>
+
+<h3 id="tags">Tags</h3>
+
+<p>Throughout this page <code>GoS</code> refers to Gopher Sauce.
+This section covers documentation of GoS XML template tags. Unless specified these tags are at the root of your <code>&lt;gos/&gt;</code> tag.</p>
+
+<h2 id="deploy">Deploy</h2>
+
+<p>Deploy specifies the manner that GoS should compile your application. Use <code>webapp</code> to have GoS generate a webserver for you. To export this package to an app use <code>package</code> instead of <code>webapp</code>. This tag should always be within the root of the <code  class="html golang">&lt;gos/&gt;</code> tag.</p>
+
+<h3 id="availabledeploytypes">Available Deploy types</h3>
+
+<ul>
+<li>webapp : Will add Go's default Http Listener to your package's <code  class="html golang">main()</code> function.</li>
+
+<li>package : Make your package's template's and web resources exportable. </li>
+</ul>
+
+<p>*This tag is required</p>
+
+<pre><code class="html golang">&lt;gos&gt;
+    ...
+    &lt;deploy&gt;webapp&lt;/deploy&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="webtag">Web tag</h2>
+
+<p>Specifies the name of the folder that contains your web resources within your GoS exportable package. The folder path is relative to your current working directory.</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;web&gt;foldername&lt;/web&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="tmpltag">Tmpl tag</h2>
+
+<p>Specifies the name of the folder containing your template files within your GoS exportable package. The folder path is relative to your current working directory.</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;tmpl&gt;foldername&lt;/tmpl&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="package">Package</h2>
+
+<p>This is only applicable to applications of type <code>package</code>. It specifies the web and template folder prefix for your exportable GoS package.</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;package&gt;packageName&lt;/package&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="port">Port</h2>
+
+<p>(if applicable) Specifies the port your application should listen on. </p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;port&gt;8080&lt;/port&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="output">Output</h2>
+
+<p>The name of the file that GoS will save.
+*This tag is required</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;output&gt;server_out.go&lt;/output&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="key">Key</h2>
+
+<p>(if applicable) used as cookie store key within your web app.</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;key&gt;my-key-braah&lt;/key&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h2 id="init">Init</h2>
+
+<p>GoS will wrap the data within this tag into the usual Go <code>init()</code> function
+For example :</p>
+
+<pre><code  class="html golang">    &lt;gos&gt;
+        ...
+        &lt;init&gt; 
+            fmt.Println("Logging from init function")   
+        &lt;/init&gt;
+        ...
+    &lt;/gos&gt;
+</code></pre>
+
+<p>Will translate into</p>
+
+<pre><code  class="html golang">func init(){
+    fmt.Println("Logging from init function")
+}
+</code></pre>
+
+<h2 id="main">Main</h2>
+
+<p>GoS will wrap the data within this tag into the go <code>main()</code> function.
+For example : </p>
+
+<pre><code  class="html golang">    &lt;gos&gt;
+        ...
+        &lt;main&gt; 
+            fmt.Println("Logging from main function")   
+        &lt;/main&gt;
+        ...
+    &lt;/gos&gt;
+</code></pre>
+
+<p>Will translate into</p>
+
+<pre><code  class="html golang">func main(){
+    ...
+    fmt.Println("Logging from Main function")
+    ...
+}
+</code></pre>
+
+<h2 id="variables">Variables</h2>
+
+<p>To declare public variables that are accessible to your program use the <code>var</code> tag. Use the type parameter to specify the variable type. Use the <code>*</code> qualifier as appropriate.
+For example </p>
+
+<pre><code  class="html golang">    &lt;var type="string"&gt;FreeServer&lt;/var&gt;
+</code></pre>
+
+<p>Will become (within your Go program)</p>
+
+<pre><code  class="html golang">    var FreeServer string 
+</code></pre>
+
+<h2 id="header">Header</h2>
+
+<h3 id="structs">Structs</h3>
+
+<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go structure within within your generated Go src.</p>
+
+<h4 id="attributes">Attributes</h4>
+
+<p>name - The name of this structure
+** Innerxml Struct field declarations.</p>
+
+<p>The example below declares a Go struct named DemoGos with a sub structure called DemoChild. The struct DemoGos has attributes SomeAttr and Child. </p>
+
+<p>Whenever this interface is initialized within a template (<code>{{ $var := Struct_name }}</code>), these variables are accessible as that object's properties.</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;header&gt;
+        &lt;struct name="DemoChild"&gt;
+            SomeOtherAttr string
+        &lt;/struct&gt;
+        &lt;struct name="DemoGos"&gt;
+            SomeAttr string
+            Child *DemoChild
+        &lt;/struct&gt;
+    &lt;/header&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<h3 id="objects">Objects</h3>
+
+<p>The <code>&lt;object/&gt;</code> tag declares a GoS object. It needs a struct name to have a field map, which is used whenever this object is initialized within a template. Please keep in mind that the struct specified for this object must be returned all the time if the object is not a <code>reader</code>.</p>
+
+<h4 id="attributes-1">Attributes</h4>
+
+<pre><code>struct - the name of a struct available to the application
+name - name of object
+</code></pre>
+
+<p>The example below will declare an object called <code>myDemoObject</code>. The inner content of this tag is where object methods are declared. (remember to jumpline after each declaration!!!) 
+These functions also need to be declared within your GoS application xml template or another imported xml template.</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;header&gt;
+    &lt;object struct="DemoGos" name="myDemoObject"&gt;
+        Hackfmt(save string)
+        WhatsMyAttr(save string,end string) string
+        WhatsMyAttrLength() string
+    &lt;/object&gt;
+    &lt;/header&gt;
+    ...
+&lt;/gos&gt;
+</code></pre>
+
+<p>By declaring an object :</p>
+
+<ul>
+<li><p>GoS will create a Go lang <code>type</code> with the object's name linked to its respective struct</p></li>
+
+<li><p>GoS will create a local and template accessible method to initialize this object. Local method :  <code>net_myDemoObject(args ...interface{}) (d DemoGos)</code>. Template method : {{$emptyObject :=  myDemoObject}}.</p>
+
+<ul>
+<li><p>Invoking object with static parameters : <code>{{$object := myDemoObject /{</code>`SomeAttr`:`ValueIn`}/ }}<code>. To pass initialization variables we can use a static json escape holders</code>/{<code>and</code>}/`. To initialize your variable with other objects create a method that returns this object by using the desired input initialization objects to use.</p></li>
+
+<li><p>Each function specified within this tag, will be generated to accept this object as a mutable parameter within templates as well as your application's local scope. Local function generated :
+<code>func (object DemoGos) Hackfmt(save string)</code>
+You can access this function via templates by invoking these calls within any template in this application : <code>{{$object | Hackfmt "data"}}</code> or <code>{{$error := $object | Hackfmt "data" }}</code>. </p></li></ul></li>
+</ul>
+
+<p>*If an Object and a template share a struct you can initialize the template and compile it to html with this call <code>{{b&lt;template name&gt; $object}}</code></p>
+
+<h2 id="methods">Methods</h2>
+
+<p>Sorry for the confusion, Methods translate into usual go functions (<code>func</code>). 
+This section covers how to create functions for your applications. These functions, known as Methods within GoS are linked for use with your templates and objects.</p>
+
+<h3 id="attributes-2">Attributes</h3>
+
+<pre><code>name - Specifies the name of the function. Please keep in mind that usage of this function outside of templates requires the `net_` added to name because GoS appends that prefix to avoid any method redeclaration. If you desire to write methods for strict usage outside of template files we recommend writing a normal Go package and importing it with the `&lt;import/&gt;` tag or creating another Go file within your project directory.
+
+return - The return type of the function. Ie: string,bool or a custom struct `DemoGos` 
+var - This is a comma delimited string of the variables you wish this function to have. Say we need a function that has two parameters `param1 string, param2 string` it will be declared `param1,param2`. Before using the variable make sure its type is defined within the method. For example to log `param1` the call would be `fmt.Println(param1.(string))`
+
+autoface - GoS has the capability of taking methods declared within objects and look for the corresponding method name, and create a Go function to mutate the corresponding object with the matching method. This feature is enabled by default to disable it for a method and have it not converted as a method to mutate an object set the attribute to false.
+limit - This is a comma delimited string to specify the object types this function will work with, if linked. For example to limit a function to DemoGos and myDemoObject this attribute will be set to `DemoGos,myDemoObject` 
+object - If this method is linked to an object this specifies the local name of the object within the function. By default it is `object`
+**InnerXml - This contains your method declarations. GoS will wrap up the inner xml data with your method attributes to create a Go func
+</code></pre>
+
+<p>In the example below, one method will be created, the corresponding method will then be added as an object method as well.  Since input variables are declared within the object, we do not need to add the <code>var</code> attribute to our method declaration. </p>
+
+<pre><code  class="html golang">    &lt;gos&gt;
+        ...
+        &lt;header&gt;
+        &lt;object struct="DemoGos" name="myDemoObject"&gt;
+            Hackfmt(save string)
+        &lt;/object&gt;
+        &lt;/header&gt;
+        ...
+        &lt;methods&gt;
+            &lt;method name="Hackfmt"&gt;
+            fmt.Println(save + " -&gt; " + object.SomeAttr) 
+            &lt;/method&gt;
+        &lt;/methods&gt;
+        ...
+    &lt;/gos&gt;
+    ... Output by GoS :
+    //Generated GoLang function
+    func (object DemoGos) Hackfmt(save string)  
+    //Generated template method for object
+    func  net_Hackfmt(save string,object DemoGos) string 
+</code></pre>
+
+<p>Once a method is used within an interface it will not be generated again and can only be invoked with the linked object type.  The snipped below will use declared function <code>Hackfmt</code> within a template. The <code>net_</code> prefix is not needed within templates.</p>
+
+<pre><code  class="html golang">{{$object := myDemoObject}}
+{{$object | Hackfmt "saveString" }}
+&lt;!-- Another way to call it --&gt;
+{{Hackfmt "saveString" $object }}
+</code></pre>
+
+<p>The method can also be used outside of templates with the snipped below :</p>
+
+<pre><code  class="html golang">object := DemoGos{}
+object.Hackfmt("saveString")    
+</code></pre>
+
+<p>Another test case is declaring a method that is not used with any objects and is still accessible within templates and function calls outside of it as well. The variables set in the var tag need their type declared during use. The example below we will declare a function that sends emails and returns a <code>bool</code>.        </p>
+
+<pre><code  class="html golang">    &lt;gos&gt;
+        ...
+            &lt;methods&gt;
+                &lt;method name="sendEmail" var="to,from" return="bool"&gt;
+                    go fmt.Println("Send Email -&gt; " + to.(string) + " -&gt;" + from.(string))
+                    return true
+            &lt;/method&gt;
+            ...
+        &lt;/methods&gt;
+        ...
+    &lt;/gos&gt;
+    ... Output by GoS :  
+    //Generated template method
+    func net_sendEmail(args ...interface{}) bool
+</code></pre>
+
+<p>Now we will create a template class that will output a Bootstrap alert if an email is sent and an error if not. 
+Note the usage of the Pipe call although "from" is not an object and send email is not an object method.</p>
+
+<pre><code  class="html golang">{{ if "from" | sendEmail "to" }}
+            {{Bootstrap_alert /{`Strong`:`Success`,`Type`:`success`, `Text` : `Email Sent`}/ }}
+{{else}}
+           {{Bootstrap_alert /{`Strong`:`Error`,`Type`:`danger`, `Text` : `Please Login`}/ }}
+{{end}}
+</code></pre>
+
+<p>Do not let the <code>|</code> scare you (known as pipe),  in our case the function parameter <code>"from"</code> becomes the last parameter of the function call and ones following the method name the first parameters, ordered in the way they are inputted. hence : <code>LastParam | functionName param1 param2...</code>.
+Another way to invoke your function is  :</p>
+
+<pre><code  class="html golang">    {{if sendEmail "to" "from" }}
+          {{Bootstrap_alert /{`Strong`:`Success`,`Type`:`success`, `Text` : `Email Sent`}/ }}
+    {{end}}
+</code></pre>
+
+<p>That Easy!!!!!!</p>
+
+<h2 id="timers">Timers</h2>
+
+<p>This section covers how to create methods that are called after every certain unit of time intervals. GoS uses the <code>&lt;timer/&gt;</code> tag to generate timer execution block with the target method specified. Please keep in mind that timers do not work within GoS mobile exports.</p>
+
+<h3 id="attributes-3">Attributes</h3>
+
+<pre><code  class="html golang">name - The name of the timer. Variable only accessible within `main()` function call
+InnerXML - Go lang statements ran after each interval.  
+interval - The number multiplied by the Go lang `time` units to determine the intervals of execution
+unit - This is the Go lang time unit constant used to determine how often your timer will execute
+
+
+&lt;gos&gt;
+    ...
+    &lt;timers&gt;
+    &lt;timer interval="60" unit="Second" name="PublicName"&gt;
+        code := Go
+    &lt;/timer&gt;
+&lt;/timers&gt;
+    ...
+&lt;/gos&gt;
+Generated output :
+...
+main(){
+...
+PublicName := time.NewTicker(time.Second *  60)
+                    go func() {
+                        for _ = range PublicName.C {
+                          code := Go
+                        }
+                    }()
+...
+}
+</code></pre>
+
+<h2 id="templates">Templates</h2>
+
+<p>This section covers how to declare templates outside of your web root. This allows you to create template files that are not served within your server. This allows for the creation of template classes, that for example send emails and returns a success alert as feedback in the form of HTML. 
+This allows for easy html template view generation, and binary compilation of file to ensure security of code and file  invisibility. </p>
+
+<h3 id="attributes-4">Attributes</h3>
+
+<pre><code>name - This is the name of the template within your application. You can load a template by simply calling `{{&lt;template name&gt;}}`
+
+tmpl - This specifies the path to the template file with the declared template root in mind. For example if our file was in `$GOPATH/PACKAGENAME/tmpl/file.tmpl` the tmpl attribute will be `file` because GoS will append the needed suffix to find and compile the template file. 
+
+struct - This specifies a declared `struct` to be used as the template's parameter map. 
+</code></pre>
+
+<p>In the example below, a struct will be declared for an alert. The example will initialize the template in three ways: by initializing the struct and then building it, initializing it with static Json parameters and without any parameters at all. Remember within any template file in your project you may load the template by typing its <code>name</code> attribute. </p>
+
+<p>The examples below will declare a struct and use that struct's parameters within the template. It is possible to build a template from static JSON init and even via object initialization, mutating and then compiling it to <code>HTML code</code> </p>
+
+<p>The example is using a template file with path     <code>bootstrap/alert</code>.
+*Due to the canonical nature of GoS asset to binary tools, file paths must be in lower case.</p>
+
+<p>Server.gxml</p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+    &lt;header&gt;
+        &lt;struct name="Bootstrap_alert"&gt;
+                Strong string
+                Text string
+                Type string
+        &lt;/struct&gt; 
+        ...
+    &lt;/header&gt;
+    ...
+    &lt;templates&gt;
+        ...
+         &lt;template name="Bootstrap_alert" tmpl="bootstrap/alert" struct="Bootstrap_alert" /&gt; 
+    &lt;/templates&gt;
+&lt;/gos&gt;
+</code></pre>
+
+<p>tmpl/bootstrap/alert.tmpl :</p>
+
+<pre><code  class="html golang"> &lt;div class="alert alert-{{.Type}} alert-dismissible fade in" role="alert"&gt;
+&lt;strong&gt;{{.Strong}}&lt;/strong&gt; &lt;p&gt;{{.Text}}&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Now to use the template within other templates there are three ways of doing this. (With the example above in mind)</p>
+
+<pre><code  class="html golang">    &lt;!-- No parameters --&gt;
+    {{Bootstrap_alert}}
+    &lt;!-- Static JSON --&gt;
+    {{Boostrap_alert /{`Type`:`danger`,`Strong`: `Strong`,`Text` :`Test`  }/ }}
+    &lt;!--Struct object Init, Static Json parameters can be supplied as well!! Add  `c` to your template name to initialize its struct; And add `b`(b&lt;template name&gt; $var) to your template name to output the html --&gt;
+    {{ $struct := cBootstrap_alert }}
+    {{ $struct | dbOperation "queryvalue"  }}
+    {{bBootstrap_alert $struct}}
+</code></pre>
+
+<h2 id="apigeneration">API Generation</h2>
+
+<p>This section covers how to create http request hooks within your GoS application. If a request's method and path match a declared endpoint, the declared Go lang statements will be ran.</p>
+
+<h3 id="attributes-5">Attributes</h3>
+
+<pre><code>path - the path to the api hook within your server
+InnerXML - Go lang statements ran on endpoint execution
+type - This specifies the request method ie: POST,GET,PUT,DELETE, star (to create a new http.handler)
+</code></pre>
+
+<p>The example below will declare a method and api end point within the GoS configuration called login. The tag defined will create a rest call : <code>POST /index/api</code></p>
+
+<pre><code  class="html golang">&lt;gos&gt;
+    ...
+        &lt;methods&gt;   
+        ...
+    &lt;/methods&gt;
+    ...
+    &lt;endpoints&gt;
+           &lt;end path="/index/api" type="POST" &gt;
+                //login function
+                response = mResponse(Button{Color:"#fff"})
+                fmt.Println("Login!! -&gt; " + session.Values["username"].(string))
+           &lt;/end&gt;
+    &lt;/endpoints&gt;
+    ...
+&lt;/gos&gt;
+This condition will be added as a check prior to the server attempting to find a file matching the request path within the web root : 
+
+if  r.URL.Path == "/index/api" &amp;&amp; r.Method == strings.ToUpper("POST") {
+    response = mResponse(Button{Color:"#fff"})
+    fmt.Println("Login!! -&gt; " + session.Values["username"].(string))
+}
+</code></pre>
+
+<p>Here are the variables that are available to your api Go code block :</p>
+
+<pre><code>response - String response of api.
+session - Current Gorilla session of the request (if applicable). Use the session.Values dictionary to access and save data.
+Handy functions :
+mResponse - will convert any Go lang interface into a JSON string for output. The example below converts Button into a JSON string for output.
+r - http.Request
+w - http.ResponseWriter
+</code></pre>
+
+<h2 id="imports">Imports</h2>
+
+<p>Imports allow you to import other Go lang packages for use within your GoS XML template. It also allows you to import other GoS xml tags by specifying an XML file relative to <code>$GOPATH/src</code>. This will include :  </p>
+
+<ul>
+<li>structs</li>
+
+<li>objects </li>
+
+<li>methods</li>
+
+<li>timers</li>
+
+<li>templates</li>
+
+<li>api endpoints. </li>
+
+<li>web resources</li>
+</ul>
+
+<p>This tag belongs only in the root of the <code>&lt;gos/&gt;</code> tag
+Example import :</p>
+
+<pre><code class="">    &lt;import src="mongo.gxml"/&gt;
+    &lt;!-- Importing Golang Packages --&gt;
+    &lt;import src= "gopkg.in/mgo.v2"/&gt;
+    &lt;import src="gopkg.in/mgo.v2/bson"/&gt;
+</code></pre>
+
+<p>The example below will download the package using the <code>go get</code> command during the generation of your application if the package is missing.</p>
+
+<pre><code class="html golang">&lt;import src= "gopkg.in/mgo.v2" /&gt;
+</code></pre>
+
+<h3 id="xmlschema">XML Schema</h3>
+
+<pre><code class="html">    &lt;xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;xs:element name="gos"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element type="xs:string" name="deploy"&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Stating the deployment type GoS should compile  Curent valid types are webapp,package and bind&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element type="xs:short" name="port"/&gt;
+        &lt;xs:element type="xs:string" name="package"/&gt;
+        &lt;xs:element type="xs:string" name="not_found"/&gt;
+        &lt;xs:element type="xs:string" name="error"/&gt;
+        &lt;xs:element name="import"&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Using &amp;lt;import/&gt; within the &amp;lt;go/&gt; tag is similar to using the import call within a .go file  To be less dramatic, GoS will skip packages that it has already imported&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:simpleContent&gt;
+              &lt;xs:extension base="xs:string"&gt;
+                &lt;xs:attribute type="xs:string" name="src"/&gt;
+              &lt;/xs:extension&gt;
+            &lt;/xs:simpleContent&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element type="xs:string" name="output"&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Go File output name&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element type="xs:string" name="web"&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;exported session fields available to Session&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element type="xs:string" name="tmpl"/&gt;
+        &lt;xs:element type="xs:string" name="key"/&gt;
+        &lt;xs:element name="header"&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Declare global variables  Contains interfaces and structs
+     that will be used by the GoS application&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="struct"&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;remember to Jumpline when stating methods or different struct attributes, it is vital for our parser \n trick&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:simpleContent&gt;
+                    &lt;xs:extension base="xs:string"&gt;
+                      &lt;xs:attribute type="xs:string" name="name"/&gt;
+                    &lt;/xs:extension&gt;
+                  &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="object"&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:simpleContent&gt;
+                    &lt;xs:extension base="xs:string"&gt;
+                      &lt;xs:attribute type="xs:string" name="name"/&gt;
+                      &lt;xs:attribute type="xs:string" name="struct"/&gt;
+                    &lt;/xs:extension&gt;
+                  &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element name="methods"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="method"&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;Vars are defined as usual except within the var attribute for example :   If there is a basic go function : func hackfmt(data string, data2 string)  the attribute names would be called as such var="data string,data2 string"  Similar to a go function decleration  if a method matches the criteria for an  interface it will be used as an interface method  To prevent that use the autoface attribute and set it to "false" By default it is true  Use the keep-local="true" attribute to limit a method within a Go file  Sometimes your method will return data   And to do so we will need to add a return var list by using the return attribute   Sometimes the autointerface will reuse the wrong the function, or your interface methods need a bit more distinction  Vis a  vis which object types are used in generating these mutating methods Use the limit attribute to narrow down the applicable structs for this method  Use the object attribute to determine the name of the local variable name to be mutated within the function. By default GoS will assume object is the variable name&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:simpleContent&gt;
+                    &lt;xs:extension base="xs:string"&gt;
+                      &lt;xs:attribute type="xs:string" name="name"/&gt;
+                      &lt;xs:attribute type="xs:string" name="var"/&gt;
+                      &lt;xs:attribute type="xs:string" name="return"/&gt;
+                    &lt;/xs:extension&gt;
+                  &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element name="templates"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="template"&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;Template libraries are useful for expediting page creation and reuse common website elements within this GoS application  Templates are nested and customized with the template function instead of using the normal {{template "Name"}} call you can now use {{Button /{"Color":"#fff"}/ }}
+        {{Modal &amp;amp;amp;{Color:"#fff"}&amp;amp;amp; }}   *Notice that special braces are used to initialize the parameters of the struct '&amp;amp;amp;{' and '}&amp;amp;amp;'  &amp;lt;template name="Bootstrap_alert" tmpl="bootstrap/alert" struct="Bootstrap_alert" /&gt;&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:simpleContent&gt;
+                    &lt;xs:extension base="xs:string"&gt;
+                      &lt;xs:attribute type="xs:string" name="name"/&gt;
+                      &lt;xs:attribute type="xs:string" name="tmpl"/&gt;
+                      &lt;xs:attribute type="xs:string" name="struct"/&gt;
+                    &lt;/xs:extension&gt;
+                  &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element name="endpoints"&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Depending on your build type the usage of this tag will vary.  For WebServers it will override any request for a given path and run the specified method. No vars or return types are needed for   methods linked to an API call, please keep in mind that you may use w for http.ResponseWriter and r for http.Request . Additional available function variables is params and session. If a function is api listed it will not be used anywhere else. &amp;lt;end /&gt; is the endpoint tag and has the variables path,method,  Happy trails!!!  &amp;lt;end path="/index/api"  type="POST" &gt;
+        varr := "data"
+        fmt.Println(varr)
+        //response is the string variable sent -&gt; mResponse()
+        response = varr
+      &amp;lt;/end&gt;&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="end"&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:simpleContent&gt;
+                    &lt;xs:extension base="xs:string"&gt;
+                      &lt;xs:attribute type="xs:string" name="path"/&gt;
+                      &lt;xs:attribute type="xs:string" name="type"/&gt;
+                    &lt;/xs:extension&gt;
+                  &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+        &lt;xs:element name="timers"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="timer"&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:simpleContent&gt;
+                    &lt;xs:extension base="xs:string"&gt;
+                      &lt;xs:attribute type="xs:string" name="interval"/&gt;
+                      &lt;xs:attribute type="xs:string" name="unit"/&gt;
+                      &lt;xs:attribute type="xs:string" name="name"/&gt;
+                    &lt;/xs:extension&gt;
+                  &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+              &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</code></pre>
+        </div>
+  </div>
+
+
+
+  <footer>
+    <div class="container">
+      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+     
+      <ul class="nav nav-inline">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/okshadow.js"></script>
+     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
+         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
+        });
+        $(document).ready(function() {
+          $('#simple-menu').sidr();
+           $('#simple-menu-two').sidr();
+          setTimeout(function(){
+          $('#simple-menu').click();
+        } , 500 );
+        });
+         hljs.initHighlightingOnLoad();
+    </script>
+     <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-71342160-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+  </body>
+</html>

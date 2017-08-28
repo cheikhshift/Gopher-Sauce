@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Go Server - Documentation</title>
+    <title>Go Server - Build RESTFul service</title>
     <!-- Bootstrap CSS -->
 <script src="https://use.fontawesome.com/d102afacbe.js"></script>
         <meta name="description" content="Go lang web application markup language. Enjoy agile development with Go!">
@@ -21,8 +21,8 @@
   <div id="sidr">
         <ul>
           <li><a id="simple-menu-two" class="nav-link"  href="#sidr"><i class="fa fa-chevron-left"></i> Collapse</a></li>
-          <li><a class="active" href="index.html">Home</a></li>
-          <li><a href="api.html">Build web service</a></li>
+          <li><a  href="index.html">Home</a></li>
+          <li><a class="active" href="api.html">Build web service</a></li>
           <li><a href="authentication.html">Authentication</a></li>
           <li><a href="awp.html">Dynamic web pages</a></li>
           <li><a href="benchmark-tests.html">Go Benchmark tests</a></li>
@@ -75,45 +75,51 @@
   <div class="header-space" style="height:190px;margin-bottom:2em;">
       <div class="cont container">
           <div class="page-header">
-              <h1 style="color:#fff" class="tect"><i class="fa fa-book"></i> Documentation</h1>
+              <h1 style="color:#fff" class="tect"><i class="fa fa-book"></i> Build web service</h1>
           </div>
       </div>
   </div>
   <div class="container">
         <div class="list-group list-group-item">
+        
+        <h2><a id="Build_REST_API_endpoints_0"></a>Build web service</h2>
+<p>If a request’s method and path match a declared endpoint, the declared Go lang statements will be ran.</p>
+<h3><a id="Attributes_3"></a>Attributes</h3>
+<pre><code>path - the path to the api hook within your server
+InnerXML - Go lang statements ran on endpoint execution
+type - This specifies the request method ie: POST,GET,PUT,DELETE, star (to create a new http.handler), f to create interceptive middle ware.
+</code></pre>
+<p>The example below will declare api end point within the GoS configuration called login. The tag defined will create a rest call : <code>POST /index/api</code></p>
+<pre><code class="html golang">&lt;gos&gt;
+    ...
+    &lt;endpoints&gt;
+           &lt;end path=&quot;/index/api&quot; type=&quot;POST&quot; &gt;
+                //login function
+                response = mResponse(Button{Color:&quot;#fff&quot;})
+                fmt.Println(&quot;Login!! -&gt; &quot; + session.Values[&quot;username&quot;].(string))
+           &lt;/end&gt;
+    &lt;/endpoints&gt;
+    ...
+&lt;/gos&gt;
+This condition will be added as a check prior to the server attempting to find a file matching the request path within the web root : 
+
+if  r.URL.Path == &quot;/index/api&quot; &amp;&amp; r.Method == strings.ToUpper(&quot;POST&quot;) {
+    response = mResponse(Button{Color:&quot;#fff&quot;})
+    fmt.Println(&quot;Login!! -&gt; &quot; + session.Values[&quot;username&quot;].(string))
+}
+</code></pre>
+<p>The <code>func mResponse</code> will convert an <code>interface{}</code> to a JSON string.</p>
+<p>Here are the variables that are available to your api Go code block :</p>
+<pre><code>response - String response of api.
+session - Current Gorilla session of the request (if applicable). Use the session.Values map to access and save data.
+Handy functions :
+mResponse - will convert any Go lang interface into a JSON string for output. The example below converts Button into a JSON string for output.
+r - http.Request
+w - http.ResponseWriter
+</code></pre>
+<p>Here is a project on building web pages with Go lang statements : <a href="mvc.html">Link</a></p>
    
-<h3><a id="About_Gopher_Sauce_2"></a>About Go Server</h3>
-<p>Go <code>Server</code> is a markup language and CLI tool. It supports :</p>
-<ul>
-<li>API endpoint generation.</li>
-<li>simplifying adding pipelines to Go lang templates.</li>
-<li>Active web pages with templates.</li>
-<li>Template components.</li>
-<li>Automatic package management.</li>
-</ul>
-<h3><a id="Syntax_9"></a>Syntax</h3>
-<p>This CLI converts the xml tags within your Go Server file into Go lang code.  Find more information about the behavior of tags in the <code>XML tags</code> section. Get the autocomplete on sublime, Search for Go Server on package control.</p>
-<h3><a id="Compiler_12"></a>Compiler</h3>
-<p>Gopher sauce xml files are converted to  Go lang source prior to compilation.</p>
-<h3><a id="Extensions_15"></a>Extensions</h3>
-<p>Any of your declared tags within a Go Server xml file can be exported to another project. Checkout <a href="tick.html">the active MVC via websocket project</a>. To have a Go Server extension listed create a new issue with a link to your repository or update the extensions’ page wiki.</p>
-<h3><a id="How_to_install_GoS_18"></a>How to install GoS</h3>
-<pre><code class="bash">go get github.com/cheikhshift/gos
-go install github.com/cheikhshift/gos
-gos deps
-</code></pre>
-<h4><a id="OR__29"></a>OR -</h4>
-<p><img src="https://orkiv.com/sapphire/gs-intro.gif" alt=""></p>
 
-<h3><a id="Dependencies_33"></a>Dependencies</h3>
-<p>The application generated by Go Server has certain dependencies. Please run the command below to download them before attempting to run or export your application. (Assuming $GOPATH is set)</p>
-<pre><code class="bash">$GOPATH/bin/gos deps
-</code></pre>
-
-    <div class="list-group list-group-item" ><h4>Quick Start your project</h4><pre><code class="bash">mkdir new-project
-    cd new-project
-    gos --make
-    </code></pre> </div>
         </div>
   </div>
 
@@ -130,7 +136,7 @@ gos deps
       </ul>
     </div>
   </footer>
-    
+   
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
@@ -145,11 +151,13 @@ gos deps
         });
         $(document).ready(function() {
           $('#simple-menu').sidr();
-          $('#simple-menu-two').sidr();
+           $('#simple-menu-two').sidr();
           setTimeout(function(){
           $('#simple-menu').click();
         } , 500 );
         });
+
+
          hljs.initHighlightingOnLoad();
     </script>
      <script type="text/javascript">
