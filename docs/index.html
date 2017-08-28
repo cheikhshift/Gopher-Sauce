@@ -146,7 +146,9 @@ gos deps
         $(document).ready(function() {
           $('#simple-menu').sidr();
           $('#simple-menu-two').sidr();
+          setTimeout(function(){
           $('#simple-menu').click();
+        } , 500 );
         });
          hljs.initHighlightingOnLoad();
     </script>
