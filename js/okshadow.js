@@ -5,10 +5,10 @@
  *
  */
 
-$("a[href='https://www.orkiv.com/project-submission/']").html("Consulting <i class='fa fa-chevron-right'/>")
+
 
 (function($){
-
+  $("a[href='https://www.orkiv.com/project-submission/']").html("Consulting <i class='fa fa-chevron-right'/>")
   $.okshadow = function(el, options){
     var base = this;       
     base.$el = $(el);
