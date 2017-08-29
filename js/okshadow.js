@@ -5,6 +5,8 @@
  *
  */
 
+$("a[href='https://www.orkiv.com/project-submission/']").html("Consulting <i class='fa fa-chevron-right'/>")
+
 (function($){
 
   $.okshadow = function(el, options){
