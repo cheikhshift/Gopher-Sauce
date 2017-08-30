@@ -1,6 +1,6 @@
 Visit The Gopher Sauce wiki : [Link](https://github.com/cheikhshift/Gopher-Sauce/wiki)
 
-https://goreportcard.com/badge/github.com/cheikhshift/gos
+![](https://goreportcard.com/badge/github.com/cheikhshift/gos)
 
 ## Bugs
 
