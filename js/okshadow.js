@@ -8,7 +8,8 @@
 
 
 (function($){
-  $("a[href='https://www.orkiv.com/project-submission/']").html("Consulting <i class='fa fa-chevron-right'/>")
+  $("a[href='https://www.orkiv.com/project-submission/']").remove()
+  $("footer .nav.nav-inline").append( $("#exCollapsingNavbar2 .navbar-nav").html() )
   $.okshadow = function(el, options){
     var base = this;       
     base.$el = $(el);
