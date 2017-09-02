@@ -9,6 +9,7 @@
 
 (function($){
   $("a[href='https://www.orkiv.com/project-submission/']").remove()
+  $("#exCollapsingNavbar2 .nav-inline").append("<a href='http://ashleymcnamara.github.io/learn_to_code/#golang'>Learn Go </a>")
   $("footer .nav.nav-inline").html( $("#exCollapsingNavbar2 .navbar-nav").html() )
   $("footer #simple-menu").remove()
   $.okshadow = function(el, options){
