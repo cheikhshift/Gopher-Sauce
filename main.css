@@ -3,6 +3,10 @@
     display: inline-block !important;
 }
 
+.twitter-tweet {
+	margin:0 auto;	
+}
+
 .header-space {
 	 background: url(bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
