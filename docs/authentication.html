@@ -152,55 +152,7 @@ defer gop.DB.Close()
     Attr map[string] string
 }
 </code></pre>
-<h3><a id="authenticating-with-ldap"></a>Authenticating with LDAP</h3>
-<h4><a id="Connect_to_server_84"></a>Connect to server</h4>
-<p>Create a connection to your LDAP server. Update the fields as needed.</p>
-<pre><code class="html golang">    gop.UseLDAP(&amp;ldap.LDAPClient{
-    Base:         &quot;dc=example,dc=com&quot;,
-    Host:         &quot;ldap.example.com&quot;,
-    Port:         389,
-    UseSSL:       false,
-    BindDN:       &quot;uid=readonlysuer,ou=People,dc=example,dc=com&quot;,
-    BindPassword: &quot;readonlypassword&quot;,
-    UserFilter:   &quot;(uid=%s)&quot;,
-    GroupFilter: &quot;(memberUid=%s)&quot;,
-    Attributes:   []string{&quot;givenName&quot;, &quot;sn&quot;, &quot;mail&quot;, &quot;uid&quot;},
-    })
-    defer LDAPClient.Close()
-</code></pre>
-<h4><a id="Authentication_with_LDAP_100"></a>Authentication with LDAP</h4>
-<p>The following <code class="html golang">&lt;end&gt;</code> tag will attempt to login a user :  If Authentication fails a text string as to why is returned. Once logged in, use the <code>pkg</code> function <code class="html golang">gop.GetUser(session *sessions.Session) (User, error)</code> to get the current session’s user interface.</p>
-<pre><code class="html golang">&lt;end path=&quot;/login&quot; type=&quot;POST&quot; &gt;
-    
-    succ, err := gop.LoginLDAP(r.FormValue(&quot;username&quot;) ,
-        r.FormValue(&quot;password&quot;) ,
-        session )
 
-    if err != nil {
-        response = err.Error()
-    } else {
-            //redirect or return user
-            user,err := gop.GetUser(session)
-            //save in case you're redirecting
-            session.Save(r,w)
-
-    }
-
-&lt;/end&gt;
-</code></pre>
-<h4><a id="Interface_of_LDAP_passport_user__123"></a>Interface of LDAP passport user :</h4>
-<pre><code class="html golang">type User struct {
-    Id bson.ObjectId `bson:&quot;_id,omitempty&quot;`
-    Username string `valid:&quot;unique,required&quot;`
-    Pw [32]byte
-    Email string `valid:&quot;email,unique,required&quot;`
-    Created time.Time //timestamp local format
-    Scopes []string
-    Groups []string
-    Props db.O
-    Attr map[string] string
-}
-</code></pre>
 <h3><a id="securing-a-service"></a>Securing a service</h3>
 <p>Use the package function <code class="html golang">gop.AddAuthZone(path string)</code> to protect a request path and its subset paths. The following example will intercept any path with string <code class="html golang">protect-resource</code> in it.</p>
 <pre><code class="html golang">gop.AddAuthZone(&quot;protect-resource&quot;)
