@@ -460,7 +460,7 @@ Another way to invoke your function is  :</p>
 <h3 id="attributes-3">Attributes</h3>
 
 <pre><code  class="html golang">name - The name of the timer. Variable only accessible within `main()` function call
-InnerXML - Go lang statements ran after each interval.  
+InnerXML - Go lang code ran after each interval.  
 interval - The number multiplied by the Go lang `time` units to determine the intervals of execution
 unit - This is the Go lang time unit constant used to determine how often your timer will execute
 
@@ -550,12 +550,12 @@ struct - This specifies a declared `struct` to be used as the template's paramet
 
 <h2 id="apigeneration">API Generation</h2>
 
-<p>This section covers how to create http request hooks within your GoS application. If a request's method and path match a declared endpoint, the declared Go lang statements will be ran.</p>
+<p>This section covers how to create http request hooks within your GoS application. If a request's method and path match a declared endpoint, the declared Go lang code will be ran.</p>
 
 <h3 id="attributes-5">Attributes</h3>
 
 <pre><code>path - the path to the api hook within your server
-InnerXML - Go lang statements ran on endpoint execution
+InnerXML - Go lang code ran on endpoint execution
 type - This specifies the request method ie: POST,GET,PUT,DELETE, star (to create a new http.handler)
 </code></pre>
 
