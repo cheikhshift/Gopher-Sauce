@@ -10,6 +10,7 @@
 (function($){
   $("a[href='https://www.orkiv.com/project-submission/']").remove()
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='http://ashleymcnamara.github.io/learn_to_code/#golang'>Learn Go </a></li>")
+  $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='http://forum.golangserver.com/index.php'>Community</a></li>")
   $("footer .nav.nav-inline").html( $("#exCollapsingNavbar2 .navbar-nav").html() )
   $("footer #simple-menu").remove()
   $.okshadow = function(el, options){
