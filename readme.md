@@ -1,7 +1,8 @@
 Repository Behind http://golangserver.com
 
-Visit The Gopher Sauce wiki : [Link](https://github.com/cheikhshift/Gopher-Sauce/wiki)
-View Go Server sources :  [Link](https://github.com/cheikhshift/gos)
+- Visit The Gopher Sauce wiki : [Link](https://github.com/cheikhshift/Gopher-Sauce/wiki)
+- View Go Server sources :  [Link](https://github.com/cheikhshift/gos)
+
 ![](https://goreportcard.com/badge/github.com/cheikhshift/gos)
 
 ## Bugs
