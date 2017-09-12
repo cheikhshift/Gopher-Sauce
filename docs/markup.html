@@ -337,15 +337,8 @@ object - If this method is linked to an object this specifies the local name of 
 **InnerXml - This contains your method declarations. GoS will wrap up the inner xml data with your method attributes to create a Go func
 </code></pre>
 
-<p>In the example below, one method will be created, the corresponding method will then be added as an object method as well.  Since input variables are declared within the object, we do not need to add the <code>var</code> attribute to our method declaration. </p>
-
 <pre><code  class="html golang">    &lt;gos&gt;
         ...
-        &lt;header&gt;
-        &lt;object struct="DemoGos" name="myDemoObject"&gt;
-            Hackfmt(save string)
-        &lt;/object&gt;
-        &lt;/header&gt;
         ...
         &lt;methods&gt;
             &lt;method name="Hackfmt"&gt;
@@ -361,21 +354,9 @@ object - If this method is linked to an object this specifies the local name of 
     func  net_Hackfmt(save string,object DemoGos) string 
 </code></pre>
 
-<p>Once a method is used within an interface it will not be generated again and can only be invoked with the linked object type.  The snipped below will use declared function <code>Hackfmt</code> within a template. The <code>net_</code> prefix is not needed within templates.</p>
 
-<pre><code  class="html golang">{{$object := myDemoObject}}
-{{$object | Hackfmt "saveString" }}
-&lt;!-- Another way to call it --&gt;
-{{Hackfmt "saveString" $object }}
-</code></pre>
 
-<p>The method can also be used outside of templates with the snipped below :</p>
-
-<pre><code  class="html golang">object := DemoGos{}
-object.Hackfmt("saveString")    
-</code></pre>
-
-<p>Another test case is declaring a method that is not used with any objects and is still accessible within templates and function calls outside of it as well. The variables set in the var tag need their type declared during use. The example below we will declare a function that sends emails and returns a <code>bool</code>.        </p>
+<p>Test case : Send email pipeline. The variables set in the var tag need their type asserted during use. The example below we will declare a function that sends emails and returns a <code>bool</code>.        </p>
 
 <pre><code  class="html golang">    &lt;gos&gt;
         ...
