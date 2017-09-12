@@ -123,16 +123,15 @@
 
 </ol>
 </li>
-</ul>
-
-<ol>
-<li><a href="#timers">Timers</a></li>
-
-<li><a href="#templates">Templates</a></li>
+  <li><a href="#templates">Templates</a></li>
 
 <li><a href="#apigeneration">Web services</a></li>
 
 <li><a href="#imports">Imports</a></li>
+</ul>
+
+<ol>
+
 </ol>
 
 <ul>
@@ -328,13 +327,8 @@ This section covers how to create functions for your applications. These functio
 <h3 id="attributes-2">Attributes</h3>
 
 <pre><code>name - Specifies the name of the function. Please keep in mind that usage of this function outside of templates requires the `net_` added to name because GoS appends that prefix to avoid any method redeclaration. If you desire to write methods for strict usage outside of template files we recommend writing a normal Go package and importing it with the `&lt;import/&gt;` tag or creating another Go file within your project directory.
-
 return - The return type of the function. Ie: string,bool or a custom struct `DemoGos` 
 var - This is a comma delimited string of the variables you wish this function to have. Say we need a function that has two parameters `param1 string, param2 string` it will be declared `param1,param2`. Before using the variable make sure its type is defined within the method. For example to log `param1` the call would be `fmt.Println(param1.(string))`
-
-autoface - GoS has the capability of taking methods declared within objects and look for the corresponding method name, and create a Go function to mutate the corresponding object with the matching method. This feature is enabled by default to disable it for a method and have it not converted as a method to mutate an object set the attribute to false.
-limit - This is a comma delimited string to specify the object types this function will work with, if linked. For example to limit a function to DemoGos and myDemoObject this attribute will be set to `DemoGos,myDemoObject` 
-object - If this method is linked to an object this specifies the local name of the object within the function. By default it is `object`
 **InnerXml - This contains your method declarations. GoS will wrap up the inner xml data with your method attributes to create a Go func
 </code></pre>
 
@@ -376,7 +370,7 @@ object - If this method is linked to an object this specifies the local name of 
 </code></pre>
 
 <p>Now we will create a template class that will output a Bootstrap alert if an email is sent and an error if not. 
-Note the usage of the Pipe call although "from" is not an object and send email is not an object method.</p>
+</p>
 
 <pre><code  class="html golang">{{ if "from" | sendEmail "to" }}
             {{Bootstrap_alert /{`Strong`:`Success`,`Type`:`success`, `Text` : `Email Sent`}/ }}
@@ -394,41 +388,6 @@ Another way to invoke your function is  :</p>
 </code></pre>
 
 <p>That Easy!!!!!!</p>
-
-<h2 id="timers">Timers</h2>
-
-<p>This section covers how to create methods that are called after every certain unit of time intervals. GoS uses the <code>&lt;timer/&gt;</code> tag to generate timer execution block with the target method specified. Please keep in mind that timers do not work within GoS mobile exports.</p>
-
-<h3 id="attributes-3">Attributes</h3>
-
-<pre><code  class="html golang">name - The name of the timer. Variable only accessible within `main()` function call
-InnerXML - Go lang code ran after each interval.  
-interval - The number multiplied by the Go lang `time` units to determine the intervals of execution
-unit - This is the Go lang time unit constant used to determine how often your timer will execute
-
-
-&lt;gos&gt;
-    ...
-    &lt;timers&gt;
-    &lt;timer interval="60" unit="Second" name="PublicName"&gt;
-        code := Go
-    &lt;/timer&gt;
-&lt;/timers&gt;
-    ...
-&lt;/gos&gt;
-Generated output :
-...
-main(){
-...
-PublicName := time.NewTicker(time.Second *  60)
-                    go func() {
-                        for _ = range PublicName.C {
-                          code := Go
-                        }
-                    }()
-...
-}
-</code></pre>
 
 <h2 id="templates">Templates</h2>
 
