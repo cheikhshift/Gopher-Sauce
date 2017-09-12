@@ -35,7 +35,7 @@
           <li><a href="tests.html">Go tests</a></li>
         </ul>
   </div>
-    <nav class="navbar navbar-light bg-primary navbar-fixed-top" >
+    <nav class="navbar navbar-light bg-primary " style="border-radius:0px;" >
   <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
     &#9776;
   </button>
@@ -66,7 +66,11 @@
     </li>
 
   </ul>
-  <div class="form-inline pull-xs-right">
+  <div style="    position: fixed;
+    bottom: 10px;
+     right:10px
+    z-index: 3000;
+" class="form-inline pull-xs-right">
     <a href="#" class="btn btn-warning-outline btn-block" type="submit">Top</a>
   </div> 
 </div>
@@ -113,9 +117,7 @@
 
 
 <ol>
-<li><a href="#struct">Structs</a></li>
-
-<li><a href="#objects">Objects</a></li></ol>
+<li><a href="#structss">Interfaces</a></li>
 </li>
 
 <li><a href="#methods">Methods</a></li></ol>
@@ -288,7 +290,7 @@ For example </p>
 
 <h2 id="header">Header</h2>
 
-<h3 id="structs">Structs</h3>
+<h3 id="structss">Structs</h3>
 
 <p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go structure within within your generated Go src.</p>
 
@@ -316,48 +318,6 @@ For example </p>
 &lt;/gos&gt;
 </code></pre>
 
-<h3 id="objects">Objects</h3>
-
-<p>The <code>&lt;object/&gt;</code> tag declares a GoS object. It needs a struct name to have a field map, which is used whenever this object is initialized within a template. Please keep in mind that the struct specified for this object must be returned all the time if the object is not a <code>reader</code>.</p>
-
-<h4 id="attributes-1">Attributes</h4>
-
-<pre><code>struct - the name of a struct available to the application
-name - name of object
-</code></pre>
-
-<p>The example below will declare an object called <code>myDemoObject</code>. The inner content of this tag is where object methods are declared. (remember to jumpline after each declaration!!!) 
-These functions also need to be declared within your GoS application xml template or another imported xml template.</p>
-
-<pre><code  class="html golang">&lt;gos&gt;
-    ...
-    &lt;header&gt;
-    &lt;object struct="DemoGos" name="myDemoObject"&gt;
-        Hackfmt(save string)
-        WhatsMyAttr(save string,end string) string
-        WhatsMyAttrLength() string
-    &lt;/object&gt;
-    &lt;/header&gt;
-    ...
-&lt;/gos&gt;
-</code></pre>
-
-<p>By declaring an object :</p>
-
-<ul>
-<li><p>GoS will create a Go lang <code>type</code> with the object's name linked to its respective struct</p></li>
-
-<li><p>GoS will create a local and template accessible method to initialize this object. Local method :  <code>net_myDemoObject(args ...interface{}) (d DemoGos)</code>. Template method : {{$emptyObject :=  myDemoObject}}.</p>
-
-<ul>
-<li><p>Invoking object with static parameters : <code>{{$object := myDemoObject /{</code>`SomeAttr`:`ValueIn`}/ }}<code>. To pass initialization variables we can use a static json escape holders</code>/{<code>and</code>}/`. To initialize your variable with other objects create a method that returns this object by using the desired input initialization objects to use.</p></li>
-
-<li><p>Each function specified within this tag, will be generated to accept this object as a mutable parameter within templates as well as your application's local scope. Local function generated :
-<code>func (object DemoGos) Hackfmt(save string)</code>
-You can access this function via templates by invoking these calls within any template in this application : <code>{{$object | Hackfmt "data"}}</code> or <code>{{$error := $object | Hackfmt "data" }}</code>. </p></li></ul></li>
-</ul>
-
-<p>*If an Object and a template share a struct you can initialize the template and compile it to html with this call <code>{{b&lt;template name&gt; $object}}</code></p>
 
 <h2 id="methods">Methods</h2>
 
