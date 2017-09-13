@@ -1,5 +1,0 @@
-<import>
-<struct name="Modal">
-	Title string
-</struct>
-</import>
