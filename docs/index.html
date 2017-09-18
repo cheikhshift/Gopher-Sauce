@@ -116,7 +116,8 @@ If you're writing a webapp, Go Server attempts to use logging to find bugs. This
 <pre><code>var name := Struct{Property:"val"}
 </code></pre>
 <p>Bad for debug logger :</p>
-<pre><code>var name := Struct{ Property:"val"
+<pre><code>var name := Struct{ 
+		    Property:"val",
 		    FieldTwo: 2
 		   }
 </code></pre>
