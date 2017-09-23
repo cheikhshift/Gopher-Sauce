@@ -7,6 +7,9 @@
 	margin:0 auto;	
 }
 
+h1 {
+    font-size: 1.5rem !important;
+}
 
 @media (min-width: 544px){
 
