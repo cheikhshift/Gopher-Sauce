@@ -11,6 +11,11 @@ h1 {
     font-size: 1.5rem !important;
 }
 
+.hljs {
+    overflow-x: hidden !important;
+    white-space: pre-wrap !important;
+}
+
 @media (min-width: 544px){
 
 .col-sm-5 {
