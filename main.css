@@ -13,18 +13,12 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 700px;
-   display: table;
-   width: 100%;
    -webkit-box-shadow: 0 8px 6px -6px black;
 	   -moz-box-shadow: 0 8px 6px -6px black;
 	        box-shadow: 0 8px 6px -6px black;
 }
 
-.header-space > .cont {
-	 display: table-cell;
-    vertical-align: middle;
-}
+
 
 .navbar .nav-item a {
 	color:#fff !important;
