@@ -18,6 +18,10 @@
 	        box-shadow: 0 8px 6px -6px black;
 }
 
+.header-space .cont {
+	padding-top: 60px;	
+}
+
 
 
 .navbar .nav-item a {
