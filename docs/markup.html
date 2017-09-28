@@ -292,16 +292,16 @@ For example </p>
 
 <h3 id="structss">Structs</h3>
 
-<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go structure within within your generated Go src.</p>
+<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go interface within within your generated Go src.</p>
 
 <h4 id="attributes">Attributes</h4>
 
-<p>name - The name of this structure
+<p>name - The name of this interface
 ** Innerxml Struct field declarations.</p>
 
 <p>The example below declares a Go struct named DemoGos with a sub structure called DemoChild. The struct DemoGos has attributes SomeAttr and Child. </p>
 
-<p>Whenever this interface is initialized within a template (<code>{{ $var := Struct_name }}</code>), these variables are accessible as that object's properties.</p>
+<p>Whenever this interface is initialized within a template (<code>{{ $var := Struct_name }}</code>), these variables are accessible as that interface's properties.</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -321,8 +321,7 @@ For example </p>
 
 <h2 id="methods">Methods</h2>
 
-<p>Sorry for the confusion, Methods translate into usual go functions (<code>func</code>). 
-This section covers how to create functions for your applications. These functions, known as Methods within GoS are linked for use with your templates and objects.</p>
+<p>This section covers how to extend template functionality with methods ( | pipelines) .</p>
 
 <h3 id="attributes-2">Attributes</h3>
 
