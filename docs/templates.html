@@ -135,10 +135,8 @@ struct - This specifies a declared `struct` to be used as the template's interfa
     {{Bootstrap_alert}}
     &lt;!-- Static JSON --&gt;
     {{Boostrap_alert /{`Type`:`danger`,`Strong`: `Strong`,`Text` :`Test`  }/ }}
-    &lt;!--Struct object Init, Static Json parameters can be supplied as well!! Add  `c` to your template name to initialize its struct; And add `b`(b&lt;template name&gt; $var) to your template name to output the html --&gt;
+    &lt;!-- Add  `c` to your template name to initialize its struct; And add `b`(b&lt;template name&gt; $var) to your template name to output the html --&gt;
     {{ $struct := cBootstrap_alert }}
-            &lt;!-- following tag should return a valid interface vis-a-vis your template --&gt;
-    {{ $struct | dbOperation "queryvalue"  }}
     {{bBootstrap_alert $struct}}
 </code></pre>
 
