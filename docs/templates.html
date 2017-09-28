@@ -102,7 +102,7 @@ struct - This specifies a declared `struct` to be used as the template's interfa
 <p>The example is using a template file with path     <code>bootstrap/alert</code>.
 *Due to the canonical nature of GoS asset to binary tools, file paths must be in lower case.</p>
 
-<p>Server.gxml</p>
+<p>file gos.gxml</p>
 
 <pre><code class="html golang">&lt;gos&gt;
     ...
@@ -122,7 +122,7 @@ struct - This specifies a declared `struct` to be used as the template's interfa
 &lt;/gos&gt;
 </code></pre>
 
-<p>tmpl/bootstrap/alert.tmpl :</p>
+<p>file tmpl/bootstrap/alert.tmpl :</p>
 
 <pre><code class="html golang"> &lt;div class="alert alert-{{.Type}} alert-dismissible fade in" role="alert"&gt;
 &lt;strong&gt;{{.Strong}}&lt;/strong&gt; &lt;p&gt;{{.Text}}&lt;/p&gt;
