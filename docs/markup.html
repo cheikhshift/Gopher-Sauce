@@ -368,7 +368,7 @@ var - This is a comma delimited string of the variables you wish this function t
 </p>
 
 <pre><code  class="html golang">{{ if "from" | sendEmail "to" }}
-          <h1>Email Sent!</h1>
+          <h1>Email sent!</h1>
 {{else}}
          <h1>Email error.</h1>
 {{end}}
@@ -378,7 +378,7 @@ var - This is a comma delimited string of the variables you wish this function t
 Another way to invoke your function is  :</p>
 
 <pre><code  class="html golang">    {{if sendEmail "to" "from" }}
-         <h1>Sent!</h1>
+            <h1>Email sent!</h1>
     {{end}}
 </code></pre>
 
