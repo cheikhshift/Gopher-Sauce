@@ -340,7 +340,7 @@ var - This is a comma delimited string of the variables you wish this function t
         ...
     &lt;/gos&gt;
     ... Output by GoS :
-    //Generated template method for object
+    //Generated template pipeline func
     func  net_Hackfmt(save string,object DemoGos) string 
 </code></pre>
 
@@ -364,13 +364,13 @@ var - This is a comma delimited string of the variables you wish this function t
     func net_sendEmail(args ...interface{}) bool
 </code></pre>
 
-<p>Now we will create a template class that will output a Bootstrap alert if an email is sent and an error if not. 
+          <p>Use the snippet within any <code>.tmpl</code> file to send email.
 </p>
 
 <pre><code  class="html golang">{{ if "from" | sendEmail "to" }}
-            {{Bootstrap_alert /{`Strong`:`Success`,`Type`:`success`, `Text` : `Email Sent`}/ }}
+          <h1>Email Sent!</h1>
 {{else}}
-           {{Bootstrap_alert /{`Strong`:`Error`,`Type`:`danger`, `Text` : `Please Login`}/ }}
+         <h1>Email error.</h1>
 {{end}}
 </code></pre>
 
@@ -378,11 +378,10 @@ var - This is a comma delimited string of the variables you wish this function t
 Another way to invoke your function is  :</p>
 
 <pre><code  class="html golang">    {{if sendEmail "to" "from" }}
-          {{Bootstrap_alert /{`Strong`:`Success`,`Type`:`success`, `Text` : `Email Sent`}/ }}
+         <h1>Sent!</h1>
     {{end}}
 </code></pre>
 
-<p>That Easy!!!!!!</p>
 
 <h2 id="templates">Templates</h2>
 
