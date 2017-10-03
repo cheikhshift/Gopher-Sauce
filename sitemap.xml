@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://golangserver.com/</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/docs/projects.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/index.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/tick.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/gdb.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/mvc.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/service.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/bpage.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/api.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/authentication.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/awp.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/benchmark-tests.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/how-run-project.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/how-to-install.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/https.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/markup.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/middleware.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/templates.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://golangserver.com/docs/tests.html</loc>
+  <lastmod>2017-10-03T10:48:45+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+</urlset>
