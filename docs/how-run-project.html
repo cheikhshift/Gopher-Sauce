@@ -83,12 +83,16 @@
         <div class="list-group list-group-item">
     <h1 id="howtorun">How to run</h1>
 
-<p>Within the same directory as your Go Server project run <code>$GOPATH/bin/gos --run</code>.</p>
+<p>Within the same directory as your Go Server project run <code>gos --run</code>.</p>
 
 <h1 id="export">How to export</h1>
 
-<p>Within the same directory as your Go Server project run <code>$GOPATH/bin/gos --export</code>.</p>
-
+<p>Within the same directory as your Go Server project run <code>gos --export</code>.</p>
+          <h1>How to build docker image</h1>
+          <p>Go Server will generate a docker file each time your <code>--run</code> or <code>--export</code> a project. </p>
+          <h4>Command</h4>
+          <p>Run the following command to build a docker image of your application (Docker is required) :</p>
+          <pre> <code>docker build -f Dockerfile . </code></pre>
         </div>
   </div>
 
