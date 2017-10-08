@@ -342,62 +342,11 @@ Follow @GopherSauce</a> <br />
     <p><a href="https://github.com/cheikhshift/gopher-sauce-mvc" target="_blank">Build MVCs with Go</a></p> 
        <p><a href="https://github.com/cheikhshift/gopher-sauce-database" target="_blank">Manage data with Golang templates.</a></p> 
      <p><a href="https://github.com/cheikhshift/gop" >Service security & User authentication.</a></p>
-     <p><a href="https://github.com/cheikhshift/form >Build html <code>forms</code> with your <code>structs</code></a></p>
+     <p><a href="https://github.com/cheikhshift/form" >Build html <code>forms</code> with your <code>structs</code></a></p>
      
   </div>
-  <div class="tab-pane" id="profile" role="tabpanel">
-    <p>Create a new file in your template directory named <code>test</code></p>
-    <pre><code>$ touch tmpl/test.tmpl</code></pre>
-    <p>Contents of file <code>tmpl/test.tmpl</code></p>
-    <pre><code class="html">&lt;div class="header"&gt;
- &lt;img src="logo.png" style="float:left" width="60" /&gt;
-&lt;a href="/Link to home" &gt;Home&lt;/a&gt; 
-&lt;a href="/Link to Page" &gt;Link&lt;/a&gt;
-&lt;/div&gt;</code> </pre>
-    <h3>Link template in <code>gos.gxml</code></h3>
-    <pre><code class="html">&lt;gos&gt;  
- ...
-    &lt;templates&gt;
-        ...
-         &lt;template name="Header" tmpl="test" struct="" /&gt; 
-    &lt;/templates&gt;
-&lt;/gos&gt;
-</code></pre>
-    <h3>Using template in Gos project</h3>
-    <p>Create a new file within the <code>web</code> folder.</p>
-    <pre><code>$ touch web/page.tmpl</code></pre>
-    <p>Contents of <code>page.tmpl</code> : <p>
-    <pre><code class="html">&lt;html&gt;
-{{ Header }}
-&lt;/html&gt;</code></pre>
-    <p>Test page at url <a target="_blank" href="http://localhost:8080/page">localhost:8080/page</a></p>
-  
-  </div>
-  <div class="tab-pane" id="messages" role="tabpanel">
-   
-    <h3>Create new <code>&lt;end&gt;</code> tag with Go lang statements : </h3>
-    <pre> <code class="html golang">&lt;gos&gt;
-    ...
-    &lt;endpoints&gt;
-           &lt;end path="/index/api" type="POST" &gt;
-                  /*response - API response var */
-                  response = mResponse(Model{key:data,field:0})
-           &lt;/end&gt;
-    &lt;/endpoints&gt;
-    ...
-&lt;/gos&gt;</code></pre>
-     <p>Test endpoint at url <a target="_blank" href="http://localhost:8080/index/api">localhost:8080/index/api</a></p>
-   
-  </div>
-  <div class="tab-pane" id="settings" role="tabpanel">
-    <h3>Compile with Go Server. </h3>
-    <p class="text-muted">Please make sure <code>gos</code> is in your binary path.</p>
-    <pre><code>$ cd project/dir</code></pre>
-     <pre><code>gos --run</code></pre>
-    <p>Export project with command :</p>
-    <pre><code>gos --export</code></pre>
-  </div>
-</div>
+ 
+
     </div>
     
     </div>
