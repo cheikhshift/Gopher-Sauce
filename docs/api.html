@@ -130,8 +130,8 @@ if  r.URL.Path == &quot;/index/api&quot; &amp;&amp; r.Method == strings.ToUpper(
 session - Current Gorilla session of the request (if applicable). Use the session.Values map to access and save data.
 Handy functions :
 mResponse - will convert any Go lang interface into a JSON string for output. The example above converts Button into a JSON string for output.
-r - http.Request
-w - http.ResponseWriter
+r - *http.Request
+w - *http.ResponseWriter
 </code></pre>
 <p>Here is a project on building web pages with Go code : <a href="mvc.html">Link</a></p>
    
