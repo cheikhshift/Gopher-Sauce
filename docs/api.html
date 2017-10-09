@@ -127,7 +127,7 @@ if  r.URL.Path == &quot;/index/api&quot; &amp;&amp; r.Method == strings.ToUpper(
 <p>The <code>func mResponse</code> will convert an <code>interface{}</code> to a JSON string.</p>
 <p>Here are the variables that are available to your api Go code block :</p>
 <pre><code>response - String response of api.
-session - Current Gorilla session of the request (if applicable). Use the session.Values map to access and save data.
+session - *sessions.Session — Current Gorilla session of the request (if applicable). Use the session.Values map to access and save data.
 Handy functions :
 mResponse - will convert any Go lang interface into a JSON string for output. The example above converts Button into a JSON string for output.
 r - *http.Request
