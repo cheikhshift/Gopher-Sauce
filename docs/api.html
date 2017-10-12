@@ -136,7 +136,7 @@ session - *sessions.Session — Current Gorilla session of the request (if appli
 Handy functions :
 mResponse - will convert any Go lang interface into a JSON string for output. The example above converts Button into a JSON string for output.
 r - *http.Request
-w - *http.ResponseWriter
+w - http.ResponseWriter
 span - opentracing.Span - this variable is only available when you run your project with command <code>gos --run</code>. Use this function to log data to the tracer : span.LogEvent(event string) 
 </code></pre>
 <p>Here is a project on building web pages with Go code : <a href="mvc.html">Link</a></p>
