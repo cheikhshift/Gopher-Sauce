@@ -504,7 +504,7 @@ if  r.URL.Path == "/index/api" &amp;&amp; r.Method == strings.ToUpper("POST") {
 session - Current Gorilla session of the request (if applicable). Use the session.Values dictionary to access and save data.
 Handy functions :
 mResponse - will convert any Go lang interface into a JSON string for output. The example below converts Button into a JSON string for output.
-r - http.Request
+r - *http.Request
 w - http.ResponseWriter
 span - opentracing.Span - this variable is only available when you run your project with command <code>gos --run</code>. Use this function to log data to the tracer : span.LogEvent(event string) 
 </code></pre>
