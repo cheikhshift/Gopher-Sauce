@@ -462,10 +462,16 @@ struct - This specifies a declared `struct` to be used as the template's paramet
 
 <h3 id="attributes-5">Attributes of end tag.</h3>
 
-<pre><code>path - the path to the api hook within your server
-InnerXML - Go lang code ran on endpoint execution
+<pre><code>path - the path to the api hook within your server</code></pre>
+<pre><code>
+InnerXML - Go lang code ran on endpoint execution</code></pre>
+<pre><code>
 type - This specifies the request method ie: POST,GET,PUT,DELETE, star (to create a new http.handler)
 </code></pre>
+<pre>
+<code>Id - Id of service. Used with open trace to find execution of service. </code></pre>
+
+
 
 <p>The example below will declare a method and api end point within the GoS configuration called login. The tag defined will create a rest call : <code>POST /index/api</code></p>
 
