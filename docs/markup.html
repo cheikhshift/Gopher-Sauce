@@ -164,6 +164,7 @@ This section covers documentation of GoS XML template tags. Unless specified the
 <li>webapp : Will add Go's default Http Listener to your package's <code  class="html golang">main()</code> function.</li>
 
 <li>package : Make your package's template's and web resources exportable. </li>
+<li>faas : Export your template and end tags as OpenFaaS functions. </li>
 </ul>
 
 <p>*This tag is required</p>
@@ -508,7 +509,9 @@ r - *http.Request
 w - http.ResponseWriter
 span - opentracing.Span - this variable is only available when you run your project with command <code>gos --run</code>. Use this function to log data to the tracer : span.LogEvent(event string) 
 </code></pre>
-
+          <h4>OpenFaaS</h4>
+          <p>If you intend on using an end tag as an OpenFaaS function, make sure you write your output to Stdout. </p>
+          
 <h2 id="imports">Imports</h2>
 
 <p>Imports allow you to import other Go lang packages for use within your GoS XML template. It also allows you to import other GoS xml tags by specifying an XML file relative to <code>$GOPATH/src</code>. This will include :  </p>
