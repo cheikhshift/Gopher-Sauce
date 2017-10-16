@@ -23,7 +23,7 @@ h1 {
 }
 }
 .header-space {
-	 background: url(bg.jpg) no-repeat center center fixed; 
+	 background: #333; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -31,6 +31,10 @@ h1 {
    -webkit-box-shadow: 0 8px 6px -6px black;
 	   -moz-box-shadow: 0 8px 6px -6px black;
 	        box-shadow: 0 8px 6px -6px black;
+}
+
+.bg-primary {
+	background-color: rgba(51, 51, 51, 0.84) !important;	
 }
 
 .header-space .cont {
