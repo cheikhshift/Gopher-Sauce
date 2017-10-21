@@ -8,7 +8,6 @@
 
 
 (function($){
-  $("a[href='https://www.orkiv.com/project-submission/']").remove()
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='http://ashleymcnamara.github.io/learn_to_code/#golang'>Learn Go </a></li>")
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='https://github.com/thestrukture/IDE'>Get IDE</a></li>")
   $("footer h5").css("float","none");
