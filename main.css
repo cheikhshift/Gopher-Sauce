@@ -6,6 +6,9 @@
 .twitter-tweet {
 	margin:0 auto;	
 }
+.sidr {
+	display:none;	
+}
 
 h1 {
     font-size: 1.5rem !important;
