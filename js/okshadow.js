@@ -11,8 +11,8 @@
     $(".header-space").prepend("<div id='stars'></div><div id='stars2'></div><div id='stars3'></div>")
     $(".header-space .cont").css("opacity", 0);
     setTimeout(function(){
-    $(".header-space .cont").animate({opacity:1})
-    }, 250)
+    $(".header-space .cont").animate({opacity:1},"slow")
+    }, 350)
    $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='/docs/extensions.html'>Extensions</a></li>")
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='http://ashleymcnamara.github.io/learn_to_code/#golang'>Learn Go </a></li>")
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='https://github.com/thestrukture/IDE'>Get IDE</a></li>")
