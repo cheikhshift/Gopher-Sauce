@@ -10,6 +10,14 @@
 	display:none;	
 }
 
+.card {
+	margin-bottom:8px;	
+}
+
+.card-block {
+	padding:6px;	
+}
+
 h1 {
     font-size: 1.5rem !important;
 }
