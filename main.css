@@ -109,7 +109,11 @@ h1 {
 }
 
 .bg-primary {
-	background-color: #000 !important;	
+	background-color: rgba(0, 0, 0, 0.94) !important;	
+}
+
+.navbar-toggler {
+	background:#fff;	
 }
 
 .header-space .cont {
