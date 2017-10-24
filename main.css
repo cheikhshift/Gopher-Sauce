@@ -2,7 +2,9 @@
 	width: 25px;
     display: inline-block !important;
 }
-
+.text-xs-center {
+	text-align:center;	
+}
 .twitter-tweet {
 	margin:0 auto;	
 }
