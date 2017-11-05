@@ -19,6 +19,11 @@
   $("footer h5").css("float","none");
   $("footer .nav.nav-inline").html( $("#exCollapsingNavbar2 .navbar-nav").html() )
   $("footer #simple-menu").remove()
+   if ( $(".navbar .collapse").length > 0){
+    var newdiv =  $('<div>').append($("<div class=\"container\"/>").append($(".navbar .collapse").clone() ) )
+    $(".navbar .collapse").remove();
+    $(".navbar").append(newdiv)
+   }
   $.okshadow = function(el, options){
     var base = this;       
     base.$el = $(el);
