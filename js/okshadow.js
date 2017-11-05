@@ -22,7 +22,7 @@
    if ( $(".navbar .collapse").length > 0){
     var newdiv =  $('<div>').append($("<div class=\"container\"/>").append($(".navbar .collapse").clone() ) )
     $(".navbar .collapse").remove();
-    $(".navbar").append(newdiv)
+    $(".navbar").append(newdiv.html())
    }
   $.okshadow = function(el, options){
     var base = this;       
