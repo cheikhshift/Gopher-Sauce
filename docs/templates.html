@@ -90,7 +90,7 @@ tmpl - This specifies the path to the template file with the declared template r
 struct - This specifies a declared `struct` to be used as the template's interface. 
 </code></pre>
 
-<p>In the example below, a struct will be declared for an alert. The example will initialize the template in three ways: by initializing the struct and then building it, initializing it with static Json parameters and without any parameters at all. Remember within any template file in your project you may load the template by typing its <code>name</code> attribute. </p>
+<p>In the example below, a struct will be declared for an alert. The example will initialize the template in two ways: by initializing the struct and then building it and initializing without any parameters at all. Remember within any template file in your project you may load the template by typing its <code>name</code> attribute. </p>
 
 <p>The examples below will declare a struct and use that struct's parameters within the template. It is possible to build a template from static JSON init and even via object initialization, mutating and then compiling it to <code>HTML code</code> </p>
 
@@ -128,9 +128,7 @@ struct - This specifies a declared `struct` to be used as the template's interfa
 
 <pre><code class="html golang">    &lt;!-- No parameters --&gt;
     {{Bootstrap_alert}}
-    &lt;!-- Static JSON --&gt;
-    {{Boostrap_alert /{`Type`:`danger`,`Strong`: `Strong`,`Text` :`Test`  }/ }}
-    &lt;!-- Add  `c` to your template name to initialize its struct; And add `b`(b&lt;template name&gt; $var) to your template name to output the html --&gt;
+    &lt;!-- Add  `c` to your template name to initialize its struct; And add `b`(b&lt;template name&gt; $var) to your template name to output the html. The function dbOperation is suppose to update the fields. --&gt;
     {{ $struct := cBootstrap_alert }}
     {{bBootstrap_alert $struct}}
 </code></pre>
