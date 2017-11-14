@@ -338,30 +338,15 @@ var - This is a comma delimited string of the variables you wish this function t
 **InnerXml - This contains your method declarations. GoS will wrap up the inner xml data with your method attributes to create a Go func
 </code></pre>
 
-<pre><code  class="html golang">    &lt;gos&gt;
-        ...
-        ...
-        &lt;methods&gt;
-            &lt;method name="Hackfmt"&gt;
-            fmt.Println(save + " -&gt; " + object.SomeAttr) 
-            &lt;/method&gt;
-        &lt;/methods&gt;
-        ...
-    &lt;/gos&gt;
-    ... Output by GoS :
-    //Generated template pipeline func
-    func  net_Hackfmt(save string,object DemoGos) string 
-</code></pre>
 
 
-
-<p>Test case : Send email pipeline. The variables set in the var tag need their type asserted during use. The example below we will declare a function that sends emails and returns a <code>bool</code>.        </p>
+<p>Test case : The example below will declare a function that sends emails and returns a <code>bool</code>.        </p>
 
 <pre><code  class="html golang">    &lt;gos&gt;
         ...
             &lt;methods&gt;
-                &lt;method name="sendEmail" var="to,from" return="bool"&gt;
-                    go fmt.Println("Send Email -&gt; " + to.(string) + " -&gt;" + from.(string))
+                &lt;func name="sendEmail" var="to string,from string" return="bool"&gt;
+                    fmt.Println("Send Email " ,to  , from)
                     return true
             &lt;/method&gt;
             ...
@@ -370,7 +355,7 @@ var - This is a comma delimited string of the variables you wish this function t
     &lt;/gos&gt;
     ... Output by GoS :  
     //Generated template method
-    func net_sendEmail(args ...interface{}) bool
+    func net_sendEmail(to string, from string) bool
 </code></pre>
 
           <p>Use the following snippet within any <code>.tmpl</code> file to send email.
