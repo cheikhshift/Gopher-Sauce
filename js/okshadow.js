@@ -20,7 +20,7 @@
     if (window.location.pathname == "/") {
      pathonGit += "/index.html"   
     } else {
-     pathonGit +=  window.location.pathname
+     pathonGit =  window.location.pathname
     }
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='https://github.com/cheikhshift/Gopher-Sauce/tree/gh-pages" + pathonGit +"'>Edit this page</a></li>")
     $("footer h5").css("float","none");
