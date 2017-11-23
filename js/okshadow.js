@@ -16,7 +16,14 @@
    $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='/docs/extensions.html'>Extensions</a></li>")
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='https://learn-golang.com/'>Learn Go (Multilingual)</a></li>")
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='https://github.com/thestrukture/IDE'>Get IDE</a></li>")
-  $("footer h5").css("float","none");
+    var pathonGit = "https://github.com/cheikhshift/Gopher-Sauce/tree/gh-pages"
+    if window.location.path == "/" {
+     pathonGit += "/index.html"   
+    } else {
+     pathonGit +=  window.location.path
+    }
+  $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='https://github.com/cheikhshift/Gopher-Sauce/tree/gh-pages" + pathonGit +"'>Edit this page</a></li>")
+    $("footer h5").css("float","none");
   $("footer .nav.nav-inline").html( $("#exCollapsingNavbar2 .navbar-nav").html() )
   $("footer #simple-menu").remove()
    if ( $(".navbar .collapse").length > 0){
