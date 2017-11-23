@@ -17,7 +17,7 @@
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' href='https://learn-golang.com/'>Learn Go (Multilingual)</a></li>")
   $("#exCollapsingNavbar2 .navbar-nav").append("<li style='margin-right: 12px;' class='nav-item'><a class='nav-link' target='_blank' href='https://github.com/thestrukture/IDE'>Get IDE</a></li>")
     var pathonGit = "https://github.com/cheikhshift/Gopher-Sauce/tree/gh-pages"
-    if window.location.path == "/" {
+    if (window.location.path == "/") {
      pathonGit += "/index.html"   
     } else {
      pathonGit +=  window.location.path
