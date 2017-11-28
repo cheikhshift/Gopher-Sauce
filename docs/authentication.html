@@ -77,7 +77,7 @@
   <div class="container">
         <div class="list-group list-group-item">
    
-          <p>Go-Server authentication API. This package supports simple service security. Golang has other authentication packages besides MongoDB and LDAP.</p>
+          <p>Simple session based authentication API. This package supports simple service security.</p>
 <h2><a id="Index_2"></a>Index</h2>
 <ol>
 <li><a href="#authenticating-with-mongodb">Mongo Authentication</a></li>
@@ -103,11 +103,18 @@ defer gop.DB.Close()
         session )
 
     if err != nil {
-        response = err.Error()
+        log.Println(err)
+        return true
     } else {
             //redirect or return user
             user,err := gop.GetUser(session)
-            //save in case you're redirecting
+            if err != nil {
+               log.Println(err)
+               return true
+            }
+            // Give user access to paths /secure/handler/endpoint
+            user.AddZone("/secure/handler/endpoint")
+            // Apply changes
             session.Save(r,w)
 
     }
@@ -124,18 +131,25 @@ defer gop.DB.Close()
             session )
 
         if err != nil {
-            response = err.Error()
+            log.Println(err)
+            return true
         } else {
                 //redirect or return user
                 user,err := gop.GetUser(session)
-                //save in case you're redirecting
+                if err != nil {
+                  log.Println(err)
+                  return true
+                }
+                // Give user access to paths /secure/handler/endpoint
+                user.AddZone("/secure/handler/endpoint")
+                // Apply changes
                 session.Save(r,w)
 
         }
 
    &lt;/end&gt;
 </code></pre>
-<h4><a id="Interface_of_Passport_user__70"></a>Interface of Passport user :</h4>
+<h4><a id="Interface_of_Passport_user__70"></a>Struct literal of Passport user :</h4>
 <pre><code class="html golang">type User struct {
     Id bson.ObjectId `bson:&quot;_id,omitempty&quot;`
     Username string `valid:&quot;unique,required&quot;`
@@ -164,7 +178,7 @@ defer gop.DB.Close()
 &lt;/end&gt;
 </code></pre>
 <h3><a id="Set_Unauthorized_page_redirect_161"></a>Set Unauthorized page redirect</h3>
-<p>Use the <code class="golang">gop.SetUnAuthPage(path string)</code> to set the redirect path on permission error.<br>
+<p>Use function <code class="golang">gop.SetUnAuthPage(path string)</code> to set the redirect path on permission error.<br>
 <code>gos.SetUnAuthPage(path string)</code></p>
         </div>
   </div>
