@@ -80,17 +80,7 @@
    
           <h1 id="howtoaddhttps">How to add HTTPS</h1>
 
-            <ol>
-            <li>Add this line to your <code class="html golang">&lt;main&gt;</code> tag within your project's <code>.gxml</code> file. If there is no <code>&lt;main&gt;</code> tag, add one to the <code>&lt;gos&gt;</code> tag of your file.</li>
-
-            <li>Add this line (As the last line it will stall your main thread):<pre> <code class="golang">errgos := http.ListenAndServeTLS(":443", "/path-to-crt-file", "/path-to-key-file", nil)
-if errgos != nil {
-	log.Fatal(errgos)
-}</code> </pre></li>
-           <li>If you have multiple certificate files, create a new file. Append the certificates you need to this new file.</li>
-         
-          </ol>
-
+		<p>Read this <a href="https://github.com/cheikhshift/docker2kube/blob/master/TLS.md" target="_blank">guide</a> to setup TLS 1.2 with a project.</p>
         </div>
   </div>
 
