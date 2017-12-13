@@ -92,10 +92,9 @@ struct - This specifies a declared `struct` to be used as the template's interfa
 
 <p>In the example below, a struct will be declared for an alert. The example will initialize the template in two ways: by initializing the struct and then building it and initializing without any parameters at all. Remember within any template file in your project you may load the template by typing its <code>name</code> attribute. </p>
 
-<p>The examples below will declare a struct and use that struct's parameters within the template. It is possible to build a template from static JSON init and even via object initialization, mutating and then compiling it to <code>HTML code</code> </p>
+<p>The examples below will declare a struct tag and use that struct's parameters within the template. It is possible to build a template from static JSON init and even via object initialization, mutating and then compiling it to <code>HTML code</code> </p>
 
-<p>The example is using a template file with path     <code>bootstrap/alert</code>.
-*Due to the canonical nature of GoS asset to binary tools, file paths must be in lower case.</p>
+<p>The example is using a template file with path     <code>bootstrap/alert</code>.</p>
 
 <p>file gos.gxml</p>
 
@@ -128,7 +127,7 @@ struct - This specifies a declared `struct` to be used as the template's interfa
 
 <pre><code class="html golang">    &lt;!-- No parameters --&gt;
     {{Bootstrap_alert}}
-    &lt;!-- Add  `c` to your template name to initialize its struct; And add `b`(b&lt;template name&gt; $var) to your template name to output the html. The function dbOperation is suppose to update the fields. --&gt;
+    &lt;!-- Add  `c` to your template name to initialize the template's interface; And add `b`(b&lt;template name&gt; $var) to your template name to output the html. --&gt;
     {{ $struct := cBootstrap_alert }}
     {{bBootstrap_alert $struct}}
 </code></pre>
