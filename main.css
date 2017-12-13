@@ -17,6 +17,56 @@
 	margin-bottom:8px;	
 }
 
+.full-width-img {
+ width: 170px;
+}
+
+.section.section-body-two img{
+  max-width: 90px;
+  padding-top:10px;
+}
+
+.grsp {
+  color:#666;
+}
+.col-sm-9 .card {
+  padding:15px;
+}
+.section.section-body img {
+  width: 100%;
+}
+
+.section .nav-item {
+    display: block;
+    margin:0 !important;
+}
+
+.section footer {
+  margin:0;
+  height: auto;
+}
+
+
+
+.header-space .header-p {
+      color: #bbb;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.header-space h1 {
+  color:#fff;
+}
+
+    
+    #feat .col-sm-6 {
+            padding: 25px;
+    } 
+    #feat p {
+      text-align: center;
+      padding: 25px;
+    }
+
 .card-block {
 	padding:6px;	
 }
@@ -36,10 +86,11 @@ h1 {
     padding-top: 50px;
 }
 }
-.header-space {
+.header-space ,.card-primary,.card-warning {
 	
 	  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
+  border-color:#333;
 }
 
 #stars {
@@ -130,8 +181,14 @@ h1 {
 }
 
 
-
-.navbar .nav-item a {
+.card h3 {
+  padding-top: 1em;
+}
+.card {
+  padding-bottom: 1em;
+  margin:4px;
+}
+.navbar .nav-item a,.card-inverse {
 	color:#fff !important;
 }
 
