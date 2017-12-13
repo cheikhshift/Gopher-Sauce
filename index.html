@@ -5,15 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GopherSauce : Web application server.</title>
-    <meta name="description" content="Golang web application server.">
-<meta name="keywords" content="dev,kit,node,electron,javascript,server,ops,web,csrf,iot,data,framework,test,unit,golang,stack">
+    <title>GopherSauce SDK</title>
+    <meta name="description" content="GopherSauce software development kit (SDK) provides access to GXML compiling and deployment. GXML offers a web application framework, a memory safe template engine, all-in-one configuration files and numerous other features.">
+<meta name="keywords" content="dev,kit,javascript,server,ops,web,csrf,iot,data,framework,test,unit,golang,stack,stack">
     <!-- Bootstrap CSS -->
     <script src="https://use.fontawesome.com/d102afacbe.js"></script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
     <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -80,160 +81,311 @@
  
 </div>
 </nav>
-  <style type="text/css">
-    
-    #feat .col-sm-6 {
-            padding: 25px;
-    } 
-    #feat p {
-      text-align: center;
-      padding: 25px;
-    }
 
-  </style>
+  <div id="fullpage">
+  <div class="section header-space">
+      
 
-  <div style="height:530px;overflow:hidden" class="header-space">
-    <!-- Nav tabs -->
-
-      <div class="cont container" style="padding-top: 20px;">
+      <div class="cont container" >
           <div class="row">
-            <div class="col-sm-12 " style="padding-right:2px;">
-    
-              <h1 style="color:#fff;padding-top:5px;" class="tect">GopherSauce development framework.</h1>
-              <p style="color:#bbb">Build and deploy resilient web applications & Go libraries. Overview :</p> 
-              <p style="color:#fff;"><i class="fa fa-gavel"></i> Tools — Build with <code>ready-to-use</code> extensions.</p>
+            <div class="col-sm-12 text-xs-center" >
+       <img src="logo.png" class="full-width-img">
+              <h1  class="tect">GopherSauce SDK.</h1>
+              <p class="header-p">GopherSauce software development kit (SDK) provides access to GXML compiling and deployment.<br/> GXML offers a web application framework, a memory safe template engine, all-in-one configuration files and numerous other features.</p> 
+            <!--  <p style="color:#fff;"><i class="fa fa-gavel"></i> Tools — Build with <code>ready-to-use</code> extensions.</p>
               <p style="color:#fff;"><i class="fa fa-server"></i> Ready for scale — Each project is generated with a <code>Dockerfile</code>, You can use to build docker images with.</p>
               <p style="color:#fff"><i class="fa fa-clock-o"></i> Request tracing — GopherSauce supports Opentracing. </p> 
-              <p style="color:#fff;"><i class="fa fa-flash"></i> Automate code — Write less code with GXML & export to .go file. Try GopherSauce.</p>
-              <p><a type="button" href="#scrl" class="head btn btn-primary-outline">Get started</a> <a type="button" href="/docs" class="head btn btn-primary-outline">Docs</a></p>
+              <p style="color:#fff;"><i class="fa fa-flash"></i> Automate code — Write less code with GXML & export to .go file. Try GopherSauce.</p>    <p style="color:#fff;letter-spacing:5px;"> 
+                Build on <i class="fa fa-linux" ></i> <i class="fa fa-windows" ></i> <i class="fa fa-apple" ></i></p>-->
+              <br />
+              <p><a type="button" href="#overview" class="head btn btn-primary-outline">Overview</a> <a type="button" href="/docs" class="head btn btn-primary-outline">Docs</a></p>
               <p> <a class="twitter-follow-button"
   href="https://twitter.com/gophersauce"
   data-size="large">
 Follow @GopherSauce</a> <br />
 <a class="github-button" href="https://github.com/thestrukture/IDE" data-show-count="true" aria-label="Star thestrukture/IDE on GitHub">Star</a></p>
-              <p style="color:#fff;letter-spacing:5px;"> 
-                Build on <i class="fa fa-linux" ></i> <i class="fa fa-windows" ></i> <i class="fa fa-apple" ></i></p>
+           
             </div>
+
         
           </div>
       </div>
+
   </div>
+
+  <div class="section section-body">
+
+  <div class="container">
+  <h2>Overview</h2><hr>
+  <div class="row">
+  <div class="col-sm-6">
+
+  <div class="card row">
+    <div class="col-sm-12">
+      <h3>GXML framework.</h3>
+      <hr>
+      <p>Build resilient web applications. GXML offers a simple approach to write a web application. </p>
+      <a type="button" href="docs/" class="head btn btn-primary-outline">Learn GXML</a>  <a type="button" href="#usecases" class="head btn btn-primary-outline">Use cases.</a>
+    </div>
    
-     
-    <style type="text/css">
-      h3 {
-       font-size:20px; 
-      }
+  </div>
+
+  <div class="card card-inverse card-primary row">
+    <div class="col-sm-8">
+      <h3>Monolith on export.</h3>
+      <hr>
+      <p>GopherSauce packages your web application into one binary. </p>
+      <a type="button" href="#expsol" class="head btn btn-secondary-outline">Deployment solutions.</a>
+    </div>
+    <div class="col-sm-4"><br /><img src="img/stone.png"></div>
+  </div>
+
+  </div>
+
+    <div class="col-sm-6">
+
+
+      <div class="card row">
+    <div class="col-sm-8">
+      <h3>Instrumentation.</h3>
+      <hr>
+      <p>GopherSauce offers a suite of tools to test your web application.</p>
+      <a type="button" href="#testtools" class="head btn btn-primary-outline">Perform tests.</a>
+    </div>
+    <div class="col-sm-4"><br /><img src="img/test1.svg"></div>
+  </div>
+
+      <div class="card card-inverse card-primary row">
+    <div class="col-sm-8">
+      <h3>Low heap.</h3>
+      <hr>
+      <p>The GopherSauce philosophy puts a strong emphasis on the scarcity of memory.</p>
+      <a type="button" href="#effic" class="head btn btn-secondary-outline">Learn more.</a>
+    </div>
+    <div class="col-sm-4"><br /><img src="img/ship.png"></div>
+  </div>
+
+
+
+
+  </div>
+
+
+
+  </div>
+  </div>
+
+  
+  </div>
+
+  <div class="section section-body-two">
       
-      .tab-content {
-           padding: 12px;
-    border: 1px #ededed solid; 
-      }
-      .nav-link.active.gs {
-        font-size:25px; 
-      }
-    </style>
-  <div class="container" id="scrl">
-    <div style="min-height:600px;margin-top: 2.5em;" class="list-group list-group-item">
-      <ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Download</a>
-  </li>
+      <div class="container">
+
+
+  <div class="text-xs-center row">
+  <div class="col-sm-12">
+      <h2>Deployment solutions.</h2><hr>
+      <p>GopherSauce SDK offers deployment options to the following targets :</p>
+  <div class=" row">
+    <div class="col-sm-4 ">
+     <div class="card card-inverse card-warning">
+     <img src="img/docker.png">
+    <br />
+      <h4>Docker</h4>
+      <hr>
+      <p>GopherSauce compiler will generate a docker file in your project's directory. </p>
+      <a type="button" href="docs/how-run-project.html#bldocker" class="head btn btn-secondary-outline">Build Docker image.</a>
+    </div>
+    </div>
+      <div class="col-sm-4 ">
+     <div class="card">
+     <img src="https://avatars1.githubusercontent.com/u/13629408?s=400&v=4">
+    <br />
+      <h4>Kubernetes</h4>
+      <hr>
+      <p>kubeconfig will generate a deployment file of your project. </p>
+      <a type="button" href="https://github.com/cheikhshift/docker2kube" target="_blank" class="head btn btn-primary-outline">Get kubeconfig.</a>
+      </div>
+    </div>
+
+     <div class="col-sm-4 ">
+     <div class="card">
+       <img src="https://www.openfaas.com/assets/images/logo.png">
+      <br />
+      <h4>OpenFaaS</h4>
+
+      <hr>
+      <p>Break your Monolith down to dust. Export your web services as serverless functions. </p>
+      <a type="button" href="https://github.com/cheikhshift/jsonfaas" target="_blank" class="head btn btn-primary-outline">Deploy to OpenFaaS</a>
+      </div>
+    </div>
+   
+  </div>
+
+
+
+  </div>
+
  
-<!--  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Templating</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Web APIs</a>
-  </li>
-           <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-cog fa-spin"></i> How to build</a>
-  </li> -->
-          <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#exs" role="tab">Examples</a>
-  </li>
-        
-         <li class="nav-item">
-    <a class="nav-link"  href="docs/"><i class="fa fa-book"></i> Docs</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" target="_blank" href="https://github.com/cheikhshift/vim-gos">Vim plugin</a>
-  </li>
+
+
+  </div>
+  </div>
+
+  </div>
+  <div class="section section-body-two">
+      <div class="container">
+       <h2>Instrumentation suite.</h2>
+       <hr >
+       <br />
+      <div class="row">
+        <div class="col-sm-3 text-xs-center">
+          <img src="img/test1.svg">
+        </div>
+       <div class="col-sm-9">
+          
+          <div class="card">
+          <h4>Generate test files.</h4>
+          <hr >
+          <p>GopherSauce offers 2 options to generating tests of your source code :</p>
+            <p><span class="grsp">-</span> You can test GXML with built-in test console.</p>
+             <p><span class="grsp">-</span> You can generate test files of your go source with <code>go-test</code>.</p>
+             <p> <a type="button" href="docs/tests.html" class="head btn btn-primary-outline">Test console.</a>  <a type="button" href="https://github.com/cheikhshift/momentum/cmd/go-test" target="_blank" class="head btn btn-primary-outline">Download go-test</a></p>
+           </div>
+
+       </div>
+
+       </div>
+      <div class="row">
+        <div class="col-sm-3 text-xs-center">
+          <img src="img/test1.png">
+        </div>
+       <div class="col-sm-9">
+          
+          <div class="card">
+          <h4>Measure performance.</h4>
+          <hr >
+          <p>During development GopherSauce will launch your web application with Appdash (a tracing system). This instance will be accessible on port <code>8700</code> </p>
+             <p> <a type="button" href="docs/how-run-project.html" class="head btn btn-primary-outline">Run a project.</a>  </p>
+           </div>
+
+       </div>
        
+       </div>       
 
-</ul>
+      </div>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="home" role="tabpanel">
-    <h3>Requirements</h3>
-    <ol>
-      <li><a href="https://golang.org/dl/" target="_blank">Golang</a></li>
-      <li>$GOPATH set in env. variables</li>
-      </ol>
-    <h3>Install GopherSauce</h3>
-    <p>Run the following commands with your terminal :</p>
-    <pre><code class="bash">
-    go get github.com/cheikhshift/gos
-    gos deps</code></pre>
-      <div><h4>Quick Start your project</h4><pre><code class="bash">
-    mkdir new-project
-    cd new-project
-    gos --make
-    </code></pre> </div>
   </div>
-   <div class="tab-pane" id="exs" role="tabpanel">
-     <h3>Examples</h3>
-     <p><a href="https://github.com/cheikhshift/gopher-sauce-template" target="_blank">Build a website with templates.</a></p>
-      <p><a href="https://github.com/cheikhshift/gopher-sauce-methods" target="_blank">Use your Golang libraries with your Web app.</a></p>
-    <p style="margin-bottom:20px;"><a href="https://github.com/cheikhshift/gopher-sauce-mvc" target="_blank">Build MVCs with Go</a></p> 
-      <p><a href="https://github.com/cheikhshift/momentum">Develop RPC functions accessible through auto-generated javascript function libraries.</a></p>
+
+   <div class="section section-body-two">
+       <div class="container">
+       <h2 >Low heap, high performance.</h2>
+       <hr >
+       <br />
+      <div class="row">
+        <div class="col-sm-3 text-xs-center">
+          <img src="img/test1.png">
+        </div>
+       <div class="col-sm-9">
+          
+          <div class="card">
+          <h4>Template caching.</h4>
+          <hr >
+          <p>GopherSauce reduces template render time by caching the minimum parameters required to execute a template.</p>
+             <p> <a type="button" href="docs/templates.html" class="head btn btn-primary-outline">Write a template.</a> </p>
+           </div>
+
+       </div>
+
+       </div>
+      <div class="row">
+        <div class="col-sm-3 text-xs-center">
+          <img src="img/empty.ico">
+        </div>
+       <div class="col-sm-9">
+          
+          <div class="card">
+          <h4>Ensured garbage collection.</h4>
+          <hr >
+          <p>GopherSauce dynamic pages release allocations after each request. This ensures garbage collection of unused resources.</p>
+             <p> <a type="button" href="docs/awp.html" class="head btn btn-primary-outline">Build dynamic page.</a>  </p>
+           </div>
+
+       </div>
+       
+       </div>       
+
+      </div>
+   </div>
+
+    <div class="section">
+      
+        <div class="container">
+       <h2 >Additional information.</h2>
+       <hr >
+       <br />
+      <div class="row">
+        <div class="col-sm-6">
+         <h4>Use cases.</h4>
+         <hr />
+           <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-template" target="_blank">Build a website with templates.</a></p>
+      <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-methods" target="_blank">Use your Golang libraries with your Web app.</a></p>
+    <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-mvc" target="_blank">Build MVCs with Go.</a></p> 
+      <p><a target="_blank" href="https://github.com/cheikhshift/momentum">Develop RPC functions accessible through auto-generated javascript function libraries.</a></p>
      
-       <p><a href="https://github.com/cheikhshift/gopher-sauce-database" target="_blank">Manage data with Golang templates.</a></p> 
-     <p><a href="https://github.com/cheikhshift/gop" >Service security & User authentication.</a></p>
-     <p><a href="https://github.com/cheikhshift/form" >Build html <code>forms</code> with your <code>structs</code></a></p>
-     <p> <a href="https://github.com/cheikhshift/locale" >Localize your web application.</a></p>
-      <p> <a href="https://github.com/cheikhshift/jwt" >JWT Authorization.</a></p>
-     <p><a href="https://github.com/cheikhshift/gos/blob/master/faas.md">Build OpenFaaS functions.</a></p>
+       <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-database" target="_blank">Manage data with Golang templates.</a></p> 
+     <p><a target="_blank" href="https://github.com/cheikhshift/gop" >Service security & User authentication.</a></p>
+     <p><a  target="_blank" href="https://github.com/cheikhshift/form" >Build html <code>forms</code> with your <code>structs</code></a></p>
+     <p> <a target="_blank" href="https://github.com/cheikhshift/locale" >Localize your web application.</a></p>
+      <p> <a target="_blank" href="https://github.com/cheikhshift/jwt" >JWT Authorization.</a></p>
+     <p><a target="_blank" href="https://github.com/cheikhshift/gos/blob/master/faas.md">Build OpenFaaS functions.</a></p>
+  
+     <p><a target="_blank" href="https://github.com/cheikhshift/docker2kube/blob/master/TLS.md">Secure web application with TLS 1.2.</a></p>
+        </div>
+       <div class="col-sm-6">
      
-  </div>
- 
-
-    </div>
-    
-    </div>
-
- 
-
-
-
-  <footer>
-    <div class="container">
-      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
-     
+      
+          <footer>
+        
+       <h4>Links.</h4>
+       <hr>
       <ul class="nav nav-inline">
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
         </li>
       </ul>
+      <br />
+       <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
+      </footer>
+
+       </div>
+
+       </div>
+    
+      </div>
+
+
     </div>
-  </footer>
+  
+  
+</div>
+
+
+
+
+
+
     
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/okshadow.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-   
-       <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-71342160-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+   <script type="text/javascript" src="scrolloverflow.min.js"></script>
+
+<script type="text/javascript" src="jquery.fullPage.js"></script>
+<script type="text/javascript" src="jsfullpage.js"></script>
+
   </body>
 </html>
