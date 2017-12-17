@@ -79,11 +79,11 @@
    
             <h1 id="activepages">Active pages</h1>
 
-          <p>This page covers the creation of dynamic web pages. Throughout this page, <code>GoS</code> refers to GopherSauce.</p>
+          <p>This page covers the creation of dynamic web pages. Dynamic pages follow Go's template engine syntax. Throughout this page, <code>GoS</code> refers to GopherSauce.</p>
 
 <h2 id="createapage">Create a page</h2>
 
-<p>To add a new page, create a new <code>page_name.tmpl</code> file within your GoS project web root. If you used the CLI argument <code>--make</code>, your web root folder would be <code>web</code>.  To access your page visit <code>hostname/page_name</code>.</p>
+<p>To add a new page, create a new <code>page_name.tmpl</code> file within your GoS project web root. If you used the CLI argument <code>--make</code>, your web root folder would be <code>web</code> (relative to your project's directory).  To access your page visit <code>hostname/page_name</code>.</p>
 
 <p>Here is a tutorial on sending emails with active pages <a href="https://github.com/cheikhshift/gopher-sauce-methods">Link</a>.</p>
 
@@ -93,7 +93,7 @@
 
 <p>More information on <a href="http://www.gorillatoolkit.org/pkg/sessions">sessions.Session</a></p>
 
-<p>The Go lang interface for a page in your web root : </p>
+<p>The Go interface of a page in your web root : </p>
 
 <pre><code class="html golang">     type Page struct {
                     R *http.Request
@@ -110,7 +110,7 @@
 <h3 id="gosexclusivetemplatemethods">GoS exclusive template methods</h3>
 
 <p>This section covers the list of functions available within all your templates compiled using GopherSauce.
-Please keep in mind that the .Session and .R variable are only available to template files within your server web root ( default is <code>web</code>).</p>
+Please keep in mind that the .Session and .R variable are only available to template files within your server web root.</p>
 
 <ul>
 <li><p>js - will take its only input and add it as the src attribute of the html <code>&lt;script/&gt;</code> tag <code>&lt;script src="var"&gt;&lt;/script&gt;</code></p>

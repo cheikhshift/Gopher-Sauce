@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GopherSauce - Markup</title>
+    <title>GopherSauce - GXML Markup</title>
     <!-- Bootstrap CSS -->
 <script src="https://use.fontawesome.com/d102afacbe.js"></script>
  
@@ -95,7 +95,7 @@
         <div class="list-group list-group-item">
    
           <h1 id="xmltags">XML Tags</h1>
-
+<hr>
 <h2 id="index">Index</h2>
 
 <ul>
@@ -145,21 +145,23 @@
 
 
 <h3 id="tags">Tags</h3>
-
+<hr>
 <p>Throughout this page <code>GoS</code> refers to GopherSauce.
-This section covers documentation of GoS XML template tags. Unless specified these tags are at the root of your <code>&lt;gos/&gt;</code> tag.</p>
+This section covers documentation of GXML behavior. GXML is a derivative of XML used with GoS to build a web application.</p>
+
+<p>Generate a new GXML file with command <code>gos --make</code> </p>
 
 <h2 id="deploy">Deploy</h2>
-
+<hr>
 <p>Deploy specifies the manner that GoS should compile your application. Use <code>webapp</code> to have GoS generate a webserver for you. To export this package to an app use <code>package</code> instead of <code>webapp</code>. This tag should always be within the root of the <code  class="html golang">&lt;gos/&gt;</code> tag.</p>
 
 <h3 id="availabledeploytypes">Available Deploy types</h3>
 
 <ul>
-<li>webapp : Will add Go's default Http Listener to your package's <code  class="html golang">main()</code> function.</li>
+<li>webapp : Build your project as a monolith application.</li>
 
-<li>package : Make your package's template's and web resources exportable. </li>
-<li>faas : Export your template and end tags as OpenFaaS functions. </li>
+<li>package : Export your library to other GopherSauce and Go projects.  </li>
+<li>faas : Build your template and end tags as OpenFaaS functions. </li>
 </ul>
 
 <p>*This tag is required</p>
@@ -172,8 +174,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="webtag">Web tag</h2>
-
-<p>Specifies the name of the folder that contains your web resources within your GoS exportable package. The folder path is relative to your current working directory.</p>
+<hr>
+<p>Specifies the name of the folder that contains your web resources within your project folder. This folder will act as a document root to your server. The folder path is relative to your project's directory.</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -183,8 +185,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="tmpltag">Tmpl tag</h2>
-
-<p>Specifies the name of the folder containing your template files within your GoS exportable package. The folder path is relative to your current working directory.</p>
+<hr>
+<p>Specifies the name of the folder containing your template files. The folder path is relative to your current working directory.</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -194,8 +196,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="package">Package</h2>
-
-<p>This is only applicable to applications of type <code>package</code>. It specifies the web and template folder prefix for your exportable GoS package.</p>
+<hr>
+<p>This is only applicable to applications of type <code>package</code>. It specifies the web and template folder prefix of your GoS package as well as your package name.</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -205,8 +207,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="port">Port</h2>
-
-<p>(if applicable) Specifies the port your application should listen on. </p>
+<hr>
+<p>(if webapp) Specifies the port your application should listen on. </p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -216,9 +218,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="output">Output</h2>
-
-<p>The name of the file that GoS will save.
-*This tag is required</p>
+<hr>
+<p>The name of the file that GoS will save. *This tag is required</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -228,8 +229,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="key">Key</h2>
-
-<p>(if applicable) used as cookie store key within your web app.</p>
+<hr>
+<p>(if webapp) used as cookie store key within your web app.</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -239,8 +240,8 @@ This section covers documentation of GoS XML template tags. Unless specified the
 </code></pre>
 
 <h2 id="init">Init</h2>
-
-<p>GoS will wrap the data within this tag into the usual Go <code>init()</code> function
+<hr>
+<p>GoS will wrap the data within this tag into the usual Go <code>init()</code> function. The code specified here will be executed on application start. The contents of this tag is Go code.
 For example :</p>
 
 <pre><code  class="html golang">    &lt;gos&gt;
@@ -260,8 +261,8 @@ For example :</p>
 </code></pre>
 
 <h2 id="main">Main</h2>
-
-<p>GoS will wrap the data within this tag into the go <code>main()</code> function.
+<hr>
+<p> The code specified here will be executed on application start. The contents of this tag is Go code.
 For example : </p>
 
 <pre><code  class="html golang">    &lt;gos&gt;
@@ -283,8 +284,8 @@ For example : </p>
 </code></pre>
 
 <h2 id="variables">Variables</h2>
-
-<p>To declare public variables that are accessible to your program use the <code>var</code> tag. Use the type parameter to specify the variable type. Use the <code>*</code> qualifier as appropriate.
+<hr>
+<p>To declare public variables that are accessible to your program use the <code>var</code> tag. Use the type parameter to specify the variable type. Use the <code>*</code> qualifier as appropriate if you want your variable to be a pointer.
 For example </p>
 
 <pre><code  class="html golang">    &lt;var type="string"&gt;FreeServer&lt;/var&gt;
@@ -296,19 +297,19 @@ For example </p>
 </code></pre>
 
 <h2 id="header">Header</h2>
-
+<hr>
 <h3 id="structss">Structs</h3>
 
-<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go interface within within your generated Go src.</p>
+<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go interface.</p>
 
 <h4 id="attributes">Attributes</h4>
 
-<p>name - The name of this interface
-** Innerxml Struct field declarations.</p>
+<p>name - The name of this interface</p>
+<p>** Innerxml Struct field declarations.</p>
 
-<p>The example below declares a Go struct named DemoGos with a sub structure called DemoChild. The struct DemoGos has attributes SomeAttr and Child. </p>
+<p>The example below declares a Go interface named DemoGos with a sub interface called DemoChild. The struct DemoGos has attributes SomeAttr and Child. </p>
 
-<p>Whenever this interface is initialized within a template (<code>{{ $var := Struct_name }}</code>), these variables are accessible as that interface's properties.</p>
+<p>Whenever this interface is initialized within a template (<code>{{ $var := Struct_name }}</code>), these variables are accessible as that interface's properties. For example to access it within a template the code would be {{ $var.SomeAttr }}</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
@@ -327,18 +328,18 @@ For example </p>
 
 
 <h2 id="methods">Template pipelines</h2>
-
+<hr>
 <p>This section covers how to extend template functionality with methods ( | pipelines) .</p>
 
 <h3 id="attributes-2">XML Attributes</h3>
 
-<pre><code>name - Specifies the name of the function. Please keep in mind that usage of this function outside of templates requires the `net_` added to name because GoS appends that prefix to avoid any method redeclaration. If you desire to write methods for strict usage outside of template files we recommend writing a normal Go package and importing it with the `&lt;import/&gt;` tag or creating another Go file within your project directory.
-return - The return type of the function. Ie: string,bool or a custom struct `DemoGos` 
+<pre><code>name - Specifies the name of the function. Please keep in mind that usage of this function outside of templates requires `Net` prepended to the declared name. If you desire to write methods for strict usage outside of template files, I recommend creating another Go file within your project directory with package name <code>main</code>.
+return - The return type of the function. Ie: string or a custom interface `DemoGos` 
 var - This is a comma delimited string of the variables you wish this function to have. Say we need a function that has two parameters: param1 of type string and param 2 of type string. It will be declared as `param1 string,param2 string`.
-**InnerXml - This contains your method declarations. GoS will wrap up the inner xml data with your method attributes to create a Go func
+**InnerXml - This contains your method declarations. This is written in Go. GoS will wrap the inner xml code to create a Go func
 </code></pre>
 
-<p>Test case : The example below will declare a function that sends emails and returns a <code>bool</code>.        </p>
+<p>Test case : The example below will declare a function that sends emails and returns a <code>bool</code>.</p>
 
 <pre><code  class="html golang">    &lt;gos&gt;
         ...
@@ -353,7 +354,7 @@ var - This is a comma delimited string of the variables you wish this function t
     &lt;/gos&gt;
     ... Output by GoS :  
     //Generated template method
-    func net_sendEmail(to string, from string) bool
+    func NetsendEmail(to string, from string) bool
 </code></pre>
 
           <p>Use the following snippet within any <code>.tmpl</code> file to send email.
@@ -366,7 +367,7 @@ var - This is a comma delimited string of the variables you wish this function t
 {{end}}
 </code></pre>
 
-<p>Do not let the <code>|</code> scare you (known as pipe),  in our case the function parameter <code>"from"</code> becomes the last parameter of the function call and ones following the method name the first parameters, ordered in the way they are inputted. hence : <code>LastParam | functionName param1 param2...</code>.
+<p>Do not let the <code>|</code> scare you (known as pipe),  in our case the function parameter <code>"from"</code> becomes the last parameter of the function call and the ones following the method name are preceded, ordered in the way they are inputted. hence : <code>LastParam | functionName param1 paramN...</code>.
 Another way to invoke your function is  :</p>
 
 <pre><code  class="html golang">    {{if sendEmail "to" "from" }}
@@ -376,24 +377,23 @@ Another way to invoke your function is  :</p>
 
 
 <h2 id="templates">Templates</h2>
-
-<p>This section covers how to declare templates outside of your web root. This allows you to create template files that are not served within your server. This allows for the creation of template classes, that for example send emails and returns a success alert as feedback in the form of HTML. 
-This allows for easy html template view generation, and binary compilation of file to ensure security of code and file  invisibility. </p>
+<hr>
+<p>This section covers how to declare templates outside of your document root. This allows for the creation of programmable template objects. For example an object that send emails and returns a success alert as feedback in the form of HTML. </p>
 
 <h3 id="attributes-4">Attributes</h3>
 
-<pre><code>name - This is the name of the template within your application. You can load a template by simply calling `{{&lt;template name&gt;}}`
+<pre><code>name - This is the name of the template within your application. You can load a template by simply calling `{{&lt;template name&gt;}}` within any template in your project.
 
-tmpl - This specifies the path to the template file with the declared template root in mind. For example if our file was in `$GOPATH/PACKAGENAME/tmpl/file.tmpl` the tmpl attribute will be `file` because GoS will append the needed suffix to find and compile the template file. 
+tmpl - This specifies the path to the template file with the declared template root in mind. For example if our file was in `$GOPATH/PACKAGENAME/tmpl/file.tmpl` the tmpl attribute will be `file` because GoS will prepend the absolute path to find and compile the template file. 
 
-struct - This specifies a declared `struct` to be used as the template's parameter map. 
+struct - This specifies the name of the Go interface to use with template. 
 </code></pre>
 
-<p>In the example below, a struct will be declared for an alert. The example will initialize the template in three ways: by initializing the struct and then building it and initializing it with without any parameters at all. Remember within any template file in your project you may load the template by typing its <code>name</code> attribute. </p>
+<p>In the example below, an interace will be declared as an alert. There are two ways to load a template: by initializing the interface, modify it and build it. or initializing it with without any parameters at all. </p>
 
 
 <p>The example is using a template file with path     <code>bootstrap/alert</code>.
-*Due to the canonical nature of GoS asset to binary tools, file paths must be in lower case.</p>
+*Due to the canonical nature of <code>go-bindata</code> (convert assets to source code), file paths must be in lower case.</p>
 
 <p>Server.gxml</p>
 
@@ -415,14 +415,14 @@ struct - This specifies a declared `struct` to be used as the template's paramet
 &lt;/gos&gt;
 </code></pre>
 
-<p>tmpl/bootstrap/alert.tmpl :</p>
+<p>contents of tmpl/bootstrap/alert.tmpl :</p>
 
 <pre><code  class="html golang"> &lt;div class="alert alert-{{.Type}} alert-dismissible fade in" role="alert"&gt;
 &lt;strong&gt;{{.Strong}}&lt;/strong&gt; &lt;p&gt;{{.Text}}&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>Now to use the template within other templates there are three ways of doing this. (With the example above in mind)</p>
+<p>Now to use the template within other templates there are two ways of doing this. (With the example above in mind)</p>
 
 <pre><code  class="html golang">    &lt;!-- No parameters --&gt;
     {{Bootstrap_alert}}
@@ -434,29 +434,24 @@ struct - This specifies a declared `struct` to be used as the template's paramet
 </code></pre>
 
 <h2 id="apigeneration">Web services</h2>
-
-<p>This section covers how to create http request hooks within your GoS application. If a request's method and path match a declared endpoint, the declared Go lang code will be ran.</p>
+<hr>
+<p>This section covers how to create a REST API endpoints. Your endpoints can be stateful as well as stateless. If a request's verb and path match a declared endpoint, the declared Go lang code will be ran.</p>
 
 <h3 id="attributes-5">Attributes of end tag.</h3>
 
-<pre><code>path - the path to the api hook within your server</code></pre>
+<pre><code>path - the path to the api hook within your server.</code></pre>
 <pre><code>
-InnerXML - Go lang code ran on endpoint execution</code></pre>
+InnerXML - Go code ran on endpoint execution.</code></pre>
 <pre><code>
-type - This specifies the request method ie: POST,GET,PUT,DELETE, star (to create a new http.handler)
+type - This specifies the request verb ie: POST,GET,PUT,DELETE, star (to create a new http.handler)
 </code></pre>
 <pre>
 <code>id - Id of service. Used with open trace to find execution of service. </code></pre>
 
 
-
-<p>The example below will declare a method and api end point within the GoS configuration called login. The tag defined will create a rest call : <code>POST /index/api</code></p>
+<p>The example below will declare a REST api endpoint called login. The tag defined will create endpoint : <code>POST /index/api</code></p>
 
 <pre><code  class="html golang">&lt;gos&gt;
-    ...
-        &lt;methods&gt;   
-        ...
-    &lt;/methods&gt;
     ...
     &lt;endpoints&gt;
            &lt;end path="/index/api" type="POST" &gt;
@@ -467,28 +462,22 @@ type - This specifies the request method ie: POST,GET,PUT,DELETE, star (to creat
     &lt;/endpoints&gt;
     ...
 &lt;/gos&gt;
-This condition will be added as a check prior to the server attempting to find a file matching the request path within the web root : 
-
-if  r.URL.Path == "/index/api" &amp;&amp; r.Method == strings.ToUpper("POST") {
-    response = mResponse(Button{Color:"#fff"})
-    fmt.Println("Login!! -&gt; " + session.Values["username"].(string))
-}
 </code></pre>
 
-<p>Here are the variables that are available to your api Go code block :</p>
+<p>Here are the variables that are available to your Go code block :</p>
 
-<pre><code>response - String response of api.
-session - Current Gorilla session of the request (if applicable). Use the session.Values dictionary to access and save data.
-Handy functions :
-mResponse - will convert any Go lang interface into a JSON string for output. The example below converts Button into a JSON string for output.
+<pre><code>response - String response of api. The value set here will be returned as the endpoint's response.
+session - Current Gorilla session of the request (if stateful endpoint). Use the session.Values dictionary to access and save data.
 r - *http.Request
 w - http.ResponseWriter
-span - opentracing.Span - this variable is only available when you run your project with command <code>gos --run</code>. Use this function to log data to the tracer : span.LogEvent(event string) 
+span - opentracing.Span - this variable is only available when you run your project in development mode (with command <code>gos --run</code>). Use this function to log data to the tracer : span.LogEvent(event string) 
+Handy functions :
+mResponse - will convert any Go lang interface into a JSON string for output. The example below converts Button into a JSON string for output.
 </code></pre>
           
 <h2 id="imports">Imports</h2>
-
-<p>Imports allow you to import other Go lang packages for use within your GoS XML template. It also allows you to import other GoS xml tags by specifying an XML file relative to <code>$GOPATH/src</code>. This will include :  </p>
+<hr >
+<p>Imports allow you to import other Go lang packages for use within your GXML file. It also allows you to import other GXML files by specifying an XML file relative to <code>$GOPATH/src</code>. This will include :  </p>
 
 <ul>
 <li>structs</li>
@@ -496,8 +485,6 @@ span - opentracing.Span - this variable is only available when you run your proj
 <li>objects </li>
 
 <li>methods</li>
-
-<li>timers</li>
 
 <li>templates</li>
 
@@ -509,8 +496,8 @@ span - opentracing.Span - this variable is only available when you run your proj
 <p>This tag belongs only in the root of the <code>&lt;gos/&gt;</code> tag
 Example import :</p>
 
-<pre><code class="">    &lt;import src="mongo.gxml"/&gt;
-    &lt;!-- Importing Golang Packages --&gt;
+<pre><code class="">    &lt;import src="github.com/cheikhshift/momentum/gos.gxml"/&gt;
+    &lt;!-- Importing Go Packages as well --&gt;
     &lt;import src= "gopkg.in/mgo.v2"/&gt;
     &lt;import src="gopkg.in/mgo.v2/bson"/&gt;
 </code></pre>

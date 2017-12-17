@@ -86,12 +86,12 @@
           <h1 id="bldocker">How to build docker image</h1>
           <p>GopherSauce will generate a docker file each time you <code>--run</code> or <code>--export</code> a project. </p>
           <p>Run the following command to just generate the sources of your application : <code>gos --run --buildcheck</code></p>
-          <h4>Command</h4>
+          <h6>Command</h6>
           <p>Run the following commands to build a docker image of your application (Docker is required) :</p>
           <p> Run the following command to ensure your project's dependencies. This command requires <code>dep</code> installed. <a href="https://github.com/golang/dep" target="_blank">Find it here.</a>  </p>
           <pre><code>dep init</code></pre>
           <p>Build docker image with file. </p>
-          <pre> <code>docker build -f Dockerfile . </code></pre>
+          <pre> <code>docker build -t ImageName . </code></pre>
           <p>Important note : Please make sure to keep up with vulnerability information provided by docker. Find tag information about the docker image used <a href="https://store.docker.com/images/golang/plans/3d078276-5a84-4422-b956-9b23261b13fb?tab=tags">here</a>.  </p>
         </div>
   </div>

@@ -79,17 +79,6 @@
             
             <p>Run the command <code>$GOPATH/bin/gos --test</code> to open the server test console.</p>
 
-<h2 id="listofcommands">List of commands :</h2>
-
-<ul>
-<li>Test a GoS method (func) : <code>m &lt;method name&gt; args...(Use Golang code with args, space delimited)</code></li>
-
-<li>Test a template : <code>t &lt;template name&gt; &lt;json_of_interface(optional)&gt;</code></li>
-
-<li>Test a server path (API | page) : <code>p &lt;/path/to/resource/without/hostname/&gt; &lt;json_of_request(optional)&gt; &lt;method_of_request(optional)&gt;</code> </li>
-
-<li>Test a func in current main package : <code>f &lt;func_name&gt; args...(Use Golang code with args, space delimited)</code></li>
-</ul>
 
 <h2 id="debugatemplate">Test a Template</h2>
 
@@ -101,7 +90,19 @@
 
 <h2 id="debugamethod">Test a method</h2>
 
-<p>To test a method declared within GoS named <code>Sample</code>, the console input would be <code>m Sample.</code> If your method requires a string input for example, the command would be <code>m Sample "string_arg"</code>.</p>
+<p>To test a method declared within GopherSauce named <code>Sample</code>, the console input would be <code>m Sample.</code> If your method requires a string input for example, the command would be <code>m Sample "string_arg"</code>.</p>
+<h2 id="listofcommands">List of commands :</h2>
+
+<ul>
+<li>Test a GopherSauce method (func) : <code>m &lt;method name&gt; args...(Use Golang code with args, space delimited, ie : Struct{}, 100 ,"String"))</code></li>
+
+<li>Test a template : <code>t &lt;template name&gt; &lt;json_of_interface(optional)&gt;</code></li>
+
+<li>Test a server path (API | page) : <code>p &lt;/path/to/resource/without/hostname/&gt; &lt;json_of_request(optional)&gt; &lt;method_of_request(optional)&gt;</code> </li>
+
+<li>Test a func in current main package : <code>f &lt;func_name&gt; args...(Use Golang code with args, space delimited,ie : Struct{}, 100 ,"String"))</code></li>
+</ul>
+
 
         </div>
   </div>
