@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GopherSauce - Session management and HTML generation</title>
+    <title>GopherSauce - Session management and HTML components</title>
     <!-- Bootstrap CSS -->
 <script src="https://use.fontawesome.com/d102afacbe.js"></script>
 
@@ -55,7 +55,7 @@
   <div class="header-space" style="height:190px;margin-bottom:2em;">
       <div class="cont container">
           <div class="page-header">
-              <h1 style="color:#fff" class="tect">Session management and HTML generation</h1>
+              <h1 style="color:#fff" class="tect">Session management and HTML components</h1>
           </div>
       </div>
   </div>
@@ -98,7 +98,7 @@ gos --make
 
 <h4 id="addmodeltoproject">Add model to project</h4>
 
-<p>Add the following tag to your <code>&lt;header&gt;</code> tag within your <code>gos.gxml</code> file.</p>
+<p>Add the following tag to your <code>&lt;header&gt;</code> tag within your <code>gos.gxml</code> file. This will declare a new Go struct with field <code>Body</code>. </p>
 
 <pre><code class="html golang">&lt;struct name="PanelPage"&gt;
     Body string
@@ -142,7 +142,7 @@ gos --make
 
 <h3 id="loginblock">Login block</h3>
 
-<p>This is a code snippet of a login form. At this point the endpoint the form is sending data to does not exist yet. </p>
+<p>This is a code snippet of a login form. At this point the form's submit URL does not exist yet. </p>
 
 <h4 id="createtemplate-1">Create template</h4>
 
@@ -163,7 +163,7 @@ gos --make
 
 <h4 id="linktemplate-1">Link template</h4>
 
-<p>Add the following tag to your <code>&lt;templates&gt;</code> tag within your <code>gos.gxml</code> file. Since the struct is empty <code>gos</code> will revert to struct : <code>NoStruct</code>.</p>
+<p>Add the following tag to your <code>&lt;templates&gt;</code> tag within your <code>gos.gxml</code> file. Since the struct attribute is empty <code>gos</code> will revert to struct : <code>NoStruct{}</code>.</p>
 
 <pre><code class="html golang">&lt;template name="Login" tmpl="login" struct=""/&gt;
 </code></pre>
@@ -312,29 +312,42 @@ Delete <code>name</code> session variable :</p>
 
 <p>Within the same <code>&lt;end&gt;</code> tag add the following snippets  (in order):</p>
 
-<p>Initialize page wrapper model :</p>
+<p>Initialize <code>PanelPage</code> model :</p>
 
 <pre><code class="html golang">page := PanelPage{}
 </code></pre>
 
-<p>Add some security. The following statement will evaluate if the session variable <code>name</code> exists, if not the login form will be set as the <code>Page.Body</code>. The  function <code>bLogin</code> is used to generate HTML of your template. Since no <code>struct</code> was specified Gos will revert to struct <code>NoStruct</code> as the template's model. To build any template the syntax is <code>b&lt;template name&gt;</code>. If the user is logged in, the Body of the <code>Page</code> template is changed as needed. :</p>
+<p>Add some security. The following statement will evaluate if the session variable <code>name</code> exists, if not the login form will be set as the <code>Page.Body</code>. The  function <code>bLogin</code> is used to generate HTML of your template. Since no <code>struct</code> attribute was specified Gos will revert to struct <code>NoStruct</code> as the template's model. To build any template, the Go syntax is <code>b&lt;template name&gt;(&lt;STRUCT_NAME&gt;{})</code> ie : <code>stringVar := bLogin(NoStruct{})</code>. If the user is logged in, the Body of the <code>Page</code> template is changed as needed. :</p>
 
-<pre><code class="html golang">if _, ok := session.Values["name"]; ok  {
-    /* User is logged in */
+<pre><code class="html golang">//Check if session variable 'name' exists.
+// Build login if session variable is non-existant.
+if _, ok := session.Values["name"]; !ok  {
+    // Build and return HTML string of template 'Login
+    page.Body = bLogin(NoStruct{})
+} else {
+   
+     // Split request URL into string slice 
         route := strings.Split(r.URL.Path, "/")
+        // Verify is URL is expected size.
         if len(route) &gt; 2 {
+            // Get session variable and assert it
+            // as a string.
             name := session.Values["name"].(string)
+            // initialize UserPanel model
             panel := UserPanel{Name: name }
+
             if route[2] == "one" {
+                // Build panel one
                 page.Body = bPanel(panel)
             } else {
+                // Build panel one
                 page.Body = bPanelTwo(panel)
             }
         } else {
+              // Redirect to 'panel/one' so that 
+              // the URL matches the expected size.
              http.Redirect(w,r,"/panel/one",307)
         }
-} else {
-    page.Body = bLogin(NoStruct{})
 }
 </code></pre>
 
@@ -353,7 +366,7 @@ w.Write([]byte(html))
 
 <pre><code class="html golang">   &lt;end path="/panel"  type="star" &gt;
 
-      // writing directly to control headers
+    
 
     page := PanelPage{}
 
