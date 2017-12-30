@@ -288,26 +288,22 @@ For example </p>
 <hr>
 <h3 id="structss">Structs</h3>
 
-<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go interface.</p>
+<p>The <code  class="html golang">&lt;struct/&gt;</code> tag will declare a new Go struct.</p>
 
 <h4 id="attributes">Attributes</h4>
 
 <p>name - The name of this interface</p>
 <p>** Innerxml Struct field declarations.</p>
 
-<p>The example below declares a Go interface named DemoGos with a sub interface called DemoChild. The struct DemoGos has attributes SomeAttr and Child. </p>
+<p>The example below declares a Go struct named <code>DemoGos</code>.</p>
 
-<p>Whenever this interface is initialized within a template (<code>{{ $var := Struct_name }}</code>), these variables are accessible as that interface's properties. For example to access it within a template the code would be {{ $var.SomeAttr }}</p>
+<p>To initialize it within a template (<code>{{ $var := Struct_name }}</code>) the code would be {{ $var.SomeAttr }}</p>
 
 <pre><code  class="html golang">&lt;gos&gt;
     ...
     &lt;header&gt;
-        &lt;struct name="DemoChild"&gt;
-            SomeOtherAttr string
-        &lt;/struct&gt;
         &lt;struct name="DemoGos"&gt;
             SomeAttr string
-            Child *DemoChild
         &lt;/struct&gt;
     &lt;/header&gt;
     ...
@@ -321,7 +317,8 @@ For example </p>
 
 <h3 id="attributes-2">XML Attributes</h3>
 
-<pre><code>name - Specifies the name of the function. Please keep in mind that usage of this function outside of templates requires `Net` prepended to the declared name. If you desire to write methods for strict usage outside of template files, I recommend creating another Go file within your project directory with package name <code>main</code>.
+<pre><code>name - Specifies the name of the function. Please keep in mind that usage of this function outside of templates requires `Net` prepended to the declared name.
+If you desire to write methods for strict usage outside of template files, I recommend creating another Go file within your project directory with package name <code>main</code>.
 return - The return type of the function. Ie: string or a custom interface `DemoGos` 
 var - This is a comma delimited string of the variables you wish this function to have. Say we need a function that has two parameters: param1 of type string and param 2 of type string. It will be declared as `param1 string,param2 string`.
 **InnerXml - This contains your method declarations. This is written in Go. GoS will wrap the inner xml code to create a Go func
@@ -423,7 +420,7 @@ struct - This specifies the name of the Go interface to use with template.
 
 <h2 id="apigeneration">Web services</h2>
 <hr>
-<p>This section covers how to create a REST API endpoints. Your endpoints can be stateful as well as stateless. If a request's verb and path match a declared endpoint, the declared Go lang code will be ran.</p>
+<p>This section covers how to create a REST API endpoints. Your endpoints can be stateful as well as stateless. If a request's verb and path match a declared endpoint, the declared Go code will be ran.</p>
 
 <h3 id="attributes-5">Attributes of end tag.</h3>
 
@@ -455,17 +452,17 @@ type - This specifies the request verb ie: POST,GET,PUT,DELETE, star (to create 
 <p>Here are the variables that are available to your Go code block :</p>
 
 <pre><code>response - String response of api. The value set here will be returned as the endpoint's response.
-session - Current Gorilla session of the request (if stateful endpoint). Use the session.Values dictionary to access and save data.
+session - Current session (*sessions.Session from github.com/gorilla/sessions) of the request (if stateful endpoint). Use the session.Values (type map[string]interface{}) map to access and save data.
 r - *http.Request
 w - http.ResponseWriter
 span - opentracing.Span - this variable is only available when you run your project in development mode (with command <code>gos --run</code>). Use this function to log data to the tracer : span.LogEvent(event string) 
 Handy functions :
-mResponse - will convert any Go lang interface into a JSON string for output. The example below converts Button into a JSON string for output.
+mResponse - will convert any Go interface/struct into a JSON string for output. The example below converts Button into a JSON string for output.
 </code></pre>
           
 <h2 id="imports">Imports</h2>
 <hr >
-<p>Imports allow you to import other Go lang packages for use within your GXML file. It also allows you to import other GXML files by specifying an XML file relative to <code>$GOPATH/src</code>. This will include :  </p>
+<p>Imports allow you to import other Go packages for use within your GXML file. It also allows you to import other GXML files by specifying an XML file relative to <code>$GOPATH/src</code>. This will include :  </p>
 
 <ul>
 <li>structs</li>
