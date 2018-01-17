@@ -31,6 +31,12 @@
     $(".navbar .collapse").remove();
     $(".navbar").append(newdiv)
    }
+
+   $("h5").each(function(e,i){
+    if($(this).html().includes("2017")){
+        $(this).html("")
+    }
+   });
   $.okshadow = function(el, options){
     var base = this;       
     base.$el = $(el);
