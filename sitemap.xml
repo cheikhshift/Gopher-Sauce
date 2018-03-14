@@ -1,109 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-<url>
-  <loc>http://gophersauce.com/</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/docs/projects.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/index.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/tick.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/gdb.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/mvc.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/service.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/bpage.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/api.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/authentication.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/awp.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/benchmark-tests.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/how-run-project.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/how-to-install.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/https.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/markup.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/middleware.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/templates.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://gophersauce.com/docs/tests.html</loc>
-  <lastmod>2017-12-09T11:46:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>gophersauce.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>gophersauce.com/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>gophersauce.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
 </urlset>

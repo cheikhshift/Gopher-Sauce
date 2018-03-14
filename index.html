@@ -1,403 +1,281 @@
 <!DOCTYPE html>
-<html style="overflow-x:hidden;background:#333" lang="en">
-  <head>
-    <!-- Required meta tags always come first -->
+<html>
+
+<head>
+    <meta name="generator" content="Hugo 0.37.1" />
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GopherSauce SDK</title>
-    <meta name="description" content="GopherSauce software development kit (SDK) provides access to GXML compiling and deployment. GXML offers a web application framework, a memory safe template engine, all-in-one configuration files and numerous other features.">
-<meta name="keywords" content="dev,kit,javascript,server,ops,web,csrf,iot,data,framework,test,unit,golang,stack,stack">
-    <!-- Bootstrap CSS -->
-    <script src="https://use.fontawesome.com/d102afacbe.js"></script>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Course",
-  "name": "GopherSauce",
-  "description": "Learn GXML framework.",
-  "provider": {
-    "@type": "Organization",
-    "name": "Get GopherSauce.",
-    "sameAs": "http://gophersauce.com/"
-  }
-}
-</script>
-  </head>
-  <body>
-    <script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
- 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
- 
-  return t;
-}(document, "script", "twitter-wjs"));</script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Gophersauce</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="gophersauce">
+    <meta name="description" content="gophersauce offers cloud developer tools and consulting services.">
+    <meta http-equiv="content-language" content="en-us" />
+    <meta name="og:site_name" content="Gophersauce">
+    <meta name="og:title" content="Gophersauce">
+    <meta name="og:url" content="gophersauce.com/">
+    <meta name="og:image" content="gophersauce.comimages/">
+    <meta name="twitter:title" content="Gophersauce" />
+    <meta name="twitter:url" content="gophersauce.com/" />
+    <meta name="twitter:image" content="gophersauce.comimages/" />
+    <meta name="twitter:card" content="" />
+    <link rel="canonical" href="gophersauce.com/" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/simple-line-icons.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style3.css">
+    <script src="js/modernizr-2.6.2.min.js"></script>
+</head>
 
-    <nav style="display:none;border-radius:0px;position:absolute;z-index:200" class="navbar navbar-light " >
-  <button class="navbar-toggler hidden-sm-up" type="button" style="color:#fff;" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-    &#9776;
-  </button>
-
-   <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-
-
-
-  <ul  class="nav navbar-nav">
-
-    <li style="margin-right: 12px;" class="nav-item">
-       <a class="nav-link" href="docs/docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
-    </li>
-
-     <li style="margin-right: 12px;" class="nav-item">
-       <a class="nav-link" href="docs/index.html"><i class="fa fa-book"></i> Docs</a>
-    </li>
-
-
-
-    <li style="margin-right: 12px;" class="nav-item">
-       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
-    </li>
-
-
-    
-
-     
-
-  </ul>
- 
-</div>
-</nav>
-
-  <div id="fullpage">
-  <div class="section header-space">
-      
-
-      <div class="cont container" >
-          <div class="row">
-            <div class="col-sm-12 text-xs-center" >
-       <img src="logo.png" class="full-width-img">
-              <h1  class="tect">GopherSauce SDK.</h1>
-              <p class="header-p">GopherSauce software development kit (SDK) provides access to GXML compiling and deployment.<br/> GXML offers a web application framework, a memory safe template engine, all-in-one configuration files and numerous other features.</p> 
-            <!--  <p style="color:#fff;"><i class="fa fa-gavel"></i> Tools — Build with <code>ready-to-use</code> extensions.</p>
-              <p style="color:#fff;"><i class="fa fa-server"></i> Ready for scale — Each project is generated with a <code>Dockerfile</code>, You can use to build docker images with.</p>
-              <p style="color:#fff"><i class="fa fa-clock-o"></i> Request tracing — GopherSauce supports Opentracing. </p> 
-              <p style="color:#fff;"><i class="fa fa-flash"></i> Automate code — Write less code with GXML & export to .go file. Try GopherSauce.</p>    <p style="color:#fff;letter-spacing:5px;"> 
-                Build on <i class="fa fa-linux" ></i> <i class="fa fa-windows" ></i> <i class="fa fa-apple" ></i></p>-->
-              <br />
-              <p><a type="button" href="#overview" class="head btn btn-primary-outline">Overview</a> <a type="button" href="/docs" class="head btn btn-primary-outline">Docs</a></p>
-              <p> <a class="twitter-follow-button"
-  href="https://twitter.com/gophersauce"
-  data-size="large">
-Follow @GopherSauce</a> <br />
-<a class="github-button" href="https://github.com/thestrukture/IDE" data-show-count="true" aria-label="Star thestrukture/IDE on GitHub">Star</a></p>
-           
-            </div>
-
-        
-          </div>
-      </div>
-
-  </div>
-
-  <div class="section section-body">
-
-  <div class="container">
-  <h2>Overview</h2><hr>
-  <div class="row">
-  <div class="col-sm-6">
-
-  <div class="card row">
-    <div class="col-sm-12">
-      <h3>GXML framework.</h3>
-      <hr>
-      <p>Build resilient web applications. GXML offers a simple approach to write a web application. </p>
-      <a type="button" href="docs/" class="head btn btn-primary-outline">Learn GXML</a>  <a type="button" href="#usecases" class="head btn btn-primary-outline">Use cases.</a>
-    </div>
-   
-  </div>
-
-  <div class="card card-inverse card-primary row">
-    <div class="col-sm-12">
-      <h3>Monolith on export.</h3>
-      <hr>
-      <p>GopherSauce packages your web resources into Go source. Deploy your service with one binary executable.</p>
-      <a type="button" href="#expsol" class="head btn btn-secondary-outline">Deployment solutions.</a>
-    </div>
-  
-  </div>
-
-  </div>
-
-    <div class="col-sm-6">
-
-
-      <div class="card row">
-    <div class="col-sm-8">
-      <h3>Instrumentation.</h3>
-      <hr>
-      <p>GopherSauce offers a suite of tools to test your web application.</p>
-      <a type="button" href="#testtools" class="head btn btn-primary-outline">Perform tests.</a>
-    </div>
-    <div class="col-sm-4"><br /><img src="img/2.png"></div>
-  </div>
-
-      <div class="card card-inverse card-primary row">
-    <div class="col-sm-12">
-      <h3>Low heap.</h3>
-      <hr>
-      <p>The GopherSauce philosophy puts a strong emphasis on the scarcity of memory.</p>
-      <a type="button" href="#effic" class="head btn btn-secondary-outline">Learn more.</a>
-    </div>
-   
-  </div>
-
-
-
-
-  </div>
-
-
-
-  </div>
-  </div>
-
-  
-  </div>
-
-  <div class="section section-body-two">
-      
-      <div class="container">
-
-
-  <div class="text-xs-center row">
-  <div class="col-sm-12">
-      <h2>Deployment solutions.</h2><hr>
-      <p>GopherSauce SDK offers deployment options to the following targets :</p>
-  <div class=" row">
-    <div class="col-lg-3 ">
-     <div class="card card-inverse card-warning">
-     <img src="img/docker.png">
-    <br />
-      <h4>Docker</h4>
-      <hr>
-      <p>GopherSauce compiler will generate a docker file in your project's directory. </p>
-      <a type="button" href="docs/how-run-project.html#bldocker" class="head btn btn-secondary-outline">Build Docker image.</a>
-    </div>
-    </div>
-      <div class="col-lg-3 ">
-     <div class="card">
-     <img src="https://avatars1.githubusercontent.com/u/13629408?s=400&v=4">
-    <br />
-      <h4>Kubernetes</h4>
-      <hr>
-      <p>kubeconfig will generate a deployment file of your project. </p>
-      <a type="button" href="https://github.com/cheikhshift/docker2kube" target="_blank" class="head btn btn-primary-outline">Get kubeconfig.</a>
-      </div>
-    </div>
-
-     <div class="col-lg-3 ">
-     <div class="card">
-       <img src="https://www.openfaas.com/assets/images/logo.png">
-      <br />
-      <h4>OpenFaaS</h4>
-
-      <hr>
-      <p>Break your Monolith down to dust. Build serverless functions. </p>
-      <a type="button" href="https://github.com/cheikhshift/jsonfaas" target="_blank" class="head btn btn-primary-outline">Deploy to OpenFaaS</a>
-      </div>
-    </div>
-
-      <div class="col-lg-3 ">
-     <div class="card">
-       <img src="img/vbox.png">
-      <br />
-      <h4>Scale anything</h4>
-
-      <hr>
-      <p>Download my load balancer. Distribute operations between physical or virtualized machines. </p>
-      <a type="button" href="https://github.com/cheikhshift/clm-static" target="_blank" class="head btn btn-primary-outline">GET CLM</a>
-      </div>
-    </div>
-   
-  </div>
-
-
-
-  </div>
-
- 
-
-
-  </div>
-  </div>
-
-  </div>
-  <div class="section section-body-two">
-      <div class="container">
-       <h2>Instrumentation suite.</h2>
-       <hr >
-       <br />
-      <div class="row">
-        <div class="col-sm-3 text-xs-center">
-          <img src="img/2.png">
-        </div>
-       <div class="col-sm-9">
-          
-          <div class="card">
-          <h4>Generate test files.</h4>
-          <hr >
-          <p>GopherSauce offers 2 options to generating tests of your source code :</p>
-            <p><span class="grsp">-</span> You can test GXML with built-in test console.</p>
-             <p><span class="grsp">-</span> You can generate test files of your go source with <code>go-test</code>.</p>
-             <p> <a type="button" href="docs/tests.html" class="head btn btn-primary-outline">Test console.</a>  <a type="button" href="https://github.com/cheikhshift/momentum/cmd/go-test" target="_blank" class="head btn btn-primary-outline">Download go-test</a></p>
-           </div>
-
-       </div>
-
-       </div>
-      <div class="row">
-        <div class="col-sm-3 text-xs-center">
-          <img src="img/3.png">
-        </div>
-       <div class="col-sm-9">
-          
-          <div class="card">
-          <h4>Go get cleo.</h4>
-          <hr >
-          <p>cleo analyzes other web applications written in Go. It generates LARs (long-ass reports) of tests performed.</p>
-             <p> <a type="button" href="https://github.com/cheikhshift/cleo" target="_blank" class="head btn btn-warning-outline">Download</a>  </p>
-           </div>
-
-       </div>
-       
-       </div>       
-
-      </div>
-
-  </div>
-
-   <div class="section section-body-two">
-       <div class="container">
-       <h2 >Low heap, high performance.</h2>
-       <hr >
-       <br />
-      <div class="row">
-        <div class="col-sm-3 text-xs-center">
-          <img src="img/1.png">
-        </div>
-       <div class="col-sm-9">
-          
-          <div class="card">
-          <h4>Template caching.</h4>
-          <hr >
-          <p>GopherSauce reduces template render time by caching the minimum parameters required to execute a template.</p>
-             <p> <a type="button" href="docs/templates.html" class="head btn btn-primary-outline">Write a template.</a> </p>
-           </div>
-
-       </div>
-
-       </div>
-      <div class="row">
-        <div class="col-sm-3 text-xs-center">
-          <img src="img/4.png">
-        </div>
-       <div class="col-sm-9">
-          
-          <div class="card">
-          <h4>Ensured garbage collection.</h4>
-          <hr >
-          <p>GopherSauce dynamic pages release allocations after each request. This ensures garbage collection of unused resources.</p>
-             <p> <a type="button" href="docs/awp.html" class="head btn btn-primary-outline">Build dynamic page.</a>  </p>
-           </div>
-
-       </div>
-       
-       </div>       
-
-      </div>
-   </div>
-
-    <div class="section">
-      
+<body>
+    <header role="banner" id="fh5co-header">
         <div class="container">
-       <h2 >Additional information.</h2>
-       <hr >
-       <br />
-      <div class="row">
-        <div class="col-sm-6">
-         <h4>Use cases.</h4>
-         <hr />
-           <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-template" target="_blank">Build a website with templates.</a></p>
-      <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-methods" target="_blank">Use your Golang libraries with your Web app.</a></p>
-    <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-mvc" target="_blank">Build MVCs with Go.</a></p> 
-      <p><a target="_blank" href="https://github.com/cheikhshift/momentum">Develop RPC functions accessible through auto-generated javascript function libraries.</a></p>
-     
-       <p><a target="_blank" href="https://github.com/cheikhshift/gopher-sauce-database" target="_blank">Manage data with Golang templates.</a></p> 
-     <p><a target="_blank" href="https://github.com/cheikhshift/gop" >Service security & User authentication.</a></p>
-     <p><a  target="_blank" href="https://github.com/cheikhshift/form" >Build html <code>forms</code> with your <code>structs</code></a></p>
-     <p> <a target="_blank" href="https://github.com/cheikhshift/locale" >Localize your web application.</a></p>
-      <p> <a target="_blank" href="https://github.com/cheikhshift/jwt" >JWT Authorization.</a></p>
-     <p><a target="_blank" href="https://github.com/cheikhshift/gos/blob/master/faas.md">Build OpenFaaS functions.</a></p>
-  
-     <p><a target="_blank" href="https://github.com/cheikhshift/docker2kube/blob/master/TLS.md">Secure web application with TLS 1.2.</a></p>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+                    <a class="navbar-brand" href="index.html">gophersauce</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+                        <li><a href="#" data-nav-section="work"><span>Developer tools</span></a></li>
+                        <li><a href="#" data-nav-section="services"><span>Services</span></a></li>
+                        <li><a href="#" data-nav-section="contact"><span>Contact</span></a></li>
+                        <li><a class="external" href="gophersauce.com/docs"><span>Documentation</span></a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-       <div class="col-sm-6">
-     
-      
-          <footer>
-        
-       <h4>Links.</h4>
-       <hr>
-      <ul class="nav nav-inline">
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
-        </li>
-      </ul>
-      <br />
-       <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
-      </footer>
+    </header>
+    <section id="fh5co-home" data-section="home" style="background-image: url(images/full_image_2.jpg);" data-stellar-background-ratio="0.5">
+        <div class="gradient"></div>
+        <div class="container">
+            <div class="text-wrap">
+                <div class="text-inner">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h1 class="to-animate">Making the cloud easy.</h1>
+                            <h2 class="to-animate">Gophersauce will help you implement your cloud strategy.</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slant"></div>
+    </section>
+    <section id="fh5co-intro">
+        <div class="container">
+            <div class="row row-bottom-padded-lg">
+                <div class="fh5co-block to-animate" style="background-image: url(images/img_7.jpg);">
+                    <div class="overlay-darker"></div>
+                    <div class="overlay"></div>
+                    <div class="fh5co-text">
+                        <i class="fh5co-intro-icon icon-bulb"></i>
+                        <h2>Plan</h2>
+                        <p>We can help design your cloud infrastructure. We offer diverse deployment options.</p>
+                        <p><a href="#fh5co-contact" class="btn btn-primary">Get In Touch</a></p>
+                    </div>
+                </div>
+                <div class="fh5co-block to-animate" style="background-image: url(images/img_8.jpg);">
+                    <div class="overlay-darker"></div>
+                    <div class="overlay"></div>
+                    <div class="fh5co-text">
+                        <i class="fh5co-intro-icon icon-wrench"></i>
+                        <h2>Develop</h2>
+                        <p>Download tools to facilitate your web server&#39;s transition to the cloud.</p>
+                        <p><a href="#fh5co-work" class="btn btn-primary">BROWSE TOOLS</a></p>
+                    </div>
+                </div>
+                <div class="fh5co-block to-animate" style="background-image: url(images/img_10.jpg);">
+                    <div class="overlay-darker"></div>
+                    <div class="overlay"></div>
+                    <div class="fh5co-text">
+                        <i class="fh5co-intro-icon icon-rocket"></i>
+                        <h2>Launch</h2>
+                        <p>Gophersauce offers cloud deployment consulting.</p>
+                        <p><a href="#fh5co-contact" class="btn btn-primary">Get In Touch</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="fh5co-work" data-section="work">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-center">
+                    <h2 class="to-animate">Developer tools</h2>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                            <h3></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-bottom-padded-sm">
+                <div class="col-md-4 col-sm-6 col-xxs-12">
+                    <a href="https://github.com/cheikhshift/cleo" class="fh5co-project-item to-animate">
+						<img src="images/img2.png" alt="Image2" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Cleo</h2>
+						<span>Estimate CPU time and heap sizes of server.</span>
+						</div>
+					</a>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-md-4 col-sm-6 col-xxs-12">
+                    <a href="https://github.com/cheikhshift/megalith" class="fh5co-project-item to-animate">
+						<img src="images/img.png" alt="Image2" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>Megalith</h2>
+						<span>Receive text messages on web server downtime.</span>
+						</div>
+					</a>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-md-4 col-sm-6 col-xxs-12">
+                    <a href="/docs" class="fh5co-project-item to-animate">
+						<img src="images/img3.png" alt="Image2" class="img-responsive">
+						<div class="fh5co-text">
+						<h2>GopherSauce CLI</h2>
+						<span>Build cloud native software.</span>
+						</div>
+					</a>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center to-animate">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="fh5co-services" data-section="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-left">
+                    <h2 class=" left-border to-animate">Services</h2>
+                    <div class="row">
+                        <div class="col-md-8 subtext to-animate">
+                            <h3>Gophersauce offers cloud consulting and support.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                    <i class="icon to-animate-2 icon-road"></i>
+                    <h3>Cloud deployment.</h3>
+                    <p>We can reduce the friction of moving to the cloud.</p>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                    <i class="icon to-animate-2 icon-layers2"></i>
+                    <h3>Stack development.</h3>
+                    <p>We can help you recreate your legacy stack on the cloud.</p>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                    <i class="icon to-animate-2 icon-phone"></i>
+                    <h3>Remote support.</h3>
+                    <p>Gophersauce offers web server monitoring. Be the first to know when your web service is not available.</p>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                    <i class="icon to-animate-2 icon-flash"></i>
+                    <h3>Cloud optimization.</h3>
+                    <p>We can optimize your web application for the cloud. And ensure your service is highly available to your audience.</p>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+            </div>
+        </div>
+    </section>
+    <section id="fh5co-contact" data-section="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-center">
+                    <h2 class="to-animate">Get in touch</h2>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                            <h3></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-bottom-padded-md">
+                <div class="col-md-6 to-animate">
+                    <h3></h3>
+                    <ul class="fh5co-contact-info">
+                        <li class="fh5co-contact-address "><i class="icon-envelope"></i>cheikhhseck@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 to-animate">
+                    <form method="post" action="//formspree.io/cheikhhseck@gmail.com">
+                        <div class="form-group ">
+                            <label for="name" class="sr-only">Name</label>
+                            <input id="name" class="form-control" name="name" placeholder="Name" type="text">
+                        </div>
+                        <div class="form-group ">
+                            <label for="email" class="sr-only">Email</label>
+                            <input id="email" class="form-control" name="_replyto" placeholder="Email" type="email">
+                        </div>
+                        <div class="form-group ">
+                            <label for="phone" class="sr-only">Phone</label>
+                            <input id="phone" class="form-control" name="phone" placeholder="Phone" type="text">
+                        </div>
+                        <div class="form-group ">
+                            <label for="message" class="sr-only">Message</label>
+                            <textarea id="message" cols="30" rows="5" class="form-control" name="message" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group ">
+                            <input class="btn btn-primary btn-lg" value="Send message" type="submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer id="footer" role="contentinfo">
+        <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
+        <div class="container">
+            <div class="">
+                <div class="col-md-12 text-center">
+                    <p></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="social social-circle">
+                        <li><a href="https://twitter.com/gophersauce"><i class="icon-twitter"></i></a></li>
+                        <li><a href="https://github.com/thestrukture"><i class="icon-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/magnific-popup-options.js"></script>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-71342160-1");
+        pageTracker._trackPageview();
+    } catch (err) {}
+    </script>
+    <script src="js/main.js"></script>
+</body>
 
-       </div>
-
-       </div>
-    
-      </div>
-
-
-    </div>
-  
-  
-</div>
-
-
-
-
-
-
-    
-    <!-- jQuery first, then Bootstrap JS. -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/okshadow.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-   <script type="text/javascript" src="scrolloverflow.min.js"></script>
-
-<script type="text/javascript" src="jquery.fullPage.js"></script>
-<script type="text/javascript" src="jsfullpage.js"></script>
-
-  </body>
 </html>
