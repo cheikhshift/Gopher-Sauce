@@ -1,0 +1,33 @@
+baseURL = "gophersauce.com"
+languageCode = "en-us"
+title = "Gophersauce CLI documentation."
+
+
+# Change the default theme to be use when building the site with Hugo
+theme = "hugo-theme-learn"
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= true
+[params]
+  editURL = "https://github.com/cheikhshift/Gopher-Sauce/edit/hugo-source/"
+  description = "Gophersauce CLI documentation"
+  author = "Cheikh Seck"
+  showVisitedLinks = true
+   themeVariant = "red"
+
+
+# For search functionnality
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+
+[Languages]
+[Languages.en]
+title = "Gophersauce CLI documentation"
+weight = 1
+languageName = "English"
+
+[[Languages.en.menu.shortcuts]] 
+name = "<i class='fa fa-fw fa-github'></i> Github repo"
+identifier = "ds"
+url = "https://github.com/cheikhshift/gos"
+weight = 10
