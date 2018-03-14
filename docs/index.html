@@ -1,170 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags always come first -->
+<html lang="en" class="js csstransforms3d">
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GopherSauce - Documentation</title>
-    <!-- Bootstrap CSS -->
-<script src="https://use.fontawesome.com/d102afacbe.js"></script>
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.37.1" />
+    <meta name="description" content="Gophersauce CLI documentation">
+    <meta name="author" content="Cheikh Seck">
+    <link rel="shortcut icon" href="/docs/images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="/docs/images/favicon.png" type="image/x-icon" />
+    <title>Gophersauce documentation. :: Gophersauce CLI documentation</title>
+    <link href="/docs/css/nucleus.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/font-awesome.min.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/hybrid.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/featherlight.min.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/perfect-scrollbar.min.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/auto-complete.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/theme.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/hugo-theme.css?1521047311" rel="stylesheet">
+    <link href="/docs/css/theme-red.css?1521047311" rel="stylesheet">
+    <script src="/docs/js/jquery-2.x.min.js?1521047311"></script>
+    <style type="text/css">
+     :root #header+#content>#left>#rlblock_left {
+        display: none !important;
+    }
+    </style>
+</head>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../main.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-          <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
-  </head>
-  <body>
-
-  <div id="sidr" class="sidrr">
-        <ul>
-          <li><a id="simple-menu-two" class="nav-link"  href="#sidr"><i class="fa fa-chevron-left"></i> Collapse</a></li>
-          <li><a class="active" href="index.html">Home</a></li>
-          <li><a href="api.html">Build web service</a></li>
-          <li><a href="authentication.html">Authentication</a></li>
-          <li><a href="awp.html">Dynamic web pages</a></li>
-          <li><a href="benchmark-tests.html">Go Benchmark tests</a></li>
-          <li><a href="how-run-project.html">How to run</a></li>
-          <li><a href="how-to-install.html">How to install</a></li>
-          <li><a href="https.html">HTTPS</a></li>
-          <li><a href="markup.html">GopherSauce markup</a></li>
-          <li><a href="middleware.html">Middleware</a></li>
-          <li><a href="templates.html">Templates</a></li>
-          <li><a href="tests.html">Go tests</a></li>
-        </ul>
-  </div>
-    <nav class="navbar navbar-expand-lg  navbar-light navbar-dark bg-primary fixed-top" >
- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="exCollapsingNavbar2">
-  <ul class="nav navbar-nav">
-  
-   <li class="nav-item">
-      <a id="simple-menu" class="nav-link"  href="#sidr"><i class="fa fa-bars"></i> Show index</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="../"><i class="fa fa-home"></i> Home</a>
-    </li>
-        <li style="margin-right: 12px;" class="nav-item">
-       <a class="nav-link" href="docs/projects.html"><i class="fa fa-user-circle"></i> Projects</a>
-    </li>
-
-     <li style="margin-right: 12px;" class="nav-item">
-       <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
-    </li>
-
-  
-  </ul>
-  <div class="form-inline pull-xs-right">
-       <a href="#" class="btn btn-info btn-block" role="button">Top</a>
-  </div> 
-</div>
-</nav>
-
-  <div class="header-space" style="height:190px;margin-bottom:2em;">
-      <div class="cont container">
-          <div class="page-header">
-              <h1 style="color:#fff" class="tect"><i class="fa fa-book"></i> Documentation</h1>
-          </div>
-      </div>
-  </div>
-  <div class="container">
-        <div class="list-group list-group-item">
-   
-<h3><a id="About_Gopher_Sauce_2"></a>About GopherSauce</h3>
-<p>GopherSauce provides an object-oriented programming model. At the heart of its philosophy is scarcity of resources. GopherSauce provides a framework to build reusable resources (scarcity of time) and production safe code (scarcity of computer resources).</p>
-
-		<h4>A sample GopherSauce project structure :</h4>
-		<pre>
-		<code>
-folder/
-	tmpl/
-	web/
-	gos.gxml
-	...additonal .go files too with package main
-		</code>
-		</pre>
-		<p>gos.gxml —  File with GopherSauce markup.</p>
-		<p>web/ —  Project's web root.</p>
-		<p>tmpl/ — Project's template root. Read more about templates <a href="http://gophersauce.com/docs/markup.html#templates">here</a> </p>
-<h3><a id="Syntax_9"></a>XML Syntax</h3>
-<p>Your GO code is wrapped around XML tags. Check out the <a href="http://gophersauce.com/docs/service.html">webservice project</a> to visualize the placement of GO Code within XML.  Find more information about the behavior of tags in the <a href="http://gophersauce.com/docs/markup.html">GopherSauce markup</a> section. Get the autocomplete for sublime 3, Search for Gopher Sauce on sublime package control.</p>
-		<h3>Quick links</h3>
-		<ul>
-			<li><a href="how-run-project.html">Quick start</a></li>
-			<li><a href="api.html">Build web services</a></li>
-			<li><a href="markup.html">GXML documentation</a></li>
-			<li><a href="authentication.html">WebApp user authentication</a></li>
-			<li><a href="https.html">Add TLS WebApp</a></li>
-		</ul>
-          
-          <!-- <h2><a id="user-content-debugging" class="anchor" href="#debugging" aria-hidden="true"></a>How to debug</h2>
-<p>Please use current golang command line tools as a fallback. The final result of each <a href="http://golangserver.com">GopherSauce</a> webapp is go code.</p>
-<h3><a id="user-content-go-server-apps" class="anchor" href="#go-server-apps" aria-hidden="true"></a>GopherSauce apps</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="" disabled=""> Find bugs by reading your web application's output.
-If you're writing a webapp, GopherSauce attempts to use logging to find bugs. This process works by recovering from a runtime panic and stating the defunct line including the reason it crashed. This logger is only supported within the web service code, template pipeline code and templates. Due to this feature limit your code within the scope of one line.</li>
-</ul>
-<p>Good :</p>
-<pre><code>var name := Struct{Property:"val"}
-</code></pre>
-<p>Bad for debug logger :</p>
-<pre><code>var name := Struct{ 
-		    Property:"val",
-		    FieldTwo: 2
-		   }
-</code></pre>
-		<h4>How to recreate data for tests</h4>
-	<p>Read the Go tests section of the documentation.</p> -->
+<body class="" data-url="/docs/">
+    <nav id="sidebar" class="showVisitedLinks">
+        <div id="header-wrapper">
+            <div id="header">
+            </div>
+            <div class="searchbox">
+                <label for="search-by"><i class="fa fa-search"></i></label>
+                <input data-search-input id="search-by" type="text" placeholder="Search...">
+                <span data-search-clear=""><i class="fa fa-close"></i></span>
+            </div>
+            <script type="text/javascript" src="/docs/js/lunr.min.js?1521047311"></script>
+            <script type="text/javascript" src="/docs/js/auto-complete.js?1521047311"></script>
+            <script type="text/javascript">
+            var baseurl = '\/docs';
+            </script>
+            <script type="text/javascript" src="/docs/js/search.js?1521047311"></script>
         </div>
-  </div>
-
-
-
-  <footer>
-    <div class="container">
-      <h5 style="float:right;" class="text-muted">&copy 2017 Cheikh Seck</h5>
-     
-      <ul class="nav nav-inline">
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/cheikhshift/Gopher-Sauce"><i class="fa fa-github"></i> Github</a>
-        </li>
-      </ul>
+        <div class="highlightable">
+            <ul class="topics">
+                <li data-nav-id="/docs/intro/" title="Intro" class="dd-item 
+        
+        
+        
+        ">
+                    <a href="/docs/intro/">
+          Intro
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+                    <ul>
+                        <li data-nav-id="/docs/intro/download/" title="Download" class="dd-item ">
+                            <a href="/docs/intro/download/">
+        Download
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/intro/setup/" title="First project" class="dd-item ">
+                            <a href="/docs/intro/setup/">
+        First project
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-nav-id="/docs/abstractions/" title="GXML" class="dd-item 
+        
+        
+        
+        ">
+                    <a href="/docs/abstractions/">
+          GXML
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+                    <ul>
+                        <li data-nav-id="/docs/abstractions/tls/" title="TLS" class="dd-item ">
+                            <a href="/docs/abstractions/tls/">
+        TLS
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/abstractions/api_endpoints/" title="Web handlers" class="dd-item ">
+                            <a href="/docs/abstractions/api_endpoints/">
+        Web handlers
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/abstractions/methods/" title="Methods" class="dd-item ">
+                            <a href="/docs/abstractions/methods/">
+        Methods
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/abstractions/go_source/" title="Go source" class="dd-item ">
+                            <a href="/docs/abstractions/go_source/">
+        Go source
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/abstractions/templates/" title="Templates" class="dd-item ">
+                            <a href="/docs/abstractions/templates/">
+        Templates
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/abstractions/webservers/" title="Web server" class="dd-item ">
+                            <a href="/docs/abstractions/webservers/">
+        Web server
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-nav-id="/docs/serving-files/" title="Serving files" class="dd-item 
+        
+        
+        
+        ">
+                    <a href="/docs/serving-files/">
+          Serving files
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+                    <ul>
+                        <li data-nav-id="/docs/serving-files/serving-templates/" title="Serving templates" class="dd-item ">
+                            <a href="/docs/serving-files/serving-templates/">
+        Serving templates
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-nav-id="/docs/build/" title="Build" class="dd-item 
+        
+        
+        
+        ">
+                    <a href="/docs/build/">
+          Build
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+                    <ul>
+                        <li data-nav-id="/docs/build/docker/" title="Docker" class="dd-item ">
+                            <a href="/docs/build/docker/">
+        Docker
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/build/export/" title="Export" class="dd-item ">
+                            <a href="/docs/build/export/">
+        Export
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-nav-id="/docs/deployments/" title="Deployments" class="dd-item 
+        
+        
+        
+        ">
+                    <a href="/docs/deployments/">
+          Deployments
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+                    <ul>
+                        <li data-nav-id="/docs/deployments/k8s/" title="K8s" class="dd-item ">
+                            <a href="/docs/deployments/k8s/">
+        K8s
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                        <li data-nav-id="/docs/deployments/faas/" title="FaaS" class="dd-item ">
+                            <a href="/docs/deployments/faas/">
+        FaaS
+        <i class="fa fa-check read-icon"></i>
+        </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <section id="shortcuts">
+                <h3>More</h3>
+                <ul>
+                    <li>
+                        <a class="padding" href="https://github.com/cheikhshift/gos"><i class='fa fa-fw fa-github'></i> Github repo</a>
+                    </li>
+                </ul>
+            </section>
+            <section id="prefooter">
+                <hr/>
+                <ul>
+                    <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fa fa-fw fa-history"></i> Clear History</a></li>
+                </ul>
+            </section>
+            <section id="footer">
+                <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+            </section>
+        </div>
+    </nav>
+    <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+            <div id="body-inner">
+                <span id="sidebar-toggle-span">
+<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
+</span>
+                <h1 id="gophersauce-cli-documentation">Gophersauce CLI documentation.</h1>
+                <p>Build cloud native applications.</p>
+            </div>
+        </div>
+        <div id="navigation">
+            <a class="nav nav-next" href="/docs/intro/" title="Intro" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        </div>
+    </section>
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+        <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-  </footer>
-    
-
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>  
-	  <script type="text/javascript" src="../js/okshadow.js"></script>
-     <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-    <script type="text/javascript">
-        $(function(){
-        $('.head').okshadow({color:"rgba(0,0,0,0.4)"});
-         $('.tect').okshadow({textShadow:true,color:"rgba(0,0,0,0.4)"});
-        });
-        $(document).ready(function() {
-          $('#simple-menu').sidr();
-          $('#simple-menu-two').sidr();
-   
-        });
-         hljs.initHighlightingOnLoad();
+    <script src="/docs/js/clipboard.min.js?1521047311"></script>
+    <script src="/docs/js/perfect-scrollbar.min.js?1521047311"></script>
+    <script src="/docs/js/perfect-scrollbar.jquery.min.js?1521047311"></script>
+    <script src="/docs/js/jquery.sticky.js?1521047311"></script>
+    <script src="/docs/js/featherlight.min.js?1521047311"></script>
+    <script src="/docs/js/html5shiv-printshiv.min.js?1521047311"></script>
+    <script src="/docs/js/highlight.pack.js?1521047311"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
     </script>
-     <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-71342160-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-  </body>
+    <script src="/docs/js/modernizr.custom.71422.js?1521047311"></script>
+    <script src="/docs/js/learn.js?1521047311"></script>
+    <script src="/docs/js/hugo-learn.js?1521047311"></script>
+    <link href="/docs/mermaid/mermaid.css?1521047311" type="text/css" rel="stylesheet" />
+    <script src="/docs/mermaid/mermaid.js?1521047311"></script>
+    <script>
+    mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+
 </html>

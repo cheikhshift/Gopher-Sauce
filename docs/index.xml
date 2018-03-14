@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gophersauce documentation. on Gophersauce CLI documentation</title>
+    <link>/docs/</link>
+    <description>Recent content in Gophersauce documentation. on Gophersauce CLI documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Mar 2018 15:19:52 +0000</lastBuildDate>
+    
+	<atom:link href="/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker</title>
+      <link>/docs/build/docker/</link>
+      <pubDate>Wed, 14 Mar 2018 15:01:11 +0000</pubDate>
+      
+      <guid>/docs/build/docker/</guid>
+      <description> How to build docker image GopherSauce will generate a docker file each time you build/export a project.
+Run the following command to ensure your project&amp;rsquo;s dependencies. This command requires dep installed.
+dep init  Build docker image with file.
+docker build -t ImageName .  </description>
+    </item>
+    
+    <item>
+      <title>Export</title>
+      <link>/docs/build/export/</link>
+      <pubDate>Wed, 14 Mar 2018 15:01:11 +0000</pubDate>
+      
+      <guid>/docs/build/export/</guid>
+      <description>This section covers how to export Gophersauce abstractions into Go code.
+Export project. To export a Gophersauce project open a new terminal session. Change the directory to your Gophersauce project, and run the following command : gos --export</description>
+    </item>
+    
+    <item>
+      <title>K8s</title>
+      <link>/docs/deployments/k8s/</link>
+      <pubDate>Wed, 14 Mar 2018 15:00:32 +0000</pubDate>
+      
+      <guid>/docs/deployments/k8s/</guid>
+      <description>Here is a guide on deploying a GopherSauce project to a local Kubernetes cluster.
+Requirements  Docker installed and running. Kubernetes setup. Kubectl. A GopherSauce or Go project. Minikube (Optional, guide references minikube dashboard command )  *Make sure the project you plan on building is the current working directory.
+Step 1 : Run Kubeconfig Run the following command to write a new kubernetes deployment file. While the command is running it will suggest a docker command to run.</description>
+    </item>
+    
+    <item>
+      <title>TLS</title>
+      <link>/docs/abstractions/tls/</link>
+      <pubDate>Wed, 14 Mar 2018 15:00:32 +0000</pubDate>
+      
+      <guid>/docs/abstractions/tls/</guid>
+      <description>Secure application with TLS 1.2 (RFC 5246) Here is a guide to building a web application served over TLS with a GopherSauce project.
+Requirements  GopherSauce project. (Make the project root your terminal&amp;rsquo;s working directory) HTTPS certificate &amp;amp; Key to use with application.  Step 0 You can skip this step if you already have HTTPS certificate and key files. Read the part of this Gist to quickly (in my opinion) generate HTTPS certificate and key files.</description>
+    </item>
+    
+    <item>
+      <title>FaaS</title>
+      <link>/docs/deployments/faas/</link>
+      <pubDate>Wed, 14 Mar 2018 15:00:28 +0000</pubDate>
+      
+      <guid>/docs/deployments/faas/</guid>
+      <description>Here is a guide to help you build an OpenFaaS function with JSON responses. This function will convert the request body (JSON) to a GO struct. The function will then write a JSON response of an altered version of your request body. PS. This is a lot faster with GopherSauce Vim plugin
+Requirements  Install GopherSauce (go get github.com/cheikhshift/gos) Docker running on host. OpenFaaS CLI. OpenFaaS Gateway (Link to setup-guide) .</description>
+    </item>
+    
+    <item>
+      <title>Serving templates</title>
+      <link>/docs/serving-files/serving-templates/</link>
+      <pubDate>Wed, 14 Mar 2018 15:00:28 +0000</pubDate>
+      
+      <guid>/docs/serving-files/serving-templates/</guid>
+      <description>This section covers the usage of dynamic web pages.
+Create a page To add a new page, create a new page_name.tmpl file within your Gophersauce project web root. If you used the CLI argument &amp;ndash;make, your web root folder would be web (relative to your project&amp;rsquo;s directory). To access your page visit hostname/page_name.
+The Go struct literal of a page in your web root :
+ type Page struct { R *http.</description>
+    </item>
+    
+    <item>
+      <title>Web handlers</title>
+      <link>/docs/abstractions/api_endpoints/</link>
+      <pubDate>Wed, 14 Mar 2018 15:00:10 +0000</pubDate>
+      
+      <guid>/docs/abstractions/api_endpoints/</guid>
+      <description>Defining a web service : This section covers how to create an end tag (REST API endpoint). Your endpoints can be stateful as well as stateless. If a request&amp;rsquo;s verb and path match a declared endpoint, the declared Go code will be ran.
+Attributes of end tag : path - URL path of endpoint InnerXML - Go statements to be ran on endpoint execution. type - This specifies the request verb ie: POST,GET,PUT,DELETE, star (to disregard request verb), f ( to execute as middleware) id - Id of service.</description>
+    </item>
+    
+    <item>
+      <title>Methods</title>
+      <link>/docs/abstractions/methods/</link>
+      <pubDate>Wed, 14 Mar 2018 14:59:00 +0000</pubDate>
+      
+      <guid>/docs/abstractions/methods/</guid>
+      <description>This section covers how to extend template functionality with pipelines ( methods ) .
+Attributes of template tag :
+name - Specifies the name of the function. Please keep in mind, that usage of this function within your package requires `Net` prepended to the declared name. If you desire to write methods for strict usage outside of template files, I recommend creating another Go file within your project directory with package name main.</description>
+    </item>
+    
+    <item>
+      <title>Go source</title>
+      <link>/docs/abstractions/go_source/</link>
+      <pubDate>Wed, 14 Mar 2018 14:58:44 +0000</pubDate>
+      
+      <guid>/docs/abstractions/go_source/</guid>
+      <description>Sidecar You can add new Go code within your Gophersauce project.
+Format Your new Go code must have package name main.
+Main function Gophersauce will declare your web server&amp;rsquo;s main function. You don&amp;rsquo;t need to write one.</description>
+    </item>
+    
+    <item>
+      <title>Templates</title>
+      <link>/docs/abstractions/templates/</link>
+      <pubDate>Wed, 14 Mar 2018 14:58:44 +0000</pubDate>
+      
+      <guid>/docs/abstractions/templates/</guid>
+      <description>This section covers how to declare reusable HTML templates.
+Attributes of template tag :
+name - This is the name of the template within your application. You can load a template by simply calling `{{&amp;lt;template name&amp;gt;}}` within any template in your project. tmpl - This specifies the path to the template file with the declared template root in mind. For example if your file was in `$GOPATH/PACKAGENAME/tmpl/file.tmpl` the tmpl attribute will be `file` because GoS will prepend the absolute path.</description>
+    </item>
+    
+    <item>
+      <title>Web server</title>
+      <link>/docs/abstractions/webservers/</link>
+      <pubDate>Wed, 14 Mar 2018 14:58:44 +0000</pubDate>
+      
+      <guid>/docs/abstractions/webservers/</guid>
+      <description>Configuring a project. This section covers how to customize the Go code generated by Gophersauce. These tags are located in your project&amp;rsquo;s GXML file.
+ Main Port Session Key Shell scripting  Main The code specified here will be executed on application start. The contents of this tag is Go code, it is located at the root of your GXML file. For example :
+&amp;lt;gos&amp;gt; ... &amp;lt;main&amp;gt; fmt.Println(&amp;quot;Logging from main function&amp;quot;) &amp;lt;/main&amp;gt; .</description>
+    </item>
+    
+    <item>
+      <title>Download</title>
+      <link>/docs/intro/download/</link>
+      <pubDate>Wed, 14 Mar 2018 14:57:38 +0000</pubDate>
+      
+      <guid>/docs/intro/download/</guid>
+      <description>Install Gophersauce Run the following command to install gophersauce.
+go get github.com/cheikhshift/gos</description>
+    </item>
+    
+    <item>
+      <title>First project</title>
+      <link>/docs/intro/setup/</link>
+      <pubDate>Wed, 14 Mar 2018 14:57:26 +0000</pubDate>
+      
+      <guid>/docs/intro/setup/</guid>
+      <description> First project Perform the following steps to start a new Gophersauce project.
+ Create a new directory. Name it as you wish. Open a new terminal session. Change the working directory to the one you&amp;rsquo;ve just created. Run this command to generate a GXML file : gos --make  </description>
+    </item>
+    
+  </channel>
+</rss>

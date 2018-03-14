@@ -1,0 +1,148 @@
+[
+{
+	"uri": "/docs/intro/",
+	"title": "Intro",
+	"tags": [],
+	"description": "",
+	"content": " Gophersauce CLI The Gophersauce CLI transpiles web server abstractions into Go code.\nGophersauce markup. web server abstractions are supplied in file format GXML. Find more information about GXML here.\nRequirements  Go 1.7 or higher $GOPATH set ( learn how here ).  "
+},
+{
+	"uri": "/docs/abstractions/",
+	"title": "GXML",
+	"tags": [],
+	"description": "",
+	"content": " Markup abstractions Gophersauce markup (GXML) offers a set of web server abstractions.\nAvailable abstractions  Web handlers Templates Methods Web server  "
+},
+{
+	"uri": "/docs/serving-files/",
+	"title": "Serving files",
+	"tags": [],
+	"description": "",
+	"content": "This section covers how to serve static files from your web server.\nBy default Gophersauce will serve all the files within your project\u0026rsquo;s web folder.\n"
+},
+{
+	"uri": "/docs/build/",
+	"title": "Build",
+	"tags": [],
+	"description": "",
+	"content": " This section covers how to run a local instance of your web server.\nRun server. To run a Gophersauce project open a new terminal session. Change the directory to your Gophersauce project, and run the following command : gos --run\n"
+},
+{
+	"uri": "/docs/",
+	"title": "Gophersauce documentation.",
+	"tags": [],
+	"description": "",
+	"content": " Gophersauce CLI documentation. Build cloud native applications.\n"
+},
+{
+	"uri": "/docs/build/docker/",
+	"title": "Docker",
+	"tags": [],
+	"description": "",
+	"content": " How to build docker image GopherSauce will generate a docker file each time you build/export a project.\nRun the following command to ensure your project\u0026rsquo;s dependencies. This command requires dep installed.\ndep init  Build docker image with file.\ndocker build -t ImageName .  "
+},
+{
+	"uri": "/docs/build/export/",
+	"title": "Export",
+	"tags": [],
+	"description": "",
+	"content": " This section covers how to export Gophersauce abstractions into Go code.\nExport project. To export a Gophersauce project open a new terminal session. Change the directory to your Gophersauce project, and run the following command : gos --export\n"
+},
+{
+	"uri": "/docs/deployments/k8s/",
+	"title": "K8s",
+	"tags": [],
+	"description": "",
+	"content": " Here is a guide on deploying a GopherSauce project to a local Kubernetes cluster.\nRequirements  Docker installed and running. Kubernetes setup. Kubectl. A GopherSauce or Go project. Minikube (Optional, guide references minikube dashboard command )  *Make sure the project you plan on building is the current working directory.\nStep 1 : Run Kubeconfig Run the following command to write a new kubernetes deployment file. While the command is running it will suggest a docker command to run. This command will generate a docker image, with name corresponding to your deployment file (with name default-deployment.yaml).\nkubeconfig  The command will look for a gos.gxml by default with port information. You may also specify the port with command kubeconfig \u0026lt;PORT\u0026gt;\nStep 2 : Build docker image If you plan on using local images make sure you\u0026rsquo;re using a local docker registry.\nBuild a docker image of your project.\ndocker build -t {folderName} .  Step 3 : Create a deployment Run the following command to launch a new deployment.\nkubectl create -f default-deployment.yaml  Step 4 : Create service The following command will create a new load balancer service of your deployment.\nkubectl expose deployment {folderName}-deployment --type=LoadBalancer  Notes : Replace {folderName} with the name of the current working directory (AKA project folder name).\nStep 5 : Access service Run the following Minikube command to access your service:\n minikube service {folderName}-deployment  Step 6 : Manage and monitor Run the following command to open the very helpful kubernetes dashboard. From here you can manage anything kubernetes related.\nminikube dashboard  Deploying Stateful applications : Create a StatefulSet with configuration file starter default-statefulset.yaml, generated when you run command kubeconfig. This will also create : - a new service. - a persistent volume \u0026amp; claim.\n"
+},
+{
+	"uri": "/docs/abstractions/tls/",
+	"title": "TLS",
+	"tags": [],
+	"description": "",
+	"content": " Secure application with TLS 1.2 (RFC 5246) Here is a guide to building a web application served over TLS with a GopherSauce project.\nRequirements  GopherSauce project. (Make the project root your terminal\u0026rsquo;s working directory) HTTPS certificate \u0026amp; Key to use with application.  Step 0 You can skip this step if you already have HTTPS certificate and key files. Read the part of this Gist to quickly (in my opinion) generate HTTPS certificate and key files.\nStep 1 Update yourgos.gxml root XML tag (AKA \u0026lt;gos\u0026gt;) . Add attribute https-cert with value specifying a path to your certificate file.\nStep 2 Update yourgos.gxml root XML tag (AKA \u0026lt;gos\u0026gt;) . Add attribute https-key with value specifying a path to your key file.\nStep 3 Update yourgos.gxml port tag. Change it to 443.\nStep 4 Run your project with TLS with the following command :\ngos --run  "
+},
+{
+	"uri": "/docs/deployments/",
+	"title": "Deployments",
+	"tags": [],
+	"description": "",
+	"content": " Deploy specifies the manner that Gophersauce should build your application. You will find this tag within your project\u0026rsquo;s GXML file. Use webapp to have GoS generate a webserver for you. To export this package to an app use package instead of webapp. This tag should always be within the root of the  tag.\nAvailable Deploy types :  webapp : Build your project as a monolith application. package : Export your library to other GopherSauce and Go projects. faas : Deploy your end tags as OpenFaaS functions.  *This tag is required\n\u0026lt;gos\u0026gt; ... \u0026lt;deploy\u0026gt;webapp\u0026lt;/deploy\u0026gt; ... \u0026lt;/gos\u0026gt;  "
+},
+{
+	"uri": "/docs/deployments/faas/",
+	"title": "FaaS",
+	"tags": [],
+	"description": "",
+	"content": " Here is a guide to help you build an OpenFaaS function with JSON responses. This function will convert the request body (JSON) to a GO struct. The function will then write a JSON response of an altered version of your request body. PS. This is a lot faster with GopherSauce Vim plugin\nRequirements  Install GopherSauce (go get github.com/cheikhshift/gos) Docker running on host. OpenFaaS CLI. OpenFaaS Gateway (Link to setup-guide) . Running \u0026amp; accessible OpenFaaS gateway. Your git command setup \u0026amp; ready to perform commits.  Assumptions Your OpenFaaS gateway is at http://localhost:8080. TO update your gateway path update the \u0026lt;gos\u0026gt; tag within your gos.gxml file, add attribute gateway=\u0026quot;YOUR_GATEWAY\u0026quot;. gos.gxml will be created after running command gos --make.\nSetup Github Repo You will need a Git repository accessible online to successfully download your package\u0026rsquo;s dependencies automatically. With this example I used this repository. 1. Create a new repository with local folder path template : $GOPATH/src/{github.com || or other git service}/yourusername/foldername\nGOS project Change your working directory to the github repository you\u0026rsquo;ve just created.\nCreate project Run the following command to generate a new project. This will generate file gos.gxml\ngos --make  Set deploy type Update the contents of \u0026lt;deploy\u0026gt; tag within your gos.gxml file, from webapp to faas.\nImport encode/json Following your \u0026lt;deploy\u0026gt; tag add the following snippet to import Go pkg encoding/json\n\u0026lt;import src=\u0026quot;encoding/json\u0026quot; /\u0026gt;  Define interface Add the following snippet within the \u0026lt;header\u0026gt; tag of your gos.gxml file. This will define a new interface within GopherSauce\n\u0026lt;struct name=\u0026quot;Testmodel\u0026quot; \u0026gt; //interface fields here \u0026lt;/struct\u0026gt;  Add fields Add snippet within newly placed \u0026lt;struct\u0026gt; tag. Declare FieldOne with type string\nFieldOne string  Add snippet within newly placed \u0026lt;struct\u0026gt; tag. Declare FieldTwo with type int\nFieldTwo int  Add snippet within newly placed \u0026lt;struct\u0026gt; tag. Declare FieldThree as an array of type string\nFieldThree []string  In the end your \u0026lt;struct\u0026gt; tag should look like this :\n\u0026lt;struct name=\u0026quot;Testmodel\u0026quot; \u0026gt; //interface fields here FieldOne string FieldTwo int FieldThree []string \u0026lt;/struct\u0026gt;  Create OpenFaaS function Add the following snippet within the \u0026lt;endpoints\u0026gt; tag of your gos.gxml file. This will define a serverless function named GETTestJson on OpenFaaS.\n\u0026lt;end path=\u0026quot;/test/json\u0026quot; type=\u0026quot;GET\u0026quot; \u0026gt; \u0026lt;/end\u0026gt;  Process json  Add the following snippet within your newly placed \u0026lt;end\u0026gt; tag. This will declare variable t with type Testmodel\nvar t Testmodel\n Add the following snippet within your newly placed \u0026lt;end\u0026gt; tag. It will create a new json.Decoder with the input stream of your request\u0026rsquo;s body. The body input stream is referred to as r.Body (AKA FaaS request body). The variable r is available to GO code within \u0026lt;end\u0026gt; tags. It refers to the current request (*http.Request).\ndecoder := json.NewDecoder(r.Body)\n Add the following snippet within your newly placed \u0026lt;end\u0026gt; tag. This will attempt to decode your request body into the interface of t (Testmodel). Your request body data will then be available with variable t. The variable err declared within the snippet will be used to check for errors.\nerr := decoder.Decode(\u0026amp;t)\n Add the following snippet within your newly placed \u0026lt;end\u0026gt; tag. Evaluate if error is nil, if so panic. Since we\u0026rsquo;re serverless it is safe to panic :).\nif err != nil { panic(err) }   Add the following snippet within your newly placed \u0026lt;end\u0026gt; tag. This will update the field value of FieldOne to \u0026quot;NewValue\u0026quot;.\nt.FieldOne = \u0026quot;NewValue\u0026quot;  Add the following snippet within your newly placed \u0026lt;end\u0026gt; tag. The variable response string is available to \u0026lt;end\u0026gt; tags. Use this to set a JSON string response with the help of func mResponse(v interface{}).\nresponse = mResponse(t)  Your \u0026lt;end\u0026gt; tag should look like this :\n\u0026lt;end path=\u0026quot;/test/json\u0026quot; type=\u0026quot;GET\u0026quot; \u0026gt; //Golang code here decoder := json.NewDecoder(r.Body) var t Testmodel err := decoder.Decode(\u0026amp;t) if err != nil { panic(err) } t.FieldOne = \u0026quot;NewValue\u0026quot; response = mResponse(t) //defered to keep body open if plan on using again. defer r.Body.Close() \u0026lt;/end\u0026gt;  Build project Run your project with following command. (While in Github repository folder created earlier)\ngos --run  Test function Run the following command to invoke the function with faas-cli\necho \u0026quot;{\\\u0026quot;FieldOne\\\u0026quot;:\\\u0026quot;Test\\\u0026quot;}\u0026quot; | faas-cli invoke GETTestJson  "
+},
+{
+	"uri": "/docs/serving-files/serving-templates/",
+	"title": "Serving templates",
+	"tags": [],
+	"description": "",
+	"content": " This section covers the usage of dynamic web pages.\nCreate a page To add a new page, create a new page_name.tmpl file within your Gophersauce project web root. If you used the CLI argument \u0026ndash;make, your web root folder would be web (relative to your project\u0026rsquo;s directory). To access your page visit hostname/page_name.\nThe Go struct literal of a page in your web root :\n type Page struct { R *http.Request Session *sessions.Session }  These variables are accessible to template web pages within your project\u0026rsquo;s web root. Field R would be accessed with syntax {{ .R }}. For templates in your template (tmpl) folder, Gophersauce will use the explicitly defined (\u0026lt;struct\u0026gt;)interface for that template. If no interface is set, NoStruct{} will be used, hence no fields available.\nTemplate pipelines This section covers the list of functions available within all your templates compiled using GopherSauce. Please keep in mind that the .Session and .R variable are only available to template files within your server web root.\n js - will take its only input and add it as the src attribute of the html \u0026lt;script/\u0026gt; tag \u0026lt;script src=\u0026quot;var\u0026quot;\u0026gt;\u0026lt;/script\u0026gt;\n Usage : {{js \u0026quot;dist/js/bootstrap.js\u0026quot;}}  css - Will take its only input and add it as the href attribute of the html \u0026lt;link/\u0026gt; tag.\n Usage : {{css \u0026quot;dist/css/bootstrap.css\u0026quot; }}  sd - Will delete the current page session\n Usage : {{.Session | sd }}  sr - Will remove a specified session key\n Usage : {{.Session | sr \u0026quot;KeyName\u0026quot; }}  sc - Will check to see if a session key exists\n Usage : {{.Session | sc \u0026quot;KeyName\u0026quot; }}  ss - Will set a string value as a session variable.\n Usage : {{.Session | ss \u0026quot;KeyName\u0026quot; \u0026quot;Variable\u0026quot; }}  sso - Will set a struct as a session variable.\n Usage : This requires three steps to work.\n Add tag \u0026lt;import src=\u0026quot;encoding/gob\u0026quot;\u0026gt; to your GXML root.\n Register the struct types within your \u0026lt;init/\u0026gt; tag of your GXML file.\ngob.Register(\u0026amp;Object{})\n Once the steps above are completed you can now set the linked object as session variables : {{.Session | sso \u0026quot;KeyName\u0026quot; $object_with_Object_struct }}\n   sgo - Will retrieve a a session stored interface.\n Usage : {{$desiredObject = .Session | sgo \u0026quot;keyName\u0026quot; }}  sg - Will retrieve a string stored as a session variable.\n Usage : {{$string := .Session | sg \u0026quot;KeyName\u0026quot; }}  form - Will retrieve a request variable no matter how it is submitted.\n Usage : {{ $input = .R | form \u0026quot;Key\u0026quot; }} . .R is a page variable with type http.Request from the Go lang package net/http  eq - Will compare two variables and return a bool of value true if they are equal\n Usage : {{if eq \u0026quot;Obj1\u0026quot; \u0026quot;Obj1\u0026quot; }} {{end}}  neq - Will compare two variables and return a bool of value true if they are not equal.\n Usage : {{if neq \u0026quot;Obj1\u0026quot; \u0026quot;Obj2\u0026quot; }} {{end}}  lte - Will see if the first number declared is less than or equal to than the second number declared, if this statement proves to be true it will return a bool with the value true.\n Usage : {{if lte 5 10 }} {{end}}  lt - Will see if the first number declared is less than the second number declared, if this statement proves to be true it wil return a bool with value true.\n Usage : {{if lt 5 7 }} {{end}}  gte - Will see if the first number declared is greater than or equal to the second number declared, if this statement proves to be true it will return a bool with value true\n Usage : {{if gte 5 2}} {{end}}  gt - Will see if the first number declared is greater than or equal to the second number declared, if this statement proves to be true it will return a bool with value true\n Usage : {{if gt 5 2}} {{end}}   "
+},
+{
+	"uri": "/docs/abstractions/api_endpoints/",
+	"title": "Web handlers",
+	"tags": [],
+	"description": "",
+	"content": " Defining a web service : This section covers how to create an end tag (REST API endpoint). Your endpoints can be stateful as well as stateless. If a request\u0026rsquo;s verb and path match a declared endpoint, the declared Go code will be ran.\nAttributes of end tag : path - URL path of endpoint InnerXML - Go statements to be ran on endpoint execution. type - This specifies the request verb ie: POST,GET,PUT,DELETE, star (to disregard request verb), f ( to execute as middleware) id - Id of service. Used with open trace to find execution of service.\nEnd tags are nested within \u0026lt;endpoints\u0026gt; in your GXML file.\nThe example below will declare a REST api endpoint called login. The tag defined will create endpoint : POST /index/api\n\u0026lt;gos\u0026gt; ... \u0026lt;endpoints\u0026gt; \u0026lt;end path=\u0026quot;/index/api\u0026quot; type=\u0026quot;POST\u0026quot; \u0026gt; // response sent to client will be {\u0026quot;Color\u0026quot;:\u0026quot;#fff\u0026quot;} response = mResponse(Button{Color:\u0026quot;#fff\u0026quot;}) \u0026lt;/end\u0026gt; \u0026lt;/endpoints\u0026gt; ... \u0026lt;/gos\u0026gt;  List of variables available to your endpoint\u0026rsquo;s Go code block :\nresponse - String response of api. The value set here will be returned as the endpoint's response. session - Current session (*sessions.Session from github.com/gorilla/sessions) of the request (if stateful endpoint). Use the session.Values (type map[string]interface{}) map to access and save data. r - *http.Request w - http.ResponseWriter span - opentracing.Span - this variable is only available when you run your project in development mode (with command gos --run). Use this function to log data to the tracer : span.LogEvent(event string)  Useful functions :\nmResponse - will convert any Go interface/struct into a JSON string for output. The example below converts Button into a JSON string for output.  "
+},
+{
+	"uri": "/docs/abstractions/methods/",
+	"title": "Methods",
+	"tags": [],
+	"description": "",
+	"content": "This section covers how to extend template functionality with pipelines ( methods ) .\nAttributes of template tag :\nname - Specifies the name of the function. Please keep in mind, that usage of this function within your package requires `Net` prepended to the declared name. If you desire to write methods for strict usage outside of template files, I recommend creating another Go file within your project directory with package name main. return - The return type of the function. Ie: string or a custom interface `DemoGos` var - This is a comma delimited string of the function parameters. Say we need a function that has two parameters: param1 of type string and param 2 of type string. It will be declared as `param1 string,param2 string`. **InnerXml - This contains your Go statements.  Test case : The example below will declare a function that sends emails and returns a bool.\n\u0026lt;gos\u0026gt; ... \u0026lt;methods\u0026gt; ... \u0026lt;func name=\u0026quot;sendEmail\u0026quot; var=\u0026quot;to string,from string\u0026quot; return=\u0026quot;bool\u0026quot;\u0026gt; fmt.Println(\u0026quot;Send Email \u0026quot; ,to , from) return true \u0026lt;/func\u0026gt; ... \u0026lt;/methods\u0026gt; ... \u0026lt;/gos\u0026gt;  Generated package function :\nfunc NetsendEmail(to string, from string) bool  Use the following snippet within any .tmpl file to send an email.\n{{ if sendEmail \u0026quot;to\u0026quot; \u0026quot;from\u0026quot; }} Email sent! {{else}} Email error. {{end}}  "
+},
+{
+	"uri": "/docs/abstractions/go_source/",
+	"title": "Go source",
+	"tags": [],
+	"description": "",
+	"content": " Sidecar You can add new Go code within your Gophersauce project.\nFormat Your new Go code must have package name main.\nMain function Gophersauce will declare your web server\u0026rsquo;s main function. You don\u0026rsquo;t need to write one.\n"
+},
+{
+	"uri": "/docs/abstractions/templates/",
+	"title": "Templates",
+	"tags": [],
+	"description": "",
+	"content": "This section covers how to declare reusable HTML templates.\nAttributes of template tag :\nname - This is the name of the template within your application. You can load a template by simply calling `{{\u0026lt;template name\u0026gt;}}` within any template in your project. tmpl - This specifies the path to the template file with the declared template root in mind. For example if your file was in `$GOPATH/PACKAGENAME/tmpl/file.tmpl` the tmpl attribute will be `file` because GoS will prepend the absolute path. struct - This specifies the name of the Go struct literal to use with template. In the example below, a struct will be declared as an alert.  The example is using a template file with path bootstrap/alert.\nproject.gxml\n\u0026lt;gos\u0026gt; ... \u0026lt;header\u0026gt; \u0026lt;!-- You may also declare your structs from another Go file within this directory. --\u0026gt; \u0026lt;struct name=\u0026quot;Bootstrap_alert\u0026quot;\u0026gt; Strong string Text string Type string \u0026lt;/struct\u0026gt; ... \u0026lt;/header\u0026gt; ... \u0026lt;templates\u0026gt; ... \u0026lt;template name=\u0026quot;Bootstrap_alert\u0026quot; tmpl=\u0026quot;bootstrap/alert\u0026quot; struct=\u0026quot;Bootstrap_alert\u0026quot; /\u0026gt; \u0026lt;/templates\u0026gt; \u0026lt;/gos\u0026gt;  contents of tmpl/bootstrap/alert.tmpl :\n \u0026lt;div class=\u0026quot;alert alert-{{.Type}} alert-dismissible fade in\u0026quot; role=\u0026quot;alert\u0026quot;\u0026gt; \u0026lt;strong\u0026gt;{{.Strong}}\u0026lt;/strong\u0026gt; \u0026lt;p\u0026gt;{{.Text}}\u0026lt;/p\u0026gt; \u0026lt;/div\u0026gt;  Now to use the template within other templates there are two ways of doing this. (With the example above in mind)\n\u0026lt;!-- No parameters --\u0026gt; {{Bootstrap_alert}} \u0026lt;!-- Add `c` to your template name to initialize its struct; And add `b`(b\u0026lt;template name\u0026gt; $var) to your template name to output the html. dbOperation is intended to update your interface's fields. --\u0026gt; {{ $struct := cBootstrap_alert }} {{ $struct | dbOperation \u0026quot;queryvalue\u0026quot; }} {{bBootstrap_alert $struct}}  "
+},
+{
+	"uri": "/docs/abstractions/webservers/",
+	"title": "Web server",
+	"tags": [],
+	"description": "",
+	"content": " Configuring a project. This section covers how to customize the Go code generated by Gophersauce. These tags are located in your project\u0026rsquo;s GXML file.\n Main Port Session Key Shell scripting  Main The code specified here will be executed on application start. The contents of this tag is Go code, it is located at the root of your GXML file. For example :\n\u0026lt;gos\u0026gt; ... \u0026lt;main\u0026gt; fmt.Println(\u0026quot;Logging from main function\u0026quot;) \u0026lt;/main\u0026gt; ... \u0026lt;/gos\u0026gt;  Will translate into\nfunc main(){ ... fmt.Println(\u0026quot;Logging from Main function\u0026quot;) ... }  Port (if deploy type is webapp) Specifies the port your web server should listen on.\n\u0026lt;gos\u0026gt; ... \u0026lt;port\u0026gt;8080\u0026lt;/port\u0026gt; ... \u0026lt;/gos\u0026gt;  Key (if deploy type is webapp) Used as cookie store key for your web app.\n\u0026lt;gos\u0026gt; ... \u0026lt;key\u0026gt;my-key-braah\u0026lt;/key\u0026gt; ... \u0026lt;/gos\u0026gt;  Scripting Run terminal commands after your build is finished with the \u0026lt;sh\u0026gt; tag.\nExample:\n\u0026lt;gos\u0026gt; ... \u0026lt;sh\u0026gt;echo \u0026quot;HelloWorld\u0026quot;\u0026lt;/sh\u0026gt; \u0026lt;sh\u0026gt;git commit .\u0026lt;/sh\u0026gt; ... \u0026lt;/gos\u0026gt;  "
+},
+{
+	"uri": "/docs/intro/download/",
+	"title": "Download",
+	"tags": [],
+	"description": "",
+	"content": " Install Gophersauce Run the following command to install gophersauce.\ngo get github.com/cheikhshift/gos\n"
+},
+{
+	"uri": "/docs/intro/setup/",
+	"title": "First project",
+	"tags": [],
+	"description": "",
+	"content": " First project Perform the following steps to start a new Gophersauce project.\n Create a new directory. Name it as you wish. Open a new terminal session. Change the working directory to the one you\u0026rsquo;ve just created. Run this command to generate a GXML file : gos --make  "
+},
+{
+	"uri": "/docs/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "/docs/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
