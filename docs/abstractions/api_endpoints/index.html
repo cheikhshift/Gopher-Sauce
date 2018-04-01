@@ -610,12 +610,13 @@
 
 <p>This section covers how to create an <code>end</code> tag (REST API endpoint). Your endpoints can be stateful as well as stateless. If a request&rsquo;s verb and path match a declared endpoint, the declared Go code will be ran.</p>
 
-<p>Attributes of end tag :
-path - URL path of endpoint
-InnerXML - Go statements to be ran on endpoint execution.
-type - This specifies the request verb ie: POST,GET,PUT,DELETE, star (to disregard request verb), f ( to execute as middleware)
-id - Id of service. Used with open trace to find execution of service.</p>
-
+		<p>Attributes of end tag :</p>
+<ol>
+<li>path - URL path of endpoint</li>
+<li>InnerXML - Go statements to be ran on endpoint execution.</li>
+<li>type - This specifies the request verb ie: POST,GET,PUT,DELETE, star (to disregard request verb), f ( to execute as middleware)</li>
+<li>id - Id of service. Used with open trace to find execution of service.</li>
+</ol>
 <p>End tags are nested within <code>&lt;endpoints&gt;</code> in your GXML file.</p>
 
 <p>The example below will declare a REST api endpoint called login. The tag defined will create endpoint : POST /index/api</p>
