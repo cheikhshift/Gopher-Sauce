@@ -587,7 +587,7 @@
 <li><a href="#requirements">Requirements</a></li>
 </ul></li>
 </ul></li>
-	<li><a href="#step-1-run-kubeconfig">Step 1 : Run Kubeconfig (Install with <code>go get github.com/cheikhshift/docker2kube/cmd/kubeconfig</code>)</a></li>
+	<li><a href="#step-1-run-kubeconfig">Step 1 : Run Kubeconfig</a></li>
 <li><a href="#step-2-build-docker-image">Step 2 : Build docker image</a></li>
 <li><a href="#step-3-create-a-deployment">Step 3 :  Create a deployment</a></li>
 <li><a href="#step-4-create-service">Step 4 : Create service</a></li>
@@ -631,6 +631,7 @@
 
 <h2 id="step-1-run-kubeconfig">Step 1 : Run Kubeconfig</h2>
 
+		<p>Install with <code>go get github.com/cheikhshift/docker2kube/cmd/kubeconfig</code> </p>
 <p>Run the following command to write a new kubernetes deployment file. While the command is running it will suggest a docker command to run. This command will generate a docker image, with name corresponding to your deployment file (with name <code>default-deployment.yaml</code>).</p>
 
 <pre><code>kubeconfig  
