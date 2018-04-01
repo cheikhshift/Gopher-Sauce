@@ -733,7 +733,7 @@ FieldThree []string
 
 <p><code>err := decoder.Decode(&amp;t)</code></p></li>
 
-<li><p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag. Evaluate if error is <code>nil</code>, if so panic. Since we&rsquo;re serverless it is safe to panic :).</p>
+<li><p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag. Evaluate if error is not <code>nil</code>, if so panic. Since we&rsquo;re serverless it is safe to panic :).</p>
 
 <pre><code>if err != nil {
     panic(err)
