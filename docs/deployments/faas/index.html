@@ -729,7 +729,7 @@ FieldThree []string
 
 <p><code>decoder := json.NewDecoder(r.Body)</code></p></li>
 
-<li><p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag.<a href="https://golang.org/pkg/encoding/json/#Decoder.Decode" target="_blank">Decode reads the next JSON-encoded value from its input and stores it in the value pointed to by v.</a>. Your request body data will then be available with variable <code>t</code>. The variable <code>err</code> declared within the snippet will be used to check for errors.</p>
+<li><p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag.<a href="https://golang.org/pkg/encoding/json/#Decoder.Decode" target="_blank">Decode reads the next JSON-encoded value from its input and stores it to the value pointed</a>, in this case <code>t</code>. Your request body data will then be available with variable <code>t</code>. The variable <code>err</code> declared within the snippet will be used to check for errors.</p>
 
 <p><code>err := decoder.Decode(&amp;t)</code></p></li>
 
