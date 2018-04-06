@@ -674,12 +674,12 @@ PS. This is a lot faster with GopherSauce <a href="https://github.com/cheikhshif
 <pre><code>&lt;import src=&quot;encoding/json&quot; /&gt;
 </code></pre>
 
-<h2 id="define-interface">Define interface</h2>
+<h2 id="define-interface">Define struct</h2>
 
-<p>Add the following snippet within the <code>&lt;header&gt;</code> tag of your <code>gos.gxml</code> file. This will define a new interface within GopherSauce</p>
+<p>Add the following snippet within the <code>&lt;header&gt;</code> tag of your <code>gos.gxml</code> file. This will define a new struct within GopherSauce</p>
 
 <pre><code>&lt;struct name=&quot;Testmodel&quot; &gt;
-//interface fields here
+//struct fields here
 &lt;/struct&gt;
 </code></pre>
 
@@ -703,7 +703,7 @@ PS. This is a lot faster with GopherSauce <a href="https://github.com/cheikhshif
 <p>In the end your <code>&lt;struct&gt;</code> tag should look like this :</p>
 
 <pre><code>&lt;struct name=&quot;Testmodel&quot; &gt;
-//interface fields here
+//struct fields here
 FieldOne string
 FieldTwo int
 FieldThree []string
@@ -729,7 +729,7 @@ FieldThree []string
 
 <p><code>decoder := json.NewDecoder(r.Body)</code></p></li>
 
-<li><p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag. This will attempt to decode your request body into the interface of <code>t</code> (<code>Testmodel</code>). Your request body data will then be available with variable <code>t</code>. The variable <code>err</code> declared within the snippet will be used to check for errors.</p>
+<li><p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag.<a href="https://golang.org/pkg/encoding/json/#Decoder.Decode" target="_blank">Decode reads the next JSON-encoded value from its input and stores it in the value pointed to by v.</a>. Your request body data will then be available with variable <code>t</code>. The variable <code>err</code> declared within the snippet will be used to check for errors.</p>
 
 <p><code>err := decoder.Decode(&amp;t)</code></p></li>
 
@@ -746,7 +746,7 @@ FieldThree []string
 <pre><code>t.FieldOne = &quot;NewValue&quot;
 </code></pre>
 
-<p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag. The variable <code>response string</code> is available to <code>&lt;end&gt;</code> tags. Use this to set a JSON string response with the help of <code>func mResponse(v interface{})</code>.</p>
+<p>Add the following snippet within your newly placed <code>&lt;end&gt;</code> tag. The variable <code>response string</code> is available to <code>&lt;end&gt;</code> tags, it can be used to write a response to your client. Use this function to set a JSON string response : <code>func mResponse(v interface{})</code>.</p>
 
 <pre><code>response = mResponse(t)
 </code></pre>
