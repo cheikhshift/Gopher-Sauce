@@ -584,6 +584,7 @@
 <ul>
 <li><a href="#configuring-a-project">Configuring a project.</a></li>
 <li><a href="#main">Main</a></li>
+<li><a href="#shutdown">Shutdown</a></li>
 <li><a href="#port">Port</a></li>
 <li><a href="#key">Key</a></li>
 <li><a href="#scripting">Scripting</a></li>
@@ -616,6 +617,7 @@
 
 <ol>
 <li><a href="#main">Main</a></li>
+<li><a href="#shutdown">Shutdown</a></li>
 <li><a href="#port">Port</a></li>
 <li><a href="#key">Session Key</a></li>
 <li><a href="#scripting">Shell scripting</a></li>
@@ -641,6 +643,18 @@
     fmt.Println(&quot;Logging from Main function&quot;)
     ...
 }
+</code></pre>
+<h3 id="shutdown">Shutdown</h3>
+
+<p>The code specified here will be executed on application exit. The contents of this tag is Go code, it is located at the root of your GXML file. For example :</p>
+
+<pre><code>&lt;gos&gt;
+    ...
+    &lt;shutdown&gt; 
+        fmt.Println(&quot;Powering off&quot;)   
+    &lt;/shutdown&gt;
+    ...
+&lt;/gos&gt;
 </code></pre>
 
 <h3 id="port">Port</h3>
