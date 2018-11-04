@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gopher Sauce v0.6</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="generator" content="Hugo 0.37.1" />
+<title>Shutdown function :: Gopher Sauce v0.6</title>
+<link rel="shortcut icon" href="/docs/images/favicon.png" type="image/x-icon" />
+<link href="/docs/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/css/nucleus.css" rel="stylesheet">
+<link href="/docs/theme-flex/style.css" rel="stylesheet">
+
+	<link href="/docs/theme-flex/variant-gold.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/docs/css/bootstrap.min.css">
+<script src="/docs/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "http:\/\/gophersauce.com\/docs\/";
+</script>
+<meta name="description" content="Section about executing Go code on web server exit.">
+
+
+
+    
+  </head>
+  <body data-url="/docs/gxml-abstractions/shutdown/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <a class="baselink" href="http://gophersauce.com/docs/">Gopher Sauce v0.6</a>
+  
+
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+    <nav class="shortcuts">
+            <li class="" role="">
+                <a href="https://github.com/cheikhshift/gos"  rel="noopener">
+                  <i class='fa fa-github'></i> <label>Github repo</label>
+                </a>
+            </li>
+            <li class="" role="">
+                <a href="https://github.com/cheikhshift/gos/archive/master.zip"  rel="noopener">
+                  <i class='fa fa-cloud-download'></i> <label>Download</label>
+                </a>
+            </li>
+    </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/docs/" class="dd-item">
+          <a href="/docs/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/docs/workflow/" class="dd-item alwaysopen haschildren
+        ">
+      <div>
+      <a href="/docs/workflow/">Get started</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/docs/workflow/code_gen/" class="dd-item">
+        <div>
+          <a href="/docs/workflow/code_gen/">
+            Project layout
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/workflow/task_mgt/" class="dd-item">
+        <div>
+          <a href="/docs/workflow/task_mgt/">
+            Task management
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/workflow/package_arch/" class="dd-item">
+        <div>
+          <a href="/docs/workflow/package_arch/">
+            Package architecture
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/workflow/library_arch/" class="dd-item">
+        <div>
+          <a href="/docs/workflow/library_arch/">
+            Library architecture
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/workflow/first_project/" class="dd-item">
+        <div>
+          <a href="/docs/workflow/first_project/">
+            First project
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/docs/gxml-abstractions/" class="dd-item parent alwaysopen haschildren
+        ">
+      <div>
+      <a href="/docs/gxml-abstractions/">GXML</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/docs/gxml-abstractions/shell/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/shell/">
+            Build commands
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/structs/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/structs/">
+            Data types
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/globals/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/globals/">
+            Global variables
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/endpoints/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/endpoints/">
+            HTTP 1.1 services
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/init/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/init/">
+            Init function
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/main/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/main/">
+            Main function
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/methods/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/methods/">
+            Methods
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/shutdown/" class="dd-item active">
+        <div>
+          <a href="/docs/gxml-abstractions/shutdown/">
+            Shutdown function
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/templates/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/templates/">
+            Templates
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/gxml-abstractions/web_root/" class="dd-item">
+        <div>
+          <a href="/docs/gxml-abstractions/web_root/">
+            Web root
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/docs/deploying/" class="dd-item
+        ">
+      <div>
+      <a href="/docs/deploying/">Deployments</a><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+    </li>
+    <li data-nav-id="/docs/tooling/" class="dd-item
+        ">
+      <div>
+      <a href="/docs/tooling/">Tools</a><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+    </li>
+    <li data-nav-id="/docs/resources/" class="dd-item
+        ">
+      <div>
+      <a href="/docs/resources/">Resources</a><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+    </li>
+
+
+
+
+    </ul>
+    <section>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/docs/workflow/" >
+   Get started</option> 
+      <option value="/docs/workflow/code_gen/" >- Project layout</option>
+      <option value="/docs/workflow/task_mgt/" >- Task management</option>
+      <option value="/docs/workflow/package_arch/" >- Package architecture</option>
+      <option value="/docs/workflow/library_arch/" >- Library architecture</option>
+      <option value="/docs/workflow/first_project/" >- First project</option>
+  
+    <option value="/docs/gxml-abstractions/" >
+   GXML</option> 
+      <option value="/docs/gxml-abstractions/shell/" >- Build commands</option>
+      <option value="/docs/gxml-abstractions/structs/" >- Data types</option>
+      <option value="/docs/gxml-abstractions/globals/" >- Global variables</option>
+      <option value="/docs/gxml-abstractions/endpoints/" >- HTTP 1.1 services</option>
+      <option value="/docs/gxml-abstractions/init/" >- Init function</option>
+      <option value="/docs/gxml-abstractions/main/" >- Main function</option>
+      <option value="/docs/gxml-abstractions/methods/" >- Methods</option>
+      <option value="/docs/gxml-abstractions/shutdown/"  selected>- Shutdown function</option>
+      <option value="/docs/gxml-abstractions/templates/" >- Templates</option>
+      <option value="/docs/gxml-abstractions/web_root/" >- Web root</option>
+  
+    <option value="/docs/deploying/" >
+   Deployments</option>
+    <option value="/docs/tooling/" >
+   Tools</option>
+    <option value="/docs/resources/" >
+   Resources</option>
+
+
+
+        </select>
+      </center>
+    </div>
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/docs/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/docs/js/auto-complete.js"></script>
+        <link href="/docs/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "http:\/\/gophersauce.com\/docs\/";
+          
+        </script>
+        <script type="text/javascript" src="/docs/js/search.js"></script>
+      </div>
+    
+
+    <h1>Shutdown function</h1>
+    
+    
+    
+    
+
+<p>Declare a shutdown function for your project with GXML tag <code>&lt;shutdown/&gt;</code>. This will be the code executed on web server exit.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>Shutdown tags are placed at the root of your <code>&lt;gos/&gt;</code> tag.</p>
+
+<h4 id="gxml-content">GXML content :</h4>
+
+<p>Go code block to run.</p>
+
+<h4 id="sample-tag">Sample tag :</h4>
+
+<pre><code>&lt;gos&gt;
+	...
+	&lt;shutdown&gt;
+		println(&quot;Bye world&quot;)
+	&lt;/shutdown&gt;
+	...
+&lt;/gos&gt;
+
+</code></pre>
+
+<hr />
+
+<h6 id="exported-to-package">Exported to package:</h6>
+
+<ul>
+<li>main</li>
+</ul>
+
+<h6 id="exports-to-files">Exports to files :</h6>
+
+<ul>
+<li>./shutdown.go</li>
+</ul>
+
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/docs/gxml-abstractions/methods/" title="Methods"> <i class="fa fa-chevron-left"></i><label>Methods</label></a>
+    <a class="nav nav-next" href="/docs/gxml-abstractions/templates/" title="Templates" style="margin-right: 0px;"><label>Templates</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+
+    
+
+    
+
+    
+    <div class="github-link">
+      <a href="https://github.com/vjeantet/hugo-theme-docdock/edit/master/exampleSite/content/gxml-abstractions/shutdown.md" target="blank"><i class="fa fa-code-fork"></i>
+        Improve this page</a>
+    </div>
+    
+  </div>
+
+
+	<div>
+
+
+  
+    <p><p style="float:right;position: relative;top:10px;">Written by Cheikh Seck</p>
+<a target="_blank" href="https://twitter.com/gophersauce"><img src="https://pbs.twimg.com/profile_images/976861571707219969/fauId6s2_400x400.jpg" height="40" /></a>
+<a target="_blank" href="https://github.com/thestrukture/IDE" title="GET IDE"><img src="https://avatars1.githubusercontent.com/u/17010896?s=200&v=4" height="40" style="position: relative;top:4px;" /></a></p>
+
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-71342160-1");
+        pageTracker._trackPageview();
+    } catch (err) {}
+    </script>
+
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/docs/js/clipboard.min.js"></script>
+
+<link href="/docs/css/featherlight.min.css" rel="stylesheet">
+<script src="/docs/js/featherlight.min.js"></script>
+
+
+
+<script src="/docs/theme-flex/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>
