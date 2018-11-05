@@ -271,7 +271,7 @@
 
 <h2 id="about">About</h2>
 
-<p>Gopher Sauce markup language, a.k.a  <code>GXML</code> is a derivative of XML. It is a hybrid configuration and programming markup language. Reading this document requires some knowledge of XML (or HTML) to use abstractions.</p>
+<p>Gopher Sauce markup language, a.k.a  <code>GXML</code>, is a derivative of XML. It is a hybrid configuration and programming markup language. Reading this document requires some knowledge of XML (or HTML) to use abstractions.</p>
 
 <h5 id="templating-engine">Templating engine</h5>
 
@@ -285,10 +285,10 @@
 <li>GXML attributes : refers to XML attributes of a tag.</li>
 <li>GXML content : refers to Go code found inside a tag. Also known as the tag&rsquo;s contents.</li>
 
-<li><p>Exported to package : specifies the package the abstraction exports to.</p>
+<li><p>Exported to package : specifies the package the abstraction exports code to.</p>
 
 <ul>
-<li>If applicable, a tag will specify the generated package it exports code to. You may use this package&rsquo;s exported identifiers (package with exported code) to access your declared abstractions. The name of the identifiers will be the value of the name attribute, of the GXML tag. For example, to use a declared method with name attribute <code>Foo</code> within a web service code block would be <code>methods.Foo</code>. Package imports are handled automatically with code written in GXML files.</li>
+<li>If applicable, a tag will specify the generated package it exports code to. You may use this package&rsquo;s exported identifiers (package with exported code) to access your declared abstractions. The name of the identifiers will be the value of the name attribute, unless stated otherwise, of a GXML tag. For example, to use a declared method with just name attribute <code>Foo</code> within a web service code block would be <code>methods.Foo()</code>. Package imports are handled automatically with Go code written in GXML files.</li>
 </ul></li>
 </ul>
 
@@ -464,7 +464,7 @@
         var pageTracker = _gat._getTracker("UA-71342160-1");
         pageTracker._trackPageview();
     } catch (err) {}
-    </script>
+    </script> 
 
   
 

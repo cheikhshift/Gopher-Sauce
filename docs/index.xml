@@ -60,7 +60,7 @@ package assets This package has your project&amp;rsquo;s web and tmpl directory 
       <guid>http://gophersauce.com/docs/workflow/first_project/</guid>
       <description>Starting a project. Read the following steps to start a new gos project.
  Open your favorite terminal and change the working directory to the value of your environment variable GOPATH.
- Change the working directory again to src.
+ Change the working directory to src.
  Run the following command to start a new project :
 gos &amp;ndash;make
  Run the following command to complete project setup.
@@ -74,11 +74,10 @@ gos &amp;ndash;t
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://gophersauce.com/docs/gxml-abstractions/shell/</guid>
-      <description> With GXML, you can specify shell commands to run after code trans-pilation with tag &amp;lt;sh/&amp;gt;.
-GXML tag &amp;lt;sh/&amp;gt; is placed at the root of your &amp;lt;gos/&amp;gt; tag.
-&amp;lt;sh/&amp;gt;  Usage format
-&amp;lt;sh&amp;gt;COMMAND&amp;lt;/sh&amp;gt;  Example :
-  &amp;lt;gos&amp;gt; ... &amp;lt;sh&amp;gt;echo &amp;quot;Hi&amp;quot;&amp;lt;/sh&amp;gt; ... &amp;lt;/gos&amp;gt;  </description>
+      <description> With GXML, you can specify shell commands to run after trans-pilation with tag &amp;lt;sh/&amp;gt;.
+Syntax GXML tag &amp;lt;sh/&amp;gt; is placed at the root of your &amp;lt;gos/&amp;gt; tag.
+GXML content : The shell command to run after trans-pilation.
+Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;sh&amp;gt;echo &amp;quot;Hi&amp;quot;&amp;lt;/sh&amp;gt; ... &amp;lt;/gos&amp;gt;  </description>
     </item>
     
     <item>
@@ -87,10 +86,10 @@ GXML tag &amp;lt;sh/&amp;gt; is placed at the root of your &amp;lt;gos/&amp;gt; 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://gophersauce.com/docs/gxml-abstractions/structs/</guid>
-      <description>Data types are declared in GXML with tag &amp;lt;struct/&amp;gt;.
+      <description>Data (struct) types are declared in GXML with tag &amp;lt;struct/&amp;gt;.
 Syntax Struct tags are placed at the root of your &amp;lt;header/&amp;gt; tag.
 GXML attributes :  name : Name of struct type.  GXML content : Declared struct fields. Must follow syntax : &amp;lt;NAME&amp;gt; &amp;lt;TYPE&amp;gt; &amp;lt;TAGS&amp;gt;. You may also document fields by placing comments prior declaring a field.
-Sample tag : &amp;lt;header&amp;gt; &amp;lt;struct name=&amp;quot;Sample&amp;quot;&amp;gt; Field1 string Field2 int Field3 []string &amp;lt;/struct&amp;gt; &amp;lt;/header&amp;gt;  Exported to package:  types  Exports to files :  .</description>
+Sample tag : &amp;lt;header&amp;gt; &amp;lt;struct name=&amp;quot;Sample&amp;quot;&amp;gt; // Sample // comment Field1 string Field2 int Field3 []string &amp;lt;/struct&amp;gt; &amp;lt;/header&amp;gt;  Exported to package:  types  Exports to files :  .</description>
     </item>
     
     <item>
@@ -110,10 +109,10 @@ var gaJsHost = ((&#34;https:&#34; == document.location.protocol) ? &#34;https://
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://gophersauce.com/docs/gxml-abstractions/globals/</guid>
-      <description> Global variables are declared in GXML with tag &amp;lt;var/&amp;gt;.
+      <description>Global variables are declared in GXML with tag &amp;lt;var/&amp;gt;.
 Syntax Var tags are placed at the root of your &amp;lt;gos/&amp;gt; tag.
-GXML attributes :  type : variable type.  GXML content : Variable name. First letter of content is forced to uppercase by compiler.
-Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;var type=&amp;quot;string&amp;quot;&amp;gt;Key&amp;lt;/var&amp;gt; ... &amp;lt;/gos&amp;gt;  Exported to package:  globals  Exports to files :  ./api/globals/variables.go  </description>
+GXML attributes :  type : variable type.  GXML content : Defines variable name. First letter of content is forced to uppercase by trans-piler. The variable name will be your variable&amp;rsquo;s exported identifier.
+Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;var type=&amp;quot;string&amp;quot;&amp;gt;Key&amp;lt;/var&amp;gt; ... &amp;lt;/gos&amp;gt;  Exported to package:  globals  Exports to files :  .</description>
     </item>
     
     <item>
@@ -137,7 +136,7 @@ GXML attributes :  path : request path to handle.
       <guid>http://gophersauce.com/docs/gxml-abstractions/init/</guid>
       <description> Declare an initialization function for your project with GXML tag &amp;lt;init/&amp;gt;.
 Syntax Init tags are placed at the root of your &amp;lt;gos/&amp;gt; tag.
-GXML content : Go code block to run.
+GXML content : Defines Go code block to run.
 Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;init&amp;gt; println(&amp;quot;Hello world&amp;quot;) &amp;lt;/init&amp;gt; ... &amp;lt;/gos&amp;gt;  Exported to package:  main  Exports to files :  ./*.go  </description>
     </item>
     
@@ -149,7 +148,7 @@ Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;init&amp;gt; println(&amp;quot;Hell
       <guid>http://gophersauce.com/docs/gxml-abstractions/main/</guid>
       <description> Declare a main function for your project with GXML tag &amp;lt;main/&amp;gt;. This will be the code executed on web server start.
 Syntax Main tags are placed at the root of your &amp;lt;gos/&amp;gt; tag.
-GXML content : Go code block to run.
+GXML content : Defines Go code block to run.
 Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;main&amp;gt; println(&amp;quot;Hello world&amp;quot;) &amp;lt;/main&amp;gt; ... &amp;lt;/gos&amp;gt;  Exported to package:  main  Exports to files :  ./launcher.go  </description>
     </item>
     
@@ -172,7 +171,7 @@ GXML attributes  name : name of function. Access a function from a template with
       <guid>http://gophersauce.com/docs/gxml-abstractions/shutdown/</guid>
       <description> Declare a shutdown function for your project with GXML tag &amp;lt;shutdown/&amp;gt;. This will be the code executed on web server exit.
 Syntax Shutdown tags are placed at the root of your &amp;lt;gos/&amp;gt; tag.
-GXML content : Go code block to run.
+GXML content : Defines Go code block to run.
 Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;shutdown&amp;gt; println(&amp;quot;Bye world&amp;quot;) &amp;lt;/shutdown&amp;gt; ... &amp;lt;/gos&amp;gt;  Exported to package:  main  Exports to files :  ./shutdown.go  </description>
     </item>
     
@@ -184,9 +183,9 @@ Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;shutdown&amp;gt; println(&amp;quot;
       <guid>http://gophersauce.com/docs/gxml-abstractions/templates/</guid>
       <description>Add a Go template to your project with GXML tag &amp;lt;template/&amp;gt;.
 Syntax Template tags are placed at the root of your &amp;lt;templates/&amp;gt; tag.
-HTML templates HTML source used with templates are stored in your project&amp;rsquo;s tmpl directory. Templates files must have file extension .tmpl.
+HTML templates HTML source used with templates are stored in your project&amp;rsquo;s tmpl directory. Templates files must have file extension .tmpl. Templates follow Go&amp;rsquo;s html template format.
 Scope of HTML templates Your GXML methods will be available to your templates as custom pipelines.
-GXML attributes :  name : name of template. Render a template from a template with syntax {{ &amp;lt;TEMPLATE NAME&amp;gt; }} or {{ b&amp;lt;TEMPLATE NAME&amp;gt; $struct }}.</description>
+GXML attributes :  name : name of template.</description>
     </item>
     
     <item>
@@ -198,7 +197,7 @@ GXML attributes :  name : name of template. Render a template from a template wi
       <description>Your project&amp;rsquo;s web root is located at directory web.
 File server Your web root is the root directory of your web server.
 Templates Files with extension .tmpl are rendered. The request path of a template is the file path relative to your web root, without the file extension : .tmpl. For example, a file with path web/sample.tmpl would be requested as GET /sample.
-Template syntax  Go templates  Scope Your GXML methods will be available to your web root templates as custom pipelines.</description>
+Template syntax  Utilizes Go HTML templates.</description>
     </item>
     
   </channel>

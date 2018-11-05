@@ -276,7 +276,7 @@
 
 <h4 id="html-templates">HTML templates</h4>
 
-<p>HTML source used with templates are stored in your project&rsquo;s tmpl directory. Templates files must have file extension <code>.tmpl</code>.</p>
+<p>HTML source used with templates are stored in your project&rsquo;s tmpl directory. Templates files must have file extension <code>.tmpl</code>. Templates follow Go&rsquo;s html template format.</p>
 
 <h5 id="scope-of-html-templates">Scope of HTML templates</h5>
 
@@ -285,7 +285,7 @@
 <h4 id="gxml-attributes">GXML attributes :</h4>
 
 <ul>
-<li><p>name : name of template. Render a template from a template with syntax <code>{{ &lt;TEMPLATE NAME&gt; }}</code> or <code>{{ b&lt;TEMPLATE NAME&gt; $struct }}</code>.</p>
+<li><p>name : name of template. Render a template from another template with syntax <code>{{ &lt;TEMPLATE NAME&gt; }}</code> or <code>{{ b&lt;TEMPLATE NAME&gt; $struct }}</code>.</p>
 
 <ul>
 <li>$struct : a variable with your template&rsquo;s data.</li>
@@ -383,7 +383,7 @@
         var pageTracker = _gat._getTracker("UA-71342160-1");
         pageTracker._trackPageview();
     } catch (err) {}
-    </script>
+    </script> 
 
   
 

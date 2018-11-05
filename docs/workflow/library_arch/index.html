@@ -339,18 +339,17 @@ var TemplateFuncStore &quot;html/template&quot;.FuncMap
 
 <h6 id="required-functions-1">Required functions:</h6>
 
-<pre><code>// Load a web page based on the path passed.
-func LoadPage(path string) (*gosweb.Page, error) 
+<pre><code>// Load a web page based on the path passed. 
+// Path is relative to your web root.
+func LoadPage(path string) (*&quot;github.com/cheikhshift/gos/web&quot;.Page, error) 
 
 // Render template as HTTP response.
-// This version of this function is only required for 
-// gos libraries exported in development mode.
+// This function is only required with projects in development mode.
 // span parameter will have the current request span.
 func RenderTemplate(w http.ResponseWriter, p *&quot;github.com/cheikhshift/gos/web&quot;.Page, span opentracing.Span)
 
 // Render template as HTTP response.
-// This version of this function is only required for 
-// gos libraries exported in production mode.
+// This function is only required with projects in production mode.
 func RenderTemplate(w http.ResponseWriter, p *&quot;github.com/cheikhshift/gos/web&quot;.Page)
 
 // Inspect template using a relative path to project root.
@@ -366,7 +365,7 @@ func DebugTemplate(w http.ResponseWriter, r *http.Request, tmpl string)
 
 <h5 id="package-tracer"><code>package tracer</code></h5>
 
-<p>This package is used to setup a tracing server with your web server. Please make sure to use a Go routine to listen on any port.</p>
+<p>This package is used to setup a tracing server for your web server. Please make sure to use a Go routine to listen on any port.</p>
 
 <h6 id="required-functions-2">Required functions:</h6>
 
@@ -421,7 +420,7 @@ func LoadTraceServer()
         var pageTracker = _gat._getTracker("UA-71342160-1");
         pageTracker._trackPageview();
     } catch (err) {}
-    </script>
+    </script> 
 
   
 
