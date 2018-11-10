@@ -19,11 +19,15 @@
   </url>
   
   <url>
-    <loc>http://gophersauce.com/docs/deploying/</loc>
+    <loc>http://gophersauce.com/docs/workflow/package_arch/</loc>
   </url>
   
   <url>
-    <loc>http://gophersauce.com/docs/workflow/package_arch/</loc>
+    <loc>http://gophersauce.com/docs/testing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://gophersauce.com/docs/deploying/</loc>
   </url>
   
   <url>
@@ -31,11 +35,11 @@
   </url>
   
   <url>
-    <loc>http://gophersauce.com/docs/tooling/</loc>
+    <loc>http://gophersauce.com/docs/workflow/first_project/</loc>
   </url>
   
   <url>
-    <loc>http://gophersauce.com/docs/workflow/first_project/</loc>
+    <loc>http://gophersauce.com/docs/tooling/</loc>
   </url>
   
   <url>
@@ -64,7 +68,15 @@
   </url>
   
   <url>
+    <loc>http://gophersauce.com/docs/testing/globals/</loc>
+  </url>
+  
+  <url>
     <loc>http://gophersauce.com/docs/gxml-abstractions/endpoints/</loc>
+  </url>
+  
+  <url>
+    <loc>http://gophersauce.com/docs/testing/handlers/</loc>
   </url>
   
   <url>
@@ -94,6 +106,10 @@
   
   <url>
     <loc>http://gophersauce.com/docs/gxml-abstractions/templates/</loc>
+  </url>
+  
+  <url>
+    <loc>http://gophersauce.com/docs/testing/templates/</loc>
   </url>
   
   <url>

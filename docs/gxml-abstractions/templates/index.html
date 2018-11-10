@@ -181,6 +181,36 @@
     </li>
         </ul>
     </li>
+    <li data-nav-id="/docs/testing/" class="dd-item alwaysopen haschildren
+        ">
+      <div>
+      <a href="/docs/testing/">Testing</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/docs/testing/globals/" class="dd-item">
+        <div>
+          <a href="/docs/testing/globals/">
+            Globals
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/testing/handlers/" class="dd-item">
+        <div>
+          <a href="/docs/testing/handlers/">
+            Handlers
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/docs/testing/templates/" class="dd-item">
+        <div>
+          <a href="/docs/testing/templates/">
+            Templates
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+        </ul>
+    </li>
     <li data-nav-id="/docs/deploying/" class="dd-item
         ">
       <div>
@@ -233,6 +263,12 @@
       <option value="/docs/gxml-abstractions/shutdown/" >- Shutdown function</option>
       <option value="/docs/gxml-abstractions/templates/"  selected>- Templates</option>
       <option value="/docs/gxml-abstractions/web_root/" >- Web root</option>
+  
+    <option value="/docs/testing/" >
+   Testing</option> 
+      <option value="/docs/testing/globals/" >- Globals</option>
+      <option value="/docs/testing/handlers/" >- Handlers</option>
+      <option value="/docs/testing/templates/" >- Templates</option>
   
     <option value="/docs/deploying/" >
    Deployments</option>
@@ -336,6 +372,12 @@
 <li>./api/templates/*.go</li>
 </ul>
 
+<h6 id="writes-tests-to">Writes tests to :</h6>
+
+<ul>
+<li>./api/templates/templates_test.go</li>
+</ul>
+
 
     
     
@@ -370,7 +412,13 @@
 
 
   
-    <p><p style="float:right;position: relative;top:10px;">Written by Cheikh Seck</p>
+    <style type="text/css">
+    #navigation a {
+        color: #847f7f;
+    }
+</style>
+
+<p><p style="float:right;position: relative;top:10px;">Written by Cheikh Seck</p>
 <a target="_blank" href="https://twitter.com/gophersauce"><img src="https://pbs.twimg.com/profile_images/976861571707219969/fauId6s2_400x400.jpg" height="40" /></a>
 <a target="_blank" href="https://github.com/thestrukture/IDE" title="GET IDE"><img src="https://avatars1.githubusercontent.com/u/17010896?s=200&v=4" height="40" style="position: relative;top:4px;" /></a></p>
 
@@ -383,7 +431,7 @@
         var pageTracker = _gat._getTracker("UA-71342160-1");
         pageTracker._trackPageview();
     } catch (err) {}
-    </script> 
+</script> 
 
   
 

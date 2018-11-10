@@ -98,7 +98,7 @@ Sample tag : &amp;lt;header&amp;gt; &amp;lt;struct name=&amp;quot;Sample&amp;quo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://gophersauce.com/docs/_footer/</guid>
-      <description>Written by Cheikh Seck
+      <description>#navigation a { color: #847f7f; }  Written by Cheikh Seck
  
 var gaJsHost = ((&#34;https:&#34; == document.location.protocol) ? &#34;https://ssl.&#34; : &#34;http://www.&#34;); document.write(unescape(&#34;%3Cscript src=&#39;&#34; + gaJsHost + &#34;google-analytics.com/ga.js&#39; type=&#39;text/javascript&#39;%3E%3C/script%3E&#34;));  try { var pageTracker = _gat._getTracker(&#34;UA-71342160-1&#34;); pageTracker._trackPageview(); } catch (err) {}  </description>
     </item>
@@ -116,6 +116,15 @@ Sample tag : &amp;lt;gos&amp;gt; ... &amp;lt;var type=&amp;quot;string&amp;quot;
     </item>
     
     <item>
+      <title>Globals</title>
+      <link>http://gophersauce.com/docs/testing/globals/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gophersauce.com/docs/testing/globals/</guid>
+      <description>How to test To test a variable, compare it to the expected value. If the variable is not similar to the expected value, fail the test.</description>
+    </item>
+    
+    <item>
       <title>HTTP 1.1 services</title>
       <link>http://gophersauce.com/docs/gxml-abstractions/endpoints/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -126,6 +135,17 @@ Syntax End tags are placed at the root of your &amp;lt;endpoints/&amp;gt; tag.
 GXML attributes :  path : request path to handle.
  type : specifies request type to handle, can be HTTP 1.1 RFC request methods (GET, PUT &amp;hellip;etc), star or f.
  type f end tags are executed if the request path includes the path specified. type star end tags handle all requests matching path attribute, disregarding any passed request methods.</description>
+    </item>
+    
+    <item>
+      <title>Handlers</title>
+      <link>http://gophersauce.com/docs/testing/handlers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gophersauce.com/docs/testing/handlers/</guid>
+      <description>How to test Handlers can be tested with gos sub-level package onyx. onyx provides functions to create new HTTP requests as well as execute a handler and determine test result.
+Avoid direct handler tests gos generates two versions of your HTTP handler functions, one for development and one for production. To ensure your tests never break, use your handlers&amp;rsquo; package function MakeHandler to keep your tests from breaking.
+Sample test Below is source code using onyx to test an HTTP handler.</description>
     </item>
     
     <item>
@@ -186,6 +206,16 @@ Syntax Template tags are placed at the root of your &amp;lt;templates/&amp;gt; t
 HTML templates HTML source used with templates are stored in your project&amp;rsquo;s tmpl directory. Templates files must have file extension .tmpl. Templates follow Go&amp;rsquo;s html template format.
 Scope of HTML templates Your GXML methods will be available to your templates as custom pipelines.
 GXML attributes :  name : name of template.</description>
+    </item>
+    
+    <item>
+      <title>Templates</title>
+      <link>http://gophersauce.com/docs/testing/templates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://gophersauce.com/docs/testing/templates/</guid>
+      <description>How to test On panic, templates render as an empty string. Thus to test a gos template, the result must be compared with an empty string, if the two are similar, fail the test.
+Which function to render with? A template abstraction exports a function to render itself with one parameter. The parameter has the type specified in the template&amp;rsquo;s struct attribute. The function will have the name specified in the template&amp;rsquo;s name attribute.</description>
     </item>
     
     <item>
