@@ -314,7 +314,7 @@
 
 <h3 id="welcome">Welcome</h3>
 
-<p>Welcome to the Gopher Sauce documentation. Gopher Sauce is an all-in-one Go web server framework. It provides a markup language to write these abstractions. Gopher Sauce abstracts  templating, HTTP services, build commands, functions and web server events. These abstractions also come at zero cost. On export, your abstractions are split into different sub-level packages tied to functionality. As a result, You can stop using Gopher Sauce without an impact to your team; as well as work on a Gopher Sauce project, with no knowledge of the framework. Using Gopher Sauce does require experience with Go (even if your just starting). Gopher Sauce has the following framework offerings :</p>
+<p>Welcome to the Gopher Sauce documentation. Gopher Sauce is an all-in-one Go web server framework. Gopher Sauce abstracts  templating, HTTP services, build commands, functions and web server events. It provides a custom markup language to write these abstractions. Gopher Sauce abstractions also come at zero cost. On export, your abstractions are split into different sub-level packages tied to functionality. As a result, You can stop using Gopher Sauce without an impact to your team; as well as work on a Gopher Sauce project, with no knowledge of the framework. Using Gopher Sauce does require experience with Go (even if your just starting). Gopher Sauce has the following framework offerings :</p>
 
 <h4 id="enterprise-work-flow">Enterprise work flow</h4>
 
@@ -340,17 +340,17 @@
 
 <h5 id="web-server-source">Web server source</h5>
 
-<p>Gopher Sauce will generate the source files needed to build your web server program. The generated code will be highly readable and ready for changes in the future.</p>
+<p>Gopher Sauce will generate the Go source files needed to build your web server program. The generated code will be highly readable and ready for changes in the future.</p>
 
 <h4 id="open-tracing">Open Tracing</h4>
 
-<p>Gopher Sauce generates code to trace HTTP requests and template rendering. The library abstracted for use is <a href="github.com/opentracing/opentracing-go">opentracing</a>. Tracing is only generated during development mode. You can access your traces at port <code>8700</code> of your web server.</p>
+<p>Gopher Sauce generates code to trace HTTP requests and template rendering. The library abstracted for use is <a href="https://github.com/opentracing/opentracing-go">opentracing</a>. Tracing is only generated during development mode. You can access your traces at port <code>8700</code> of your web server.</p>
 
 <hr />
 
 <h4 id="monolith">Monolith</h4>
 
-<p>Gopher Sauce generates monolith binaries, with all aspects of your project merged into one. The size of your binary is determined by the size of your project&rsquo;s directory (excluding GXML files). The monolith architecture enables the possibility of loading server side functions with Go templates. This removes the requirement of defining an HTTP resource each time a functionality is needed. Nonetheless, exported code can be used to build microservices.</p>
+<p>Gopher Sauce generates monolith binaries, with all aspects of your project merged into one. The monolith architecture enables the possibility of loading server side functions with Go templates. This removes the requirement of defining an HTTP resource each time a functionality is needed. Nonetheless, exported code can be used to build microservices.</p>
 
 <hr />
 
@@ -399,7 +399,7 @@
     }
 </style>
 
-<p><p style="float:right;position: relative;top:10px;">Written by Cheikh Seck</p>
+<p><p style="float:right;position: relative;top:10px;">Written by Cheikh Seck, Built with Hugo</p>
 <a target="_blank" href="https://twitter.com/gophersauce"><img src="https://pbs.twimg.com/profile_images/976861571707219969/fauId6s2_400x400.jpg" height="40" /></a>
 <a target="_blank" href="https://github.com/thestrukture/IDE" title="GET IDE"><img src="https://avatars1.githubusercontent.com/u/17010896?s=200&v=4" height="40" style="position: relative;top:4px;" /></a></p>
 
