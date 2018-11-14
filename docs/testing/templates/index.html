@@ -48,6 +48,11 @@
                   <i class='fa fa-cloud-download'></i> <label>Download</label>
                 </a>
             </li>
+            <li class="" role="">
+                <a href="https://forum.gophersauce.com"  rel="noopener">
+                  <i class='fa fa-users'></i> <label>Community</label>
+                </a>
+            </li>
     </nav>
 </header>
 <article>
@@ -306,7 +311,7 @@
 
 <h2 id="how-to-test">How to test</h2>
 
-<p>On panic, templates render as an empty string. Thus to test a <code>gos</code> template, the result must be compared with an empty string, if the two are similar, fail the test.</p>
+<p>On panic, templates render as an empty string. Thus to test if a <code>gos</code> template is rendering, the result must be compared with an empty string, if the two are similar, fail the test.</p>
 
 <h3 id="which-function-to-render-with">Which function to render with?</h3>
 
@@ -399,7 +404,7 @@ func TestFoo(t *testing.T) {
         var pageTracker = _gat._getTracker("UA-71342160-1");
         pageTracker._trackPageview();
     } catch (err) {}
-</script> 
+</script>
 
   
 

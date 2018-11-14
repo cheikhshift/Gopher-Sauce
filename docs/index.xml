@@ -211,7 +211,7 @@ GXML attributes :  name : name of template.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://gophersauce.com/docs/testing/templates/</guid>
-      <description>How to test On panic, templates render as an empty string. Thus to test a gos template, the result must be compared with an empty string, if the two are similar, fail the test.
+      <description>How to test On panic, templates render as an empty string. Thus to test if a gos template is rendering, the result must be compared with an empty string, if the two are similar, fail the test.
 Which function to render with? A template abstraction exports a function to render itself with one parameter. The parameter has the type specified in the template&amp;rsquo;s struct attribute. The function will have the name specified in the template&amp;rsquo;s name attribute.</description>
     </item>
     
